@@ -1,0 +1,269 @@
+.button-52,
+.button-53 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 2px solid rgb(255, 255, 255);
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54,
+.button-55,
+.button-56,
+.button-57,
+.button-58,
+.button-59,
+.button-60 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 2px solid rgb(0, 0, 0);
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "SHOP NOW --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #ffffff;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-53:after {
+  content: "BELI SEKARANG --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #ffffff;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-54:after {
+  content: "PRIA --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-55:after {
+  content: "ANAK --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-56:after {
+  content: "WANITA --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-57:after {
+  content: "MASUK --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-58:after {
+  content: "REGISTRASI --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-59:after {
+  content: "KIRIM --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+.button-60:after {
+  content: "TULIS ULASAN PERTAMA --->";
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  z-index: 9;
+  position: absolute;
+  height: 100%;
+  top: -3px;
+  left: -3px;
+  transition: 0.2s;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+  .button-53 {
+    padding: 13px 50px 13px;
+  }
+  .button-54 {
+    padding: 13px 50px 13px;
+  }
+  .button-55 {
+    padding: 13px 50px 13px;
+  }
+  .button-56 {
+    padding: 13px 50px 13px;
+  }
+  .button-57 {
+    padding: 13px 50px 13px;
+  }
+  .button-58 {
+    padding: 13px 50px 13px;
+  }
+  .button-59 {
+    padding: 13px 50px 13px;
+  }
+  .button-60 {
+    padding: 13px 50px 13px;
+  }
+}
+
+.hilang {
+  top: -100px;
+}
+
+/* mystyle */
+.hover-line:hover {
+  transition: 0.1s;
+  text-decoration: underline;
+}
+
+.hover-black:hover {
+  transition: 0.1s;
+  background-color: black !important;
+  color: #ffffff !important;
+}
+
+.hover-border:hover {
+  border: 1px solid black !important;
+}
+
+.hover-border-bottom:hover {
+  border-bottom: 2px solid black !important;
+}
+
+.hover-produk:hover {
+  border: 1px solid black !important;
+  min-height: 450px;
+  height: auto !important;
+}
+
+.hover-grey:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+/* checkbox */
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label:before {
+  background-color: white;
+  border: 2px solid black;
+  content: "";
+  display: inline-block;
+  font-size: 20px;
+  height: 25px;
+  width: 25px;
+  line-height: 20px;
+  margin: 5px 6px 5px 0px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+input[type="checkbox"]:checked + label:before {
+  content: "\2713";
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  padding-left: 28px;
+}
