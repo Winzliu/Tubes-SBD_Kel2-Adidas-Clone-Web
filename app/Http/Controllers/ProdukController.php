@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
-use App\Http\Requests\StoreProdukRequest;
-use App\Http\Requests\UpdateProdukRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($slug, $warna)
     {
-        //
+        $produks = Produk::all();
+        foreach ($produks as $p) {
+            if (Str::slug($p->detailproduk->nama) == $slug && $p->warna->warna == $warna) {
+                $produk = $p;
+            }
+        }
+
+        return view('User.produks', [
+            'title'  => "title",
+            'produk' => $produk
+        ]);
     }
 
     /**
@@ -27,7 +37,7 @@ class ProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProdukRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +61,7 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProdukRequest $request, Produk $produk)
+    public function update(Request $request, Produk $produk)
     {
         //
     }

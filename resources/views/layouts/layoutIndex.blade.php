@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ $title }}</title>
   <!-- link  -->
-  <link rel="stylesheet" href="css/bootstrap.css" />
-  <link rel="stylesheet" href="css/bootstrap.css.map" />
-  <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.css.map') }}" />
+  <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
 </head>
 
 <body style="overflow-x: hidden;">
@@ -19,7 +19,7 @@
     style="z-index: 99999999999999; transition: 0.3s;">
     <div class="container-fluid">
       <!-- brand -->
-      <a class="navbar-brand w-16" href="#">Image-Adidas</a>
+      <a class="navbar-brand w-16" href="/"><img src="img/logo.jpeg" width="50px" class="ms-5" alt=""></a>
       <!-- hamburger menu -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -46,9 +46,6 @@
                   newsletter</span></a>
             </li>
             <li class="nav-item me-3">
-              <a class="nav-link active p-0" aria-current="page" href="#"><span class="fs-vs">nega</span></a>
-            </li>
-            <li class="nav-item me-3">
               @auth
               <p class="fs-vs mb-0">Selamat Datang Kembali <a href="/AkunSaya"
                   class="px-0 fs-vs nav-link text-black d-inline">{{
@@ -64,7 +61,7 @@
         <div class="collapse navbar-collapse mt-25">
           <!-- dropdown -->
           <div class="w-100">
-            <ul class="navbar-nav m-auto w-28rem mb-2 mb-lg-0">
+            <ul class="navbar-nav m-auto justify-content-center mb-2 mb-lg-0">
               <!-- Pria -->
               <li class="nav-item fs-s">
                 <a class="nav-link fw-bolder text-black pb-3 px-3" id="dropdown-navbar" href="pria">
@@ -73,111 +70,121 @@
                 <ul class="d-none position-absolute bg-white border-top w-100 start-0">
                   <!-- menu -->
                   <div class="d-flex pt-4 w-90 m-auto pb-2">
-                    <!-- features(pria) -->
-                    <div class="w-115 border-end">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                            href="#">FEATURED</a>
-                        </li>
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">New Arrivals</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Exclusive at adidas</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Ultraboost</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">NMD</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Forum</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Superstar</a>
-                          <a class="nav-link text-danger fw-bold d-block py-0 hover-line" href="#">Sale</a>
-                          <a class="nav-link text-black fw-bold d-block py-0 hover-line" href="#">Last Chance</a>
-                        </li>
-                        <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-5 py-0" href="#">Lihat Semua Pria</a>
-                        </li>
-                      </ul>
-                    </div>
                     <!-- sepatu(Pria) -->
                     <div class="w-100 bg-white ps-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                            href="#">SEPATU</a>
-                        </li>
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Originals</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Training</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Running</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Sepak Bola</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Basket</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Tenis</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Essentials</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Slides</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Outdoor</a>
-                        </li>
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="pria/sepatu">SEPATU</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sepatu/originals">Originals</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sepatu/training">Training</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sepatu/running">Running</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sepatu/sepak-bola">Sepak
+                              Bola</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sepatu/basket">Basket</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sepatu/tenis">Tenis</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sepatu/essentials">Essentials</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sepatu/slides">Slides</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sepatu/outdoor">Outdoor</a>
+                          </li>
+                        </div>
                         <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-4 py-0" href="#">Lihat Semua Sepatu</a>
+                          <a class="nav-link text-black fw-bold d-block mt-4 py-0" href="pria/sepatu">Lihat Semua
+                            Sepatu</a>
                         </li>
                       </ul>
                     </div>
                     <!-- pakaian(Pria) -->
                     <div class="w-100 bg-white ps-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                            href="#">PAKAIAN</a>
-                        </li>
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Atasan</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Jerseys</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Bawahan</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Celana Panjang & Celana
-                            Ketat</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Jaket & Track Top</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Hoodies/Sweatshirts</a>
-                        </li>
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="pria/pakaian">PAKAIAN</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/pakaian/atasan">Atasan</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/pakaian/jerseys">Jerseys</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/pakaian/bawahan">Bawahan</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/pakaian/celana-panjang">Celana
+                              Panjang & Celana
+                              Ketat</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/pakaian/jaket">Jaket &
+                              Track Top</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/pakaian/hoodies">Hoodies/Sweatshirts</a>
+                          </li>
+                        </div>
                         <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="#">Lihat Semua Pakaian</a>
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="pria/pakaian">Lihat Semua
+                            Pakaian</a>
                         </li>
                       </ul>
                     </div>
                     <!-- aksesoris(Pria) -->
                     <div class="w-100 bg-white ps-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                            href="#">AKSESORIS</a>
-                        </li>
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Tas</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Topi & Headband<a
-                              class="nav-link text-black d-block py-0 hover-line" href="#">Kaos Kaki</a>
-                            <a class="nav-link text-black d-block py-0 hover-line" href="#">Bola</a>
-                            <a class="nav-link text-black d-block py-0 hover-line" href="#">Sarung Tangan & Deker</a>
-                            <a class="nav-link text-black d-block py-0 hover-line" href="#">Aksesoris Lainnya</a>
-                        </li>
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="pria/aksesoris">AKSESORIS</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/aksesoris/tas">Tas</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/aksesoris/topi">Topi &
+                              Headband<a class="nav-link text-black d-block py-0 hover-line"
+                                href="pria/aksesoris/kaos-kaki">Kaos Kaki</a>
+                              <a class="nav-link text-black d-block py-0 hover-line" href="pria/aksesoris/bola">Bola</a>
+                              <a class="nav-link text-black d-block py-0 hover-line"
+                                href="pria/aksesoris/sarung-tangan">Sarung Tangan & Deker</a>
+                              <a class="nav-link text-black d-block py-0 hover-line"
+                                href="pria/aksesoris/aksesoris-lainnya">Aksesoris Lainnya</a>
+                          </li>
+                        </div>
                         <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="#">Lihat Semua Aksesoris</a>
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="pria/aksesoris">Lihat Semua
+                            Aksesoris</a>
                         </li>
                       </ul>
                     </div>
                     <!-- sport(Pria) -->
                     <div class="w-100 bg-white ps-3">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                            href="#">SPORTS</a>
-                        </li>
-                        <li class="list-group-item border-0 py-0">
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Sepak Bola</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Training</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Running</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Basket</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Tenis</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Golf</a>
-                          <a class="nav-link text-black d-block py-0 hover-line" href="#">Outdoor</a>
-                          <a class="nav-link text-black fw-bold d-block py-0 hover-line" href="#">Sepeda</a>
-                        </li>
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="pria/sports">SPORTS</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sports/sepak-bola">Sepak
+                              Bola</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sports/training">Training</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sports/running">Running</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sports/basket">Basket</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sports/tenis">Tenis</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="pria/sports/golf">Golf</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="pria/sports/outdoor">Outdoor</a>
+                            <a class="nav-link text-black fw-bold d-block py-0 hover-line"
+                              href="pria/sports/sepeda">Sepeda</a>
+                          </li>
+                        </div>
                         <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-4-7 py-0" href="#">Lihat Semua Sport</a>
+                          <a class="nav-link text-black fw-bold d-block mt-4-7 py-0" href="pria/sports">Lihat Semua
+                            Sport</a>
                         </li>
                       </ul>
                     </div>
@@ -187,54 +194,251 @@
               <!-- akhir pria -->
               <!-- wanita -->
               <li class="nav-item fs-s">
-                <a class="nav-link fw-bolder text-black pb-3 pe-3" id="dropdown-navbar" href="#">
+                <a class="nav-link fw-bolder text-black pb-3 pe-3" id="dropdown-navbar" href="wanita">
                   WANITA
                 </a>
                 <ul class="d-none position-absolute bg-white border-top w-100 start-0">
-                  <li><a class="dropdown-item" href="#">Wanita</a></li>
+                  <!-- menu -->
+                  <div class="d-flex pt-4 w-90 m-auto pb-2">
+                    <!-- sepatu(Wanita) -->
+                    <div class="w-100 ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="wanita/sepatu">SEPATU</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/originals">Originals</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/training">Training</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/running">Running</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/sepatu/tenis">Tenis</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/slides">Slides</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/essentials">Essentials</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sepatu/outdoor">Outdoor</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block py-0" href="wanita/sepatu">Lihat Semua
+                            Sepatu</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- pakaian(Wanita) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="wanita/pakaian">PAKAIAN</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/pakaian/dress">Dress &
+                              Rok</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/pakaian/celana-panjang">Celana Panjang & Celana
+                              Ketat</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/pakaian/sport-bra">Sport
+                              Bra</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/pakaian/celana-pendek">Celana Pendek</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/pakaian/atasan">Atasan</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/pakaian/jaket">Jaket &
+                              Track Top</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/pakaian/hoodies">Hoodies/Sweatshirts</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block py-0" href="wanita/pakaian">Lihat Semua
+                            Pakaian</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- aksesoris(Wanita) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="wanita/aksesoris">AKSESORIS</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/aksesoris/tas">Tas</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/aksesoris/topi">Topi &
+                              Headband<a class="nav-link text-black d-block py-0 hover-line"
+                                href="wanita/aksesoris/sarung-tangan">Sarung Tangan & Deker</a>
+                              <a class="nav-link text-black d-block py-0 hover-line"
+                                href="wanita/aksesoris/kaos-kaki">Kaos Kaki</a>
+                              <a class="nav-link text-black d-block py-0 hover-line"
+                                href="wanita/aksesoris/aksesoris-lainnya">Aksesoris Lainnya</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0 ">
+                          <a class="nav-link text-black fw-bold d-block py-0" href="wanita/aksesoris">Lihat Semua
+                            Aksesoris</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- sport(Wanita) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="wanita/sports">SPORTS</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sports/training">Training</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sports/running">Running</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/sports/golf">Golf</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/sports/tenis">Tenis</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="wanita/sports/sepak-bola">Sepak
+                              Bola</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sports/basket">Basket</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sports/outdoor">Outdoor</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="wanita/sports/renang">renang</a>
+                            <a class="nav-link text-black fw-bold d-block py-0 hover-line"
+                              href="wanita/sports/sepeda">Sepeda</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block py-0" href="wanita/sports">Lihat Semua Sport</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </ul>
               </li>
               <!-- akhir wanita -->
               <!-- anak -->
               <li class="nav-item fs-s">
-                <a class="nav-link fw-bolder text-black pb-3 pe-3" id="dropdown-navbar" href="#">
+                <a class="nav-link fw-bolder text-black pb-3 pe-3" id="dropdown-navbar" href="anak">
                   ANAK
                 </a>
                 <ul class="d-none position-absolute bg-white border-top w-100 start-0">
-                  <li><a class="dropdown-item" href="#">Anak</a></li>
+                  <!-- menu -->
+                  <div class="d-flex pt-4 w-90 m-auto pb-2">
+                    <!-- Anak (8-16) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="anak/anak-8-16">ANAK
+                              (8-16)</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-8-16/new-arrivals">New Arrivals</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-8-16/pakaian-laki-laki">Pakaian Laki-Laki</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-8-16/pakaian-perempuan">Pakaian Perempuan</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-8-16/sepatu-laki-laki">Sepatu Laki-Laki</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-8-16/sepatu-perempuan">Sepatu Perempuan</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block mt-4 py-0" href="anak/anak-8-16">Lihat Semua
+                            Anak (8-16)</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- Anak(4-8) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="anak/anak-4-8">ANAK
+                              (4-8)</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="anak/anak-4-8/new-arrivals">New
+                              Arrivals</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-4-8/pakaian-laki-laki">Pakaian Laki-Laki</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-4-8/pakaian-perempuan">Pakaian Perempuan</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-4-8/sepatu-laki-laki">Sepatu Laki-Laki</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/anak-4-8/sepatu-perempuan">Sepatu Perempuan</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="anak/anak-4-8">Lihat Semua Anak
+                            (4-8)</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- Balita (1-4) -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="anak/balita">BALITA
+                              (1-4)</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line" href="anak/balita/new-arrivals">New
+                              Arrivals</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/balita/pakaian">Pakaian</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="anak/balita/sepatu">Sepatu</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="anak/balita">Lihat Semua Balita
+                            (1-4)</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- Sports -->
+                    <div class="w-100 bg-white ps-3">
+                      <ul class="list-group list-group-flush h-100 d-flex justify-content-between">
+                        <div class="">
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
+                              href="anak/sports">SPORTS</a>
+                          </li>
+                          <li class="list-group-item border-0 py-0">
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/sports/training">Training</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="anak/sports/sepakbola">Sepak
+                              Bola</a>
+                            <a class="nav-link text-black d-block py-0 hover-line" href="anak/sports/golf">Golf</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="anak/sports/running">Running</a>
+                          </li>
+                        </div>
+                        <li class="list-group-item border-0">
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="anak/sports">Lihat Semua
+                            Sport</a>
+                        </li>
+                      </ul>
+                    </div>
+                    {{-- akhir sport --}}
+                  </div>
                 </ul>
               </li>
               <!-- akhir anak -->
-              <!-- olahraga -->
-              <li class="nav-item fs-s">
-                <a class="nav-link text-black pb-3 pe-3" href="#" id="dropdown-navbar">
-                  OLAHRAGA
-                </a>
-                <ul class="d-none position-absolute bg-white border-top w-100 start-0">
-                  <li><a class="dropdown-item" href="#">Olahraga</a></li>
-                </ul>
-              </li>
-              <!-- akhir olahraga -->
-              <!-- brands -->
-              <li class="nav-item fs-s">
-                <a class="nav-link text-black pb-3 pe-3" href="#" id="dropdown-navbar">
-                  BRANDS
-                </a>
-                <ul class="d-none position-absolute bg-white border-top mt-0.8 w-100 start-0">
-                  <li><a class="dropdown-item" href="#">Brands</a></li>
-                </ul>
-              </li>
-              <!-- akhir brands -->
-              <!-- promo -->
-              <li class="nav-item fs-s">
-                <a class="nav-link fw-bolder text-black pb-3 pe-3" id="dropdown-navbar" href="#">
-                  PROMO
-                </a>
-                <ul class="d-none position-absolute bg-white border-top mt-0.8 w-100 start-0">
-                  <li><a class="dropdown-item" href="#">Promo</a></li>
-                </ul>
-              </li>
-              <!-- akhir promo -->
             </ul>
           </div>
           <!-- search -->
@@ -242,10 +446,15 @@
             <input class="border-0 bg-grey py-2 px-3 fs-vs" style="width: 90%" type="search" placeholder="Cari"
               aria-label="Search" />
             <button class="border-0 bg-grey position-absolute end-0 h-100 px-2" type="submit">
-              S
+              <ion-icon name="search-outline"></ion-icon>
             </button>
           </form>
-          <a class="nav-link mx-4">ke</a>
+          <a href="#" class="nav-link mx-2">
+            <ion-icon class="fs-4" name="heart-outline"></ion-icon>
+          </a>
+          <a href="#" class="nav-link me-4">
+            <ion-icon class="fs-4" name="bag-handle-outline"></ion-icon>
+          </a>
         </div>
       </div>
     </div>
@@ -344,10 +553,10 @@
   <!-- akhir footer -->
 
   <!-- script -->
-  <script src="js/bootstrap.bundle.js"></script>
-  <script src="js/bootstrap.bundle.js.map"></script>
-  <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.bundle.js.map') }}"></script>
+  <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('js/script.js') }}"></script>
   @yield('script')
 
   <!-- ionicons -->

@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_alamat")->constrained("alamats");
-            $table->foreignId("id_user")->constrained("users");
+            $table->foreignId("alamat_id")->constrained("alamats");
+            $table->foreignId("user_id")->constrained("users");
             $table->integer("totalHarga");
             $table->string("pembayaran");
             $table->string("status");

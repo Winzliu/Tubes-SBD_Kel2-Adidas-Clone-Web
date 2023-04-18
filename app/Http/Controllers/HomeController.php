@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alamat;
-use App\Http\Requests\StoreAlamatRequest;
-use App\Http\Requests\UpdateAlamatRequest;
+use App\Models\Gambar;
+use App\Models\Produk;
+use Illuminate\Http\Request;
 
-class AlamatController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        // $id_produk = Produk::inRandomOrder()->take(4)->pluck('id');
+        // $gambars = Gambar::whereIn('id_produk', $id_produk)->pluck('gambar');
+
+        $produks = Produk::inRandomOrder()->take(16)->get();
+
+        return view('User.index', [
+            'title'   => 'Adidas',
+            'produks' => $produks
+        ]);
     }
 
     /**
@@ -27,7 +35,7 @@ class AlamatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAlamatRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +43,7 @@ class AlamatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alamat $alamat)
+    public function show(Gambar $gambar)
     {
         //
     }
@@ -43,7 +51,7 @@ class AlamatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alamat $alamat)
+    public function edit(Gambar $gambar)
     {
         //
     }
@@ -51,7 +59,7 @@ class AlamatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAlamatRequest $request, Alamat $alamat)
+    public function update(Request $request, Gambar $gambar)
     {
         //
     }
@@ -59,7 +67,7 @@ class AlamatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alamat $alamat)
+    public function destroy(Gambar $gambar)
     {
         //
     }

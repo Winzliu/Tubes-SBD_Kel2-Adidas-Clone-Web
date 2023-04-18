@@ -22,44 +22,68 @@
     <div class="position-relative">
       <p class="text-muted fs-vs mb-4"><span class="fs-2 text-black fw-bold fst-italic me-2">PRIA</span> [3622]</p>
 
-      <div class="d-flex border border-1 border-dark justify-content-between" id="navbar-1" style="z-index: 999;">
-        <div class="p-1">
-          <div class="btn-group">
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">HARGA </span>
-            </button>
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">UKURAN </span>
-            </button>
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">DISKON </span>
-            </button>
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">CORPORATE MARKETING LINE </span>
-            </button>
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">TIPE PRODUK </span>
-            </button>
+      <form action="">
+        <div class="d-flex border border-1 border-dark justify-content-between" id="navbar-1" style="z-index: 999;">
+          <div class="p-1 d-flex gap-2 w-100 justify-content-between">
+            <div class="d-flex gap-2">
+              {{-- rentang harga --}}
+              <div class="dropdown">
+                <button class="h-100 border border-dark rounded-0 bg-transparent dropdown-toggle " type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Harga
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-0 border-dark" style="height: 40px"
+                        id="floatingInput" placeholder="name@example.com">
+                      <label class="p-2" for="floatingInput">Minimum</label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-0 border-dark" style="height: 40px"
+                        id="floatingInput" placeholder="name@example.com">
+                      <label class="p-2" for="floatingInput">Maximum</label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              {{-- akhir rentang harga --}}
+              {{-- ukuran --}}
+              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
+                <option selected>Ukuran</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              {{-- akhir ukuran --}}
+              {{-- warna --}}
+              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
+                <option selected>Warna</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              {{-- akhir warna --}}
+              {{-- filter --}}
+              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
+                <option selected>Filter</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              {{-- akhir filter --}}
+            </div>
+            {{-- button --}}
+            <div class="p-1">
+              <button role="button" class="btn rounded-0 bg-black px-5 me-5 h-100 fs-vs fw-bold py-1 text-white"
+                type="submit">Cari</button>
+            </div>
+            {{-- akhir button --}}
           </div>
         </div>
-        <div class="p-1">
-          <div class="btn-group">
-            <button class="border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">LEBIH BANYAK FILTER <span class="fs-5">+</span></span>
-            </button>
-            <button class="dropdown-toggle border-0 bg-white p-2 hover-border" id="dropdown-border" type="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <span class="fs-s" style="letter-spacing: 2px;">RECOMMENDED </span>
-            </button>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
     <!-- akhir kategori/Filter -->
     <!-- produk -->

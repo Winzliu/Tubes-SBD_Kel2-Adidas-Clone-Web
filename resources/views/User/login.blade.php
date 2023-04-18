@@ -92,7 +92,7 @@
       <p class="ms-2">
         <ion-icon class="fs-5 me-2" name="checkmark-outline"></ion-icon>Checkout lebih cepat
       </p>
-      <a href="registrasi.html" class="button-58 mt-3 m-auto text-center" role="button">SHAaaA</a>
+      <a href="/registrasi" class="button-58 mt-3 m-auto text-center" role="button">SHAaaA</a>
     </div>
     <!-- akhir sisi kanan -->
   </div>

@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('keranjangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_user")->constrained("users");
-            $table->foreignId("id_ukuran")->constrained("ukurans");
-            $table->foreignId("id_produk")->constrained("produks");
+            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("ukuran_id")->constrained("ukurans");
+            $table->foreignId("produk_id")->constrained("produks");
             $table->integer("jumlahItem");
             $table->timestamps();
         });

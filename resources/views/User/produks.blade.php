@@ -18,22 +18,44 @@
         style="margin-right: 10px; margin-top: 45px; letter-spacing: 2px; transform: rotate(-90deg);z-index: 9;">BARU
       </p>
       <div class="d-flex py-2 position-absolute start-0 top-0 ms-5 mt-3" style="z-index: 9;">
-        <a href="#" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
+        <a href="/" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
           style="letter-spacing: 2px;">KEMBALI</a>
-        <a href="#" class="fs-s ms-3 text-decoration-underline text-dark hover-black">Pria</a>
+        <a href="/{{ $produk->detailproduk->pengguna }}"
+          class="fs-s ms-3 text-decoration-underline text-dark hover-black">{{ $produk->detailproduk->pengguna }}</a>
       </div>
       <div id="carouselExampleIndicators" style="background-color: #EDEFF0;" class="carousel slide">
         <div class="carousel-indicators">
-          <img src="img/Produk1.1.jpeg" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+          @php
+          $i = 0;
+          @endphp
+          @foreach ($produk->gambar as $gambar)
+          <img src="{{ asset('img/' . $gambar->gambar) }}" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="{{ $i }}" class="active border border-dark h-100 carousel-sepatu" aria-current="true"
+            aria-label="Slide {{ $i+1 }}">
+          </img>
+          @php
+          $i++;
+          @endphp
+          @endforeach
+          {{-- <img src="{{ asset('img/' . $produk->gambar->gambar) }}" type="button"
+            data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
             class="active border border-dark h-100 carousel-sepatu" aria-current="true" aria-label="Slide 1">
           </img>
           <img src="img/Produk1.2.jpeg" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
             class="border border-dark h-100 carousel-sepatu" aria-label="Slide 2"></img>
           <img src="img/Produk1.2.jpeg" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            class="border border-dark h-100 carousel-sepatu" aria-label="Slide 3"></img>
+            class="border border-dark h-100 carousel-sepatu" aria-label="Slide 3"></img> --}}
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
+            <img src="{{ asset('img/' . $produk->gambar[0]->gambar) }}" class="d-block w-50 m-auto" alt="...">
+          </div>
+          @foreach ($produk->gambar->slice(1) as $gambar)
+          <div class="carousel-item">
+            <img src="{{ asset('img/' . $gambar->gambar) }}" class="d-block w-50 m-auto" alt="...">
+          </div>
+          @endforeach
+          {{-- <div class="carousel-item active">
             <img src="img/Produk1.1.jpeg" class="d-block w-50 m-auto" alt="...">
           </div>
           <div class="carousel-item">
@@ -41,7 +63,7 @@
           </div>
           <div class="carousel-item">
             <img src="..." class="d-block w-100" alt="...">
-          </div>
+          </div> --}}
         </div>
         <!-- tombol balek -->
         <button id="back"
@@ -69,7 +91,7 @@
       <!-- akhir carousel -->
       <!-- pilihan warna -->
       <div class="d-flex justify-content-center bg-white gap-2 py-3">
-        <p class="fs-vvs text-center pt-2 m-0 fw-bold me-4" style="width: 60px;letter-spacing: 1px;">2 WARNA TERSEDIA
+        <p class="fs-vvs text-center pt-2 m-0 fw-bold me-4" style="width: 60px;letter-spacing: 1px;">1 WARNA TERSEDIA
         </p>
         <div class="position-relative">
           <img src="img/Produk1.1.jpeg" class="border-bottom border-3 border-dark" width="50px" alt="">

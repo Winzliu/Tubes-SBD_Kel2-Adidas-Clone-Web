@@ -17,7 +17,7 @@ $(window).scroll(function(){
 
 // show password
 let icon = document.getElementById('icon');
-let password = document.getElementById('floatingPassword');
+let password = document.getElementById('password');
 let showPassword = document.getElementById('showpassword');
 
 showPassword.addEventListener('click', function(){
