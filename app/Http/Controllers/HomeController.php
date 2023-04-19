@@ -16,7 +16,7 @@ class HomeController extends Controller
         // $id_produk = Produk::inRandomOrder()->take(4)->pluck('id');
         // $gambars = Gambar::whereIn('id_produk', $id_produk)->pluck('gambar');
 
-        $produks = Produk::inRandomOrder()->take(16)->get();
+        $produks = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
 
         return view('User.index', [
             'title'   => 'Adidas',

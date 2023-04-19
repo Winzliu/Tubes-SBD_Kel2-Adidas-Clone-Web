@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Gambar;
+use App\Models\Ukuran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,16 +15,36 @@ class ProdukController extends Controller
      */
     public function index($slug, $warna)
     {
-        $produks = Produk::all();
+        $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'ulasan'])->get();
+
         foreach ($produks as $p) {
             if (Str::slug($p->detailproduk->nama) == $slug && $p->warna->warna == $warna) {
                 $produk = $p;
+                $jumlah_produk = $produks->where('detailproduk_id', $p->detailproduk_id);
             }
         }
 
+        $ukurans = $produk->produk_ukuran->pluck('ukuran_id');
+        $ukurans = Ukuran::whereIn('id', $ukurans)->pluck('ukuran');
+
+        $produk_lainnya = $jumlah_produk->whereNotIn('id', $produk->id);
+        $gambar_produk = Gambar::where('produk_id', $produk->id)->first()->gambar;
+
+        $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
+        $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
+
+        $ulasans = $produk->ulasan;
+
         return view('User.produks', [
-            'title'  => "title",
-            'produk' => $produk
+            'title'                  => $produk->detailproduk->nama,
+            'produk'                 => $produk,
+            'jumlahWarna'            => $jumlah_produk->count(),
+            'gambar_produk'          => $gambar_produk,
+            'produk_lainnya'         => collect($produk_lainnya),
+            'produk_tawaran'         => $produk_tawaran,
+            'pelanggan_lain_membeli' => $pelanggan_lain_membeli,
+            'ukurans'                => $ukurans,
+            'ulasans'                => $ulasans
         ]);
     }
 

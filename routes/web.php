@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\RegistrasiController;
 
 /*
@@ -29,6 +30,8 @@ use App\Http\Controllers\RegistrasiController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/{slug}/{warna}', [ProdukController::class, 'index']);
+
+Route::post('/ulasan', [UlasanController::class, 'store']);
 
 Route::get('/pria', function () {
     return view('User.kategori', [

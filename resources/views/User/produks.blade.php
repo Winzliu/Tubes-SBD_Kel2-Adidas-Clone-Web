@@ -21,7 +21,16 @@
         <a href="/" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
           style="letter-spacing: 2px;">KEMBALI</a>
         <a href="/{{ $produk->detailproduk->pengguna }}"
-          class="fs-s ms-3 text-decoration-underline text-dark hover-black">{{ $produk->detailproduk->pengguna }}</a>
+          class="fs-s ms-3 text-decoration-underline text-dark hover-black">{{
+          $produk->detailproduk->pengguna
+          }}/</a>
+        <a href="/{{ $produk->detailproduk->jenis }}"
+          class="fs-s ms-3 text-decoration-underline text-dark hover-black">{{ $produk->detailproduk->jenis
+          }}/</a>
+        <a href="/{{ $produk->detailproduk->kategori }}"
+          class="fs-s ms-3 text-decoration-underline text-dark hover-black">{{
+          $produk->detailproduk->kategori
+          }}</a>
       </div>
       <div id="carouselExampleIndicators" style="background-color: #EDEFF0;" class="carousel slide">
         <div class="carousel-indicators">
@@ -91,19 +100,22 @@
       <!-- akhir carousel -->
       <!-- pilihan warna -->
       <div class="d-flex justify-content-center bg-white gap-2 py-3">
-        <p class="fs-vvs text-center pt-2 m-0 fw-bold me-4" style="width: 60px;letter-spacing: 1px;">1 WARNA TERSEDIA
+        <p class="fs-vvs text-center pt-2 m-0 fw-bold me-4" style="width: 60px;letter-spacing: 1px;">{{
+          $jumlahWarna }} WARNA TERSEDIA
         </p>
         <div class="position-relative">
-          <img src="img/Produk1.1.jpeg" class="border-bottom border-3 border-dark" width="50px" alt="">
+          <img src="{{ asset('img/'. $gambar_produk) }}" class="border-bottom border-3 border-dark" width="50px" alt="">
           <p class="position-absolute top-0 end-0 bg-black rounded-circle"
             style="margin-right: -5px;margin-top: -5px;width: 20px; height: 20px;">
             <ion-icon class="fs-5 text-white fw-bold" name="checkmark-outline" style="width: 20px;height: 20px;">
             </ion-icon>
           </p>
         </div>
-        <a href="#">
-          <img src="img/Produk1.2.jpeg" width="50px" alt="">
+        @foreach ($produk_lainnya as $produk_lain)
+        <a href="/{{ Str::slug($produk_lain->detailproduk->nama) }}/{{ $produk_lain->warna->warna }}">
+          <img src={{ asset("img/". $produk_lain->gambar->first()->gambar) }} width="50px" alt="">
         </a>
+        @endforeach
       </div>
       <!-- akhir pilihan warna -->
       <!-- menu -->
@@ -128,22 +140,16 @@
       <!-- akhir menu -->
       <!-- Deskripsi -->
       <div class="my-5 mx-5 px-5">
-        <p class="fs-3 fw-bold mb-2">SEPATU SAMBA OG</p>
-        <p class="fst-italic fw-bolder mb-2">TAMPILAN DAN SENSASI KLASIK DARI SAMBA YANG AUTENTIK.</p>
-        <p class="fs-s">Diciptakan untuk sepak bola indoor, Samba menjadi ikon street style yang tak lekang oleh waktu.
-          Sepatu ini tetap mempertahankan warisannya dengan upper kulit lembut dan overlay berbahan suede.</p>
+        <p class="fs-3 fw-bold mb-2">{{ $produk->detailproduk->nama }}</p>
+        <p class="fst-italic fw-bolder mb-2">{{ $produk->detailproduk->deskripsi }}</p>
+        <p class="fs-s">{{ $produk->detailproduk->subDeskripsi }}</p>
       </div>
       <!-- akhir deskripsi -->
       <!-- Deskripsi -->
       <div class="my-5 mx-5 px-5">
         <p class="fs-3 fw-bold mb-2">SPESIFIKASI</p>
         <ul class="w-100">
-          <li class="fs-vs ps-3 ">Regular fit</li>
-          <li class="fs-vs ps-3">Upper berbahan kulit full grain dengan suede bertekstur dan detail gold foil</li>
-          <li class="fs-vs ps-3">Outsole berbahan karet gum</li>
-          <li class="fs-vs ps-3">Menggunakan tali sepatu</li>
-          <li class="fs-vs ps-3">Bagian lining dibuat dari bahan kulit sintetis; Cupsole berbahan karet gum</li>
-          <li class="fs-vs ps-3">Kode produk: B75807</li>
+          {{$produk->detailproduk->spesifikasi}}
         </ul>
       </div>
       <!-- akhir deskripsi -->
@@ -171,81 +177,34 @@
             <!-- halaman 1 -->
             <div class="carousel-item active bg-white">
               <div class="d-flex gap-2 m-auto w-100">
+                @foreach ($produk_tawaran->slice(0,4) as $produk_sukai)
                 <!-- Terbaik 1 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                <a href="/{{ Str::slug($produk_sukai->detailproduk->nama) }}/{{ $produk_sukai->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik1.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $produk_sukai->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SLIDES ADILETTE AYOON</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 900.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
+                        $produk_sukai->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $produk_sukai->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($produk_sukai->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
                 <!-- akhir Terbaik 1 carousel -->
-
-                <!-- Terbaik 2 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik2.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TRACK JACKET ADICOLOR CONTEMPO (UNISEKS)</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.700.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 2 carousel -->
-
-                <!-- Terbaik 3 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik3.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE 4.0 SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 3 carousel -->
-
-                <!-- Terbaik 4 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik4.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICOLOR HERITAGE NOW KNOT SKIRT</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.600.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 4 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 1 -->
@@ -253,82 +212,34 @@
             <!-- halaman 2 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 5 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($produk_tawaran->slice(4,4) as $produk_sukai)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($produk_sukai->detailproduk->nama) }}/{{ $produk_sukai->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik5.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $produk_sukai->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICOLOR HERITAGE NOW CALI TEE DRESS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
+                        $produk_sukai->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $produk_sukai->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($produk_sukai->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 5 carousel -->
-
-                <!-- Terbaik 6 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik6.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TRACK PANTS ADICOLOR CLASSICS FIREBIRD
-                        PRIMEBLUE</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.400.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 6 carousel -->
-
-                <!-- Terbaik 7 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik7.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Uniseks Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICANE CLOGS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 750.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 7 carousel -->
-
-                <!-- Terbaik 8 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik8.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Unisexs Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TERREX CYPREX ULTRA DLX SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.000.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 8 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 2 -->
@@ -336,93 +247,34 @@
             <!-- halaman 3 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 9 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($produk_tawaran->slice(8,4) as $produk_sukai)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($produk_sukai->detailproduk->nama) }}/{{ $produk_sukai->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik9.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $produk_sukai->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE AYOON SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 900.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
+                        $produk_sukai->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $produk_sukai->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($produk_sukai->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 9 carousel -->
-
-                <!-- Terbaik 10 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik10.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SLIDES ADIFORM ADILETTE</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 800.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 10 carousel -->
-
-                <!-- Terbaik 11 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik11.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ADVENTURE SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 11 carousel -->
-
-                <!-- Terbaik 12 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.300.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 12 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 3 -->
@@ -430,93 +282,34 @@
             <!-- halaman 4 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 13 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($produk_tawaran->slice(12,4) as $produk_sukai)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($produk_sukai->detailproduk->nama) }}/{{ $produk_sukai->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik13.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $produk_sukai->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Running</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ADIDAS BY STELLA MCCARTNEY</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 2.600.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
+                        $produk_sukai->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $produk_sukai->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($produk_sukai->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 13 carousel -->
-
-                <!-- Terbaik 14 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik14.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ESSENTIAL SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 840.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 14 carousel -->
-
-                <!-- Terbaik 15 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik15.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ADVENTURE SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 15 carousel -->
-
-                <!-- Terbaik 16 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik16.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADIMULE LEA SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.400.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 16 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 4 -->
@@ -572,81 +365,34 @@
             <!-- halaman 1 -->
             <div class="carousel-item active bg-white">
               <div class="d-flex gap-2 m-auto w-100">
+                @foreach ($pelanggan_lain_membeli->slice(0,4) as $pelanggan_lain)
                 <!-- Terbaik 1 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                <a href="/{{ Str::slug($pelanggan_lain->detailproduk->nama) }}/{{ $pelanggan_lain->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik1.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $pelanggan_lain->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SLIDES ADILETTE AYOON</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 900.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
+                        $pelanggan_lain->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $pelanggan_lain->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($pelanggan_lain->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
                 <!-- akhir Terbaik 1 carousel -->
-
-                <!-- Terbaik 2 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik2.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TRACK JACKET ADICOLOR CONTEMPO (UNISEKS)</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.700.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 2 carousel -->
-
-                <!-- Terbaik 3 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik3.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE 4.0 SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 3 carousel -->
-
-                <!-- Terbaik 4 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik4.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICOLOR HERITAGE NOW KNOT SKIRT</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.600.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 4 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 1 -->
@@ -654,82 +400,34 @@
             <!-- halaman 2 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 5 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($pelanggan_lain_membeli->slice(4,4) as $pelanggan_lain)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($pelanggan_lain->detailproduk->nama) }}/{{ $pelanggan_lain->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik5.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $pelanggan_lain->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICOLOR HERITAGE NOW CALI TEE DRESS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
+                        $pelanggan_lain->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $pelanggan_lain->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($pelanggan_lain->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 5 carousel -->
-
-                <!-- Terbaik 6 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik6.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TRACK PANTS ADICOLOR CLASSICS FIREBIRD
-                        PRIMEBLUE</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.400.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 6 carousel -->
-
-                <!-- Terbaik 7 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik7.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Uniseks Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADICANE CLOGS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 750.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 7 carousel -->
-
-                <!-- Terbaik 8 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik8.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Unisexs Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">TERREX CYPREX ULTRA DLX SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.000.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 8 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 2 -->
@@ -737,93 +435,34 @@
             <!-- halaman 3 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 9 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($pelanggan_lain_membeli->slice(8,4) as $pelanggan_lain)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($pelanggan_lain->detailproduk->nama) }}/{{ $pelanggan_lain->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik9.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $pelanggan_lain->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE AYOON SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 900.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
+                        $pelanggan_lain->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $pelanggan_lain->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($pelanggan_lain->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 9 carousel -->
-
-                <!-- Terbaik 10 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik10.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SLIDES ADIFORM ADILETTE</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 800.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 10 carousel -->
-
-                <!-- Terbaik 11 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik11.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ADVENTURE SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 11 carousel -->
-
-                <!-- Terbaik 12 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.300.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 12 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 3 -->
@@ -831,93 +470,34 @@
             <!-- halaman 4 -->
             <div class="carousel-item bg-white">
               <div class="d-flex gap-2 m-auto w-100">
-                <!-- Terbaik 13 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
+                @foreach ($pelanggan_lain_membeli->slice(12,4) as $pelanggan_lain)
+                <!-- Terbaik 1 carousel -->
+                <a href="/{{ Str::slug($pelanggan_lain->detailproduk->nama) }}/{{ $pelanggan_lain->warna->warna }}"
+                  class="text-black nav-link hover-border">
                   <div class="card border-0" style="width: 13rem;">
                     <div class="">
-                      <img src="img/Terbaik13.jpeg" class="card-img-top rounded-0" alt="...">
+                      <img src="{{ asset('img/'. $pelanggan_lain->gambar->first()->gambar) }}"
+                        class="card-img-top rounded-0" alt="...">
                       <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
                         style="margin-left: -45px; margin-top: 17px;">
                         <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
                       </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
                     </div>
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Running</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ADIDAS BY STELLA MCCARTNEY</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 2.600.000</p>
+                      <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
+                        $pelanggan_lain->detailproduk->kategori }}</p>
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                        $pelanggan_lain->detailproduk->nama
+                        }}
+                      </p>
+                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
+                        number_format($pelanggan_lain->detailproduk->harga
+                        , 0, ',', '.')}}</p>
                     </div>
                   </div>
                 </a>
-                <!-- akhir Terbaik 13 carousel -->
-
-                <!-- Terbaik 14 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik14.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ESSENTIAL SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 840.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 14 carousel -->
-
-                <!-- Terbaik 15 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik15.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADILETTE ADVENTURE SANDALS</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.100.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 15 carousel -->
-
-                <!-- Terbaik 16 carousel -->
-                <a href="#" class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
-                    <div class="">
-                      <img src="img/Terbaik16.jpeg" class="card-img-top rounded-0" alt="...">
-                      <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                        style="margin-left: -45px; margin-top: 17px;">
-                        <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-                      </button>
-                      <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                        style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">
-                        BARU</p>
-                    </div>
-                    <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-                      <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-                      <p class="card-text fs-vs" style="margin-top: -7px;">ADIMULE LEA SLIDES</p>
-                      <p class="card-text fs-vs" style="margin-top: -10px;">Rp. 1.400.000</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- akhir Terbaik 16 carousel -->
+                <!-- akhir Terbaik 1 carousel -->
+                @endforeach
               </div>
             </div>
             <!-- akhir halaman 4 -->
@@ -951,172 +531,246 @@
 
       <!-- ulasan -->
       <div class="my-5 mx-5 px-5">
+        @auth
+        @else
         <p class="fs-4 fw-bold mb-2">Silakan masuk untuk menulis ulasan</p>
-        <p class="fs-vs">Hanya pengguna terdaftar yang dapat menulis ulasan, Silakan <a href="#"
-            class="text-black hover-black">masuk</a> atau <a href="#" class="text-black hover-black">registrasi</a></p>
+        <p class="fs-vs">Hanya pengguna terdaftar yang dapat menulis ulasan, Silakan <a href="/login"
+            class="text-black hover-black">masuk</a> atau <a href="/registrasi"
+            class="text-black hover-black">registrasi</a></p>
+        @endauth
+
+        @if (session()->has('success'))
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+          <strong>{{ session('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @error('quality')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('value')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('price')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('namaDepan')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('judulUlasan')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('ulasan')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ $message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+
         <p class="fs-3 fw-bold mb-2">JADILAH YANG PERTAMA MENGULAS PRODUK INI</p>
         <!-- Button trigger modal -->
-        <button type="button" class="button-60 mt-3 m-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button id="ulasan" type="button" class="button-60 mt-3 m-auto" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
           Tulis ulasan pertama
         </button>
 
+        @auth
         <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <div class="">
-                  <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">TULIS ULASAN ANDA SENDIRI</h1>
-                  <p class="fw-bold">Anda Sedang Mengulas <span class="fs-vs">Sepatu Samba OG</span></p>
+        <form action="/ulasan" method="POST">
+          @csrf
+          <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="">
+                    <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">TULIS ULASAN ANDA SENDIRI</h1>
+                    <p class="fw-bold">Anda Sedang Mengulas <span class="fs-vs">Sepatu Samba OG</span></p>
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p class="fw-bold">BERI NILAI*</p>
-                <!-- Quality -->
-                <div class="d-flex gap-5">
-                  <p class="fw-bold fs-vs">Quality</p>
-                  <!-- bintang -->
-                  <div class="form-check">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      5
-                    </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <div class="modal-body">
+                  <p class="fw-bold">BERI NILAI*</p>
+                  <!-- Quality -->
+                  <div class="d-flex gap-5">
+                    <p class="fw-bold fs-vs">Quality</p>
+                    <!-- bintang -->
+                    <div class="form-check">
+                      <label class="form-check-label" for="quality5">
+                        5
+                      </label>
+                      <input class="form-check-input" value="5" type="radio" name="quality" id="quality5">
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="4" type="radio" name="quality" id="quality4">
+                      <label class="form-check-label" for="quality4">
+                        4
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="3" type="radio" name="quality" id="quality3">
+                      <label class="form-check-label" for="quality3">
+                        3
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="2" type="radio" name="quality" id="quality2">
+                      <label class="form-check-label" for="quality2">
+                        2
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="1" type="radio" name="quality" id="quality1">
+                      <label class="form-check-label" for="quality1">
+                        1
+                      </label>
+                    </div>
+                    <!-- akhir bintang -->
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      4
-                    </label>
+                  <!-- akhir quality -->
+                  <!-- Value -->
+                  <div class="d-flex gap-5">
+                    <p class="fw-bold fs-vs">Value</p>
+                    <!-- bintang -->
+                    <div class="form-check">
+                      <label class="form-check-label" for="value5">
+                        5
+                      </label>
+                      <input class="form-check-input" value="5" type="radio" name="value" id="value5">
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="4" type="radio" name="value" id="value4">
+                      <label class=" form-check-label" for="value4">
+                        4
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="3" type="radio" name="value" id="value3">
+                      <label class=" form-check-label" for="value3">
+                        3
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="2" type="radio" name="value" id="value2">
+                      <label class=" form-check-label" for="value2">
+                        2
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="1" type="radio" name="value" id="value1">
+                      <label class="form-check-label" for="value1">
+                        1
+                      </label>
+                    </div>
+                    <!-- akhir bintang -->
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                      3
-                    </label>
+                  <!-- akhir value -->
+                  <!-- price -->
+                  <div class="d-flex gap-5">
+                    <p class="fw-bold fs-vs">Price</p>
+                    <!-- bintang -->
+                    <div class="form-check">
+                      <label class="form-check-label" for="price5">
+                        5
+                      </label>
+                      <input class="form-check-input" value="5" type="radio" name="price" id="price5">
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="4" type="radio" name="price" id="price4">
+                      <label class="form-check-label" for="price4">
+                        4
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="3" type="radio" name="price" id="price3">
+                      <label class="form-check-label" for="price3">
+                        3
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="2" type="radio" name="price" id="price2">
+                      <label class="form-check-label" for="price2">
+                        2
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" value="1" type="radio" name="price" id="price1">
+                      <label class="form-check-label" for="price1">
+                        1
+                      </label>
+                    </div>
+                    <!-- akhir bintang -->
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
-                    <label class="form-check-label" for="flexRadioDefault4">
-                      2
-                    </label>
+                  <!-- akhir price -->
+                  <hr>
+                  <!-- nama -->
+                  <p class="fw-bold">SEDIKIT INFO TENTANG ANDA...*</p>
+                  <p class="fw-bold fs-vs">Apa nama panggilan Anda?</p>
+                  <div class="form-floating mb-3">
+                    <input type="text" name="namaDepan" class="form-control" id="namaDepan"
+                      placeholder="name@example.com">
+                    <label for="namaDepan">Nama Depan</label>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked>
-                    <label class="form-check-label" for="flexRadioDefault5">
-                      1
-                    </label>
-                  </div>
-                  <!-- akhir bintang -->
+                  <!-- akhir nama -->
+                  <hr>
+                  <!-- pendapat -->
+                  <p class="fw-bold">SAMPAIKAN PENDAPAT ANDA</p>
+                  <p class="fw-bold fs-vs">Judul Ulasan</p>
+                  <textarea name="judulUlasan" id="judulUlasan" cols="58" rows="2"></textarea>
+                  <p class="fw-bold fs-vs">Ulasan</p>
+                  <textarea name="ulasan" id="ulasan" cols="58" rows="4"></textarea>
+                  <!-- akhir pendapat -->
                 </div>
-                <!-- akhir quality -->
-                <!-- Value -->
-                <div class="d-flex gap-5">
-                  <p class="fw-bold fs-vs">Value</p>
-                  <!-- bintang -->
-                  <div class="form-check">
-                    <label class="form-check-label" for="flexRadioDefault6">
-                      5
-                    </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7" checked>
-                    <label class="form-check-label" for="flexRadioDefault7">
-                      4
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8" checked>
-                    <label class="form-check-label" for="flexRadioDefault8">
-                      3
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9" checked>
-                    <label class="form-check-label" for="flexRadioDefault9">
-                      2
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10"
-                      checked>
-                    <label class="form-check-label" for="flexRadioDefault10">
-                      1
-                    </label>
-                  </div>
-                  <!-- akhir bintang -->
+                <div class="modal-footer">
+                  <p class="fs-vs m-auto my-2">Dengan mengirimkan ulasan artinya Anda menyetujui <a href="#"
+                      class="text-black hover-black">Syarat dan Ketentuan</a></p>
+                  <button type="submit" class="bg-black text-white py-2">Kirim Ulasan ---></button>
                 </div>
-                <!-- akhir value -->
-                <!-- price -->
-                <div class="d-flex gap-5">
-                  <p class="fw-bold fs-vs">Price</p>
-                  <!-- bintang -->
-                  <div class="form-check">
-                    <label class="form-check-label" for="flexRadioDefault11">
-                      5
-                    </label>
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault11">
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12"
-                      checked>
-                    <label class="form-check-label" for="flexRadioDefault12">
-                      4
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault13"
-                      checked>
-                    <label class="form-check-label" for="flexRadioDefault13">
-                      3
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault14"
-                      checked>
-                    <label class="form-check-label" for="flexRadioDefault14">
-                      2
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault15"
-                      checked>
-                    <label class="form-check-label" for="flexRadioDefault15">
-                      1
-                    </label>
-                  </div>
-                  <!-- akhir bintang -->
-                </div>
-                <!-- akhir price -->
-                <hr>
-                <!-- nama -->
-                <p class="fw-bold">SEDIKIT INFO TENTANG ANDA...*</p>
-                <p class="fw-bold fs-vs">Apa nama panggilan Anda?</p>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                  <label for="floatingInput">Nama Depan</label>
-                </div>
-                <!-- akhir nama -->
-                <hr>
-                <!-- pendapat -->
-                <p class="fw-bold">SAMPAIKAN PENDAPAT ANDA</p>
-                <p class="fw-bold fs-vs">Judul Ulasan</p>
-                <textarea name="judulUlasan" id="judulUlasan" cols="58" rows="2"></textarea>
-                <p class="fw-bold fs-vs">Ulasan</p>
-                <textarea name="ulasan" id="ulasan" cols="58" rows="4"></textarea>
-                <!-- akhir pendapat -->
-              </div>
-              <div class="modal-footer">
-                <p class="fs-vs m-auto my-2">Dengan mengirimkan ulasan artinya Anda menyetujui <a href="#"
-                    class="text-black hover-black">Syarat dan Ketentuan</a></p>
-                <button type="button" class="bg-black text-white py-2">Kirim Ulasan ---></button>
               </div>
             </div>
           </div>
-        </div>
+        </form>
+        @endauth
 
+        @foreach ($ulasans as $ulasan)
+        @if($ulasan->is_verif == 1)
+        <div class="mt-3 border-top border-bottom border-3">
+          <div class="d-flex p-3">
+            <div class="me-5 mt-2">
+              <span class="fw-bold me-4">Quality</span>
+              @for ($i = 0; $i < $ulasan->quality; $i++)
+                <ion-icon name="star"></ion-icon>
+                @endfor
+            </div>
+            <div class="w-72">
+              <div class="d-flex justify-content-between w-100">
+                <p class="fw-bold fs-4 text-uppercase">{{ $ulasan->judulUlasan }}</p>
+                <p class=" align-self-center">{{ $ulasan->created_at }}</p>
+              </div>
+              <p>{{ $ulasan->ulasan }}</p>
+              <p class="fw-bold fs-vs">-{{ $ulasan->namaDepan }}</p>
+            </div>
+          </div>
+        </div>
+        @endif
+        @endforeach
       </div>
       <!-- akhir ulasan -->
     </div>
@@ -1127,37 +781,33 @@
       <!-- kategori dan beri ulasan -->
       <div class="d-flex justify-content-between">
         <div class="d-flex">
-          <p class="fs-vs">Pria &bull;</p>
-          <p class="fs-vs">Lifestyle &bull;</p>
+          <p class="fs-vs">{{ $produk->detailproduk->jenis }} &bull;</p>
+          <p class="fs-vs">{{ $produk->detailproduk->kategori }} &bull;</p>
         </div>
-        <a href="#" class="fs-vs text-black hover-black">Tulis Ulasan</a>
+        <a href="#ulasan" class="fs-vs text-black hover-black">Tulis Ulasan</a>
       </div>
       <!-- akhir kategori dan beri ulasan -->
 
       <!-- merek -->
-      <p class="fs-2 fw-bold fst-italic">SEPATU SAMBA OG</p>
-      <p class="fs-vs ">BLACK/WHITE/BEIGE [B75807]</p>
-      <p class="fs-vs fw-bold">Rp. 2.200.000</p>
+      <p class="fs-2 fw-bold fst-italic">{{ $produk->detailproduk->nama }}</p>
+      <p class="fs-vs text-uppercase">{{ $produk->deskripsiWarna }}</p>
+      <p class="fs-vs fw-bold">Rp. {{
+        number_format($produk->detailproduk->harga
+        , 0, ',', '.')}}</p>
       <!-- akhir merek -->
 
       <!-- ukuran -->
       <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
       <div class="d-flex">
-        <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs me-2 py-2"
-          aria-label="Default select example">
-          <option value="UK" selected>UK</option>
-          <option value="2">EUROPE</option>
-          <option value="3">US</option>
-        </select>
         <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
           aria-label="Default select example">
           <option selected>UKURAN</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          @foreach ($ukurans as $ukuran)
+          <option value="{{ $ukuran }}">{{ $ukuran }}</option>
+          @endforeach
         </select>
       </div>
-      <p class="text-danger fw-bold fs-vs my-2">Hanya 1 stok tersisa</p>
+      <p class="text-danger fw-bold fs-vs my-2">{{ $produk->stock }} stok tersisa</p>
       <div class="d-flex gap-4 my-3">
         <a href="#" class="fs-vs fw-bold hover-black text-black">PANDUAN UKURAN</a>
         <a href="#" class=" fs-vs text-black hover-black">Ukuran yang dipilih habis?</a>
@@ -1214,5 +864,5 @@
 @endsection
 
 @section('script')
-<script src="js/produks.js"></script>
+<script src="{{ asset('js/produks.js') }}"></script>
 @endsection
