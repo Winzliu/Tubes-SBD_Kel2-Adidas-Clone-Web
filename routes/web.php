@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\RegistrasiController;
 
 /*
@@ -27,17 +29,6 @@ use App\Http\Controllers\RegistrasiController;
 //     ]);
 // });
 
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/{slug}/{warna}', [ProdukController::class, 'index']);
-
-Route::post('/ulasan', [UlasanController::class, 'store']);
-
-Route::get('/pria', function () {
-    return view('User.kategori', [
-        'title' => 'Adidas'
-    ]);
-});
 
 Route::get('/AkunSaya', function () {
     return view('User.Akun.AkunSaya', [
@@ -45,9 +36,26 @@ Route::get('/AkunSaya', function () {
     ]);
 });
 
+// home controller
+Route::get('/', [HomeController::class, 'index']);
+
+// produk controller
+Route::get('/produk/{slug}/{warna}', [ProdukController::class, 'index']);
+
+// ulasan controller
+Route::post('/ulasan', [UlasanController::class, 'store']);
+
+// registrasi controller
 Route::resource('/registrasi', RegistrasiController::class)->middleware('guest');
 
+// login controller
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::resource('/login', LoginController::class)->except(['index']);
-
 Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+// wishlist controller
+Route::delete('/wishlist/deleteall', [WishlistController::class, 'destroyAll']);
+Route::resource('/wishlist', WishlistController::class);
+
+// kategori controller
+Route::resource('/{pengguna?}/{jenis?}/{kategori?}', KategoriController::class);

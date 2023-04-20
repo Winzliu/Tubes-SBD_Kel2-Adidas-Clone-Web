@@ -15,12 +15,14 @@
     <div class="d-flex py-2">
       <a href="#" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
         style="letter-spacing: 2px;">KEMBALI</a>
-      <p class="fs-s ms-3">Pria</p>
+      <p class="fs-s ms-3 text-uppercase">{{ $title }}</p>
     </div>
     <!-- akhir head -->
     <!-- kategori/Filter -->
     <div class="position-relative">
-      <p class="text-muted fs-vs mb-4"><span class="fs-2 text-black fw-bold fst-italic me-2">PRIA</span> [3622]</p>
+      <p class="text-muted fs-vs mb-4"><span class="fs-2 text-black fw-bold fst-italic me-2 text-uppercase">{{ $judul
+          }}</span>
+      </p>
 
       <form action="">
         <div class="d-flex border border-1 border-dark justify-content-between" id="navbar-1" style="z-index: 999;">
@@ -88,35 +90,99 @@
     <!-- akhir kategori/Filter -->
     <!-- produk -->
     <div class="row row-cols-4 mt-4 ms-1">
+      @foreach ($produks as $produk)
       <!-- produk 1.1 -->
       <div class="col">
-        <a href="sepatu.html" class="text-black nav-link mb-3 hover-produk" style="height: 450px;" id="produk">
+        <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+          class="text-black nav-link mb-3 hover-produk" style="height: 450px;" id="produk">
           <div class="card border-0">
             <div class="">
-              <img src="img/Produk1.1.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
+              @auth
+              @if($produk->wishlist != NULL)
+              @foreach ($produk_wishlist as $wishlist)
+              @if(auth()->user()->id == $wishlist->user_id && $produk->id == $wishlist->produk_id)
+              @php
+              $hasil = 'delete';
+              $id = $wishlist->id
+              @endphp
+              @break;
+              @else
+              @php
+              $hasil = 'input'
+              @endphp
+              @endif
+              @endforeach
+              @if($hasil == 'delete')
+              <form action="/wishlist/{{ $id }}" method="POST">
+                @method('delete')
+                @csrf
+                @else
+                <form action="/wishlist" method="POST">
+                  @csrf
+                  <input type="hidden" name="produk_id" id="produk_id" value="{{ $produk->id }}">
+                  @endif
+                  @else
+                  <form action="/wishlist" method="POST">
+                    @csrf
+                    <input type="hidden" name="produk_id" id="produk_id" value="{{ $produk->id }}">
+                    @endif
+                    @endauth
+                    <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
+                      alt="...">
+                    <button type="submit" class="border-0 position-absolute start-100"
+                      style="margin-left: -45px; margin-top: 17px;">
+                      @auth
+                      @if ($produk->wishlist != NULL)
+                      @foreach ($produk_wishlist as $wishlist)
+                      @if(auth()->user()->id == $wishlist->user_id && $produk->id == $wishlist->produk_id)
+                      @php
+                      $hasil = 'heart';
+                      @endphp
+                      @break
+                      @else
+                      @php
+                      $hasil = 'heart-outline';
+                      @endphp
+                      @endif
+                      @endforeach
+                      <ion-icon style="font-size: 1.2rem;" name="{{ $hasil }}"></ion-icon>
+                      @else
+                      <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
+                      @endif
+                      @endauth
+                    </button>
+                  </form>
+                  <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
+                    style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU
+                  </p>
             </div>
+            {{-- @dd($produks->where('detailproduk_id', $produk->detailproduk_id)->whereNotIn('id',
+            $produk->id)->first()->gambar->first()->gambar); --}}
             <div class="mt-1 bg-grey d-flex d-none px-2" id="image-produk">
-              <button onclick="return false;" class="border-0"><img src="img/Produk1.1.jpeg"
-                  class="border-bottom border-dark border-2 hover-border-bottom" width="50px" alt=""></button>
-              <button onclick="return false;" class="border-0"><img src="img/Produk1.2.jpeg" class="hover-border-bottom"
-                  width="50px" alt=""></button>
+              <button onclick="return false;" class="border-0"><img src={{ asset("img/".
+                  $produk->gambar->first()->gambar)}}
+                class="border-bottom border-dark border-2 hover-border-bottom" width="50px" alt=""></button>
+              @foreach ($produks->where('detailproduk_id',$produk->detailproduk_id)->whereNotIn('id',$produk->id) as $p)
+              <button onclick="return false;" class="border-0"><img src={{ asset("img/". $p->gambar->first()->gambar)}}
+                class="hover-border-bottom" width="50px" alt=""></button>
+              @endforeach
             </div>
             <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Pria Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SEPATU SAMBA OG</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 2.200.000</p>
-              <p class="card-text fs-vs text-muted mb-2">2 warna</p>
+              <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
+                $produk->detailproduk->kategori }}</p>
+              <p class="card-text fs-vs" style="margin-top: -7px;">{{ $produk->detailproduk->nama }}</p>
+              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. {{
+                number_format($produk->detailproduk->harga
+                , 0, ',', '.')}}</p>
+              <p class="card-text fs-vs text-muted mb-2">{{ $produks->where('detailproduk_id',
+                $produk->detailproduk_id)->count() }} warna</p>
             </div>
           </div>
         </a>
       </div>
       <!-- akhir produk 1.1 -->
+      @endforeach
+      {{--
       <!-- produk 2.1 -->
       <div class="col">
         <a href="#" class="text-black nav-link hover-produk" style="height: 450px;" id="produk">
@@ -231,7 +297,7 @@
           </div>
         </a>
       </div>
-      <!-- akhir produk 2.1 -->
+      <!-- akhir produk 2.1 --> --}}
     </div>
     <!-- akhir produk -->
   </div>

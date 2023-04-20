@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produk_Ukuran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ukuran extends Model
 {
     use HasFactory;
+
+    public function produk_ukuran()
+    {
+        return $this->hasMany(Produk_Ukuran::class);
+    }
 }

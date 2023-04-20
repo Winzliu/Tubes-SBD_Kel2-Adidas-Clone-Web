@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gambar;
 use App\Models\Produk;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,11 +17,13 @@ class HomeController extends Controller
         // $id_produk = Produk::inRandomOrder()->take(4)->pluck('id');
         // $gambars = Gambar::whereIn('id_produk', $id_produk)->pluck('gambar');
 
-        $produks = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
+        $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
+        $produk_wishlist = Wishlist::with('produk')->get();
 
         return view('User.index', [
-            'title'   => 'Adidas',
-            'produks' => $produks
+            'title'           => 'Adidas',
+            'produks'         => $produks,
+            'produk_wishlist' => $produk_wishlist
         ]);
     }
 

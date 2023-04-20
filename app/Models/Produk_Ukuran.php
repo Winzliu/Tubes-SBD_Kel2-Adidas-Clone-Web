@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produk;
+use App\Models\Ukuran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produk_Ukuran extends Model
 {
     use HasFactory;
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
+    }
+    public function ukuran()
+    {
+        return $this->belongsTo(Ukuran::class);
+    }
 }

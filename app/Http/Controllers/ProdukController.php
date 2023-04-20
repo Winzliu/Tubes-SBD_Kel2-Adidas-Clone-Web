@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\Gambar;
 use App\Models\Ukuran;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -30,10 +31,12 @@ class ProdukController extends Controller
         $produk_lainnya = $jumlah_produk->whereNotIn('id', $produk->id);
         $gambar_produk = Gambar::where('produk_id', $produk->id)->first()->gambar;
 
-        $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
-        $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna'])->inRandomOrder()->take(16)->get();
+        $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
+        $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
 
         $ulasans = $produk->ulasan;
+
+        $produk_wishlist = Wishlist::with('produk')->get();
 
         return view('User.produks', [
             'title'                  => $produk->detailproduk->nama,
@@ -44,7 +47,8 @@ class ProdukController extends Controller
             'produk_tawaran'         => $produk_tawaran,
             'pelanggan_lain_membeli' => $pelanggan_lain_membeli,
             'ukurans'                => $ukurans,
-            'ulasans'                => $ulasans
+            'ulasans'                => $ulasans,
+            'produk_wishlist'        => $produk_wishlist
         ]);
     }
 

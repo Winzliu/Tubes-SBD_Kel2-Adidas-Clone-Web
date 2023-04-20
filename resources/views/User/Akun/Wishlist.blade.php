@@ -15,24 +15,37 @@
       <!-- header wishlist -->
       <div class="d-flex justify-content-between mt-4">
         <p class="fs-4 fw-bold align-self-center">WISHLIST SAYA</p>
-        <a href="#" class="fs-vvs fw-bold hover-black text-black align-self-center" style="letter-spacing: 3px;">HAPUS
-          WISHLIST</a>
+        <form action="/wishlist/deleteall" method="POST">
+          @method('delete')
+          @csrf
+          <button type="submit"
+            class="fs-vvs fw-bold hover-black text-black align-self-center border-0 bg-transparent">HAPUS
+            WISHLIST</button>
+        </form>
       </div>
       <!-- akhir header wishlist -->
       <!-- main wishlist -->
       <div class="border-bottom border-top border-4 border-secondary mb-4">
+        @foreach ($wishlists as $wishlist)
+        @if($wishlist->user_id == auth()->user()->id)
         <!-- wishlist pertama -->
         <div class="d-flex px-2 py-3 border-bottom border- 1 justify-content-between">
           <!-- sisi kiri -->
           <div class="d-flex gap-4">
             <a href="#">
-              <img src="img/Produk1.1.jpeg" width="150px" height="150px" alt="">
+              <img src="{{ asset('img/' . $wishlist->produk->gambar->first()->gambar) }}" width="150px" height="150px"
+                alt="">
             </a>
             <div class="">
-              <p class="fs-vs fw-bold mb-0">SEPATU SAMBA OG</p>
-              <p class="fs-vs mb-0">Color : Black/White/Beige</p>
+              <p class="fs-vs fw-bold mb-0">{{ $wishlist->produk->detailproduk->nama }}</p>
+              <p class="fs-vs mb-0">Color : <span class="text-uppercase">{{ $wishlist->produk->deskripsiWarna }}</span>
+              </p>
               <p class="fs-vs mb-0">Tersedia</p>
-              <a href="#" class="fs-vs mb-0 hover-black text-black">Remove</a>
+              <form action="/wishlist/{{ $wishlist->id }}" method="POST">
+                @method('delete')
+                @csrf
+                <button type="submit" class="fs-vs mb-0 hover-black text-black border-0 bg-transparent">Remove</button>
+              </form>
             </div>
           </div>
           <!-- akhir sisi kiri -->
@@ -41,18 +54,12 @@
             <!-- ukuran -->
             <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
             <div class="d-flex">
-              <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs me-2 py-2"
-                aria-label="Default select example">
-                <option value="UK" selected>UK</option>
-                <option value="2">EUROPE</option>
-                <option value="3">US</option>
-              </select>
               <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
                 aria-label="Default select example">
                 <option selected>UKURAN</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                @foreach ($wishlist->produk->produk_ukuran as $ukurans)
+                <option value="{{ $ukurans->ukuran->ukuran }}">{{ $ukurans->ukuran->ukuran }}</option>
+                @endforeach
               </select>
             </div>
             <p class="text-danger fw-bold fs-vs my-2">Low Stock</p>
@@ -67,7 +74,10 @@
           <!-- akhir sisi kanan -->
         </div>
         <!-- akhir wishlist pertama -->
+        @endif
+        @endforeach
 
+        {{--
         <!-- wishlist kedua -->
         <div class="d-flex px-2 py-3 border-bottom border- 1 justify-content-between">
           <!-- sisi kiri -->
@@ -113,7 +123,7 @@
           </div>
           <!-- akhir sisi kanan -->
         </div>
-        <!-- akhir wishlist kedua -->
+        <!-- akhir wishlist kedua --> --}}
       </div>
     </div>
     <!-- akhir main wishlist -->
