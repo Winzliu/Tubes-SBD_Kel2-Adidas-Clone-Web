@@ -24,7 +24,7 @@
           }}</span>
       </p>
 
-      <form action="">
+      <form action="{{ request()->url() }}" method="GET">
         <div class="d-flex border border-1 border-dark justify-content-between" id="navbar-1" style="z-index: 999;">
           <div class="p-1 d-flex gap-2 w-100 justify-content-between">
             <div class="d-flex gap-2">
@@ -37,43 +37,55 @@
                 <ul class="dropdown-menu">
                   <li>
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control rounded-0 border-dark" style="height: 40px"
-                        id="floatingInput" placeholder="name@example.com">
+                      <input type="text" value="{{ request()->query('minimum') ?: 0 }}" name="minimum"
+                        class="form-control rounded-0 border-dark" style="height: 40px" id="floatingInput"
+                        placeholder="name@example.com">
                       <label class="p-2" for="floatingInput">Minimum</label>
                     </div>
                   </li>
                   <li>
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control rounded-0 border-dark" style="height: 40px"
-                        id="floatingInput" placeholder="name@example.com">
-                      <label class="p-2" for="floatingInput">Maximum</label>
+                      <input type="text" value="{{ request()->query('maksimum') ?: 8499000 }}" name="maksimum"
+                        class="form-control rounded-0 border-dark" style="height: 40px" id="floatingInput"
+                        placeholder="name@example.com">
+                      <label class="p-2" for="floatingInput">Maksimum</label>
                     </div>
                   </li>
                 </ul>
               </div>
               {{-- akhir rentang harga --}}
               {{-- ukuran --}}
-              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
-                <option selected>Ukuran</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select name="ukuran" class="form-select border-dark rounded-0 h-100 w-auto"
+                aria-label="Default select example">
+                <option disabled {{ request()->query('ukuran') ?: 'selected' }}>Ukuran</option>
+                @foreach ($ukurans as $ukuran)
+                <option value="{{ $ukuran->id }}" {{ request()->query('ukuran') == $ukuran->id ? 'selected' : '' }}>{{
+                  $ukuran->ukuran }}</option>
+                @endforeach
               </select>
               {{-- akhir ukuran --}}
               {{-- warna --}}
-              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
-                <option selected>Warna</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select name="warna" class="form-select border-dark rounded-0 h-100 w-auto"
+                aria-label="Default select example">
+                <option disabled {{ request()->query('warna') ?: 'selected' }}>Warna</option>
+                @foreach ($warnas as $warna)
+                <option value="{{ $warna->id }}" {{ request()->query('warna') == $warna->id ? 'selected' : '' }}>{{
+                  $warna->warna }}</option>
+                @endforeach
               </select>
               {{-- akhir warna --}}
               {{-- filter --}}
-              <select class="form-select border-dark rounded-0 h-100 w-auto" aria-label="Default select example">
-                <option selected>Filter</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select name="filter" class="form-select border-dark rounded-0 h-100 w-auto"
+                aria-label="Default select example">
+                <option disabled {{ request()->query('filter') ?: 'selected' }}>Filter</option>
+                <option value="namaUp" {{ request()->query('filter') == 'namaUp' ? 'selected' : '' }}>Nama : A hingga Z
+                </option>
+                <option value="namaDown" {{ request()->query('filter') == 'namaDown' ? 'selected' : '' }}>Nama : Z
+                  hingga A</option>
+                <option value="hargaUp" {{ request()->query('filter') == 'hargaUp' ? 'selected' : '' }}>Harga : Rendah
+                  ke Tinggi</option>
+                <option value="hargaDown" {{ request()->query('filter') == 'hargaDown' ? 'selected' : '' }}>Harga :
+                  Tinggi ke Rendah</option>
               </select>
               {{-- akhir filter --}}
             </div>
@@ -93,7 +105,7 @@
       @foreach ($produks as $produk)
       <!-- produk 1.1 -->
       <div class="col">
-        <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+        <a href="/produk/{{ Str::slug($produk->nama) }}/{{ $produk->warna->warna }}"
           class="text-black nav-link mb-3 hover-produk" style="height: 450px;" id="produk">
           <div class="card border-0">
             <div class="">
@@ -156,8 +168,7 @@
                     style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU
                   </p>
             </div>
-            {{-- @dd($produks->where('detailproduk_id', $produk->detailproduk_id)->whereNotIn('id',
-            $produk->id)->first()->gambar->first()->gambar); --}}
+            @if($produk->where('detailproduk_id',$produk->detailproduk_id)->count() > 1)
             <div class="mt-1 bg-grey d-flex d-none px-2" id="image-produk">
               <button onclick="return false;" class="border-0"><img src={{ asset("img/".
                   $produk->gambar->first()->gambar)}}
@@ -167,15 +178,18 @@
                 class="hover-border-bottom" width="50px" alt=""></button>
               @endforeach
             </div>
+            @endif
             <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
               <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                 $produk->detailproduk->kategori }}</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">{{ $produk->detailproduk->nama }}</p>
+              <p class="card-text fs-vs" style="margin-top: -7px;">{{ $produk->nama }}</p>
               <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. {{
-                number_format($produk->detailproduk->harga
+                number_format($produk->harga
                 , 0, ',', '.')}}</p>
+              @if($produk->where('detailproduk_id',$produk->detailproduk_id)->count() > 1)
               <p class="card-text fs-vs text-muted mb-2">{{ $produks->where('detailproduk_id',
                 $produk->detailproduk_id)->count() }} warna</p>
+              @endif
             </div>
           </div>
         </a>

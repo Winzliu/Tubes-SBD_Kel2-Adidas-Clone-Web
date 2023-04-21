@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Detailproduk;
 use App\Models\Produk;
 use App\Models\Wishlist;
+use App\Models\Ukuran;
+use App\Models\Warna;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -12,16 +14,60 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($pengguna = null, $jenis = null, $kategori = null)
+    public function index(Request $request, $pengguna = null, $jenis = null, $kategori = null)
     {
+        $ukurans = Ukuran::get();
+        $warnas = Warna::get();
+
         if ($jenis == null) {
             $title = $pengguna;
             $judul = $pengguna;
 
-            $id_semuaProduk = Detailproduk::where('pengguna', $pengguna)->pluck('id');
-            $produks = Produk::whereIn('detailproduk_id', $id_semuaProduk)->get();
+            $minimum = $request->query('minimum');
+            $maksimum = $request->query('maksimum');
+            $warna = $request->query('warna');
+            $ukuran = $request->query('ukuran');
+            $filter = $request->query('filter');
+
+            $id_semuaProduk = Detailproduk::with('produk')->where('pengguna', $pengguna)->pluck('id');
+
+            $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk);
+
+            if ($minimum != null && $maksimum != null) {
+                $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
+            }
+
+            if ($warna != null) {
+                $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk)->
+                    where('warna_id', $warna);
+            }
+
+            if ($ukuran != null) {
+                $produks = $produks->whereHas('produk_ukuran', function ($query) use ($ukuran) {
+                    $query->where('ukuran_id', $ukuran);
+                });
+            }
+
+            if ($filter == 'namaUp') {
+                $produks = $produks->orderBy('nama', 'asc');
+            }
+
+            if ($filter == 'namaDown') {
+                $produks = $produks->orderBy('nama', 'desc');
+            }
+
+            if ($filter == 'hargaUp') {
+                $produks = $produks->orderBy('harga', 'asc');
+            }
+
+            if ($filter == 'hargaDown') {
+                $produks = $produks->orderBy('harga', 'desc');
+            }
+
+            $produks = $produks->get();
 
             $produk_wishlist = Wishlist::with('produk')->get();
+
         } else if ($kategori == null) {
             $title = $pengguna . '/' . $jenis;
             $judul = $jenis;
@@ -44,7 +90,9 @@ class KategoriController extends Controller
             'title'           => $title,
             'judul'           => $judul,
             'produks'         => $produks,
-            'produk_wishlist' => $produk_wishlist
+            'produk_wishlist' => $produk_wishlist,
+            'ukurans'         => $ukurans,
+            'warnas'          => $warnas
         ]);
     }
 

@@ -19,7 +19,7 @@ class ProdukController extends Controller
         $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'ulasan'])->get();
 
         foreach ($produks as $p) {
-            if (Str::slug($p->detailproduk->nama) == $slug && $p->warna->warna == $warna) {
+            if (Str::slug($p->nama) == $slug && $p->warna->warna == $warna) {
                 $produk = $p;
                 $jumlah_produk = $produks->where('detailproduk_id', $p->detailproduk_id);
             }
@@ -39,7 +39,7 @@ class ProdukController extends Controller
         $produk_wishlist = Wishlist::with('produk')->get();
 
         return view('User.produks', [
-            'title'                  => $produk->detailproduk->nama,
+            'title'                  => $produk->nama,
             'produk'                 => $produk,
             'jumlahWarna'            => $jumlah_produk->count(),
             'gambar_produk'          => $gambar_produk,

@@ -458,10 +458,12 @@
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </form>
+          @auth
           <a href="/wishlist" class="nav-link mx-2">
             <ion-icon class="fs-4" name="heart-outline"></ion-icon>
           </a>
-          <a href="#" class="nav-link me-4">
+          @endauth
+          <a href="#" class="nav-link me-4 ms-2">
             <ion-icon class="fs-4" name="bag-handle-outline"></ion-icon>
           </a>
         </div>

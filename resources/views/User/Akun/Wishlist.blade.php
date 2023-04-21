@@ -32,12 +32,12 @@
         <div class="d-flex px-2 py-3 border-bottom border- 1 justify-content-between">
           <!-- sisi kiri -->
           <div class="d-flex gap-4">
-            <a href="#">
+            <a href="/produk/{{ Str::slug($wishlist->produk->nama) }}/{{ $wishlist->produk->warna->warna }}">
               <img src="{{ asset('img/' . $wishlist->produk->gambar->first()->gambar) }}" width="150px" height="150px"
                 alt="">
             </a>
             <div class="">
-              <p class="fs-vs fw-bold mb-0">{{ $wishlist->produk->detailproduk->nama }}</p>
+              <p class="fs-vs fw-bold mb-0">{{ $wishlist->produk->nama }}</p>
               <p class="fs-vs mb-0">Color : <span class="text-uppercase">{{ $wishlist->produk->deskripsiWarna }}</span>
               </p>
               <p class="fs-vs mb-0">Tersedia</p>

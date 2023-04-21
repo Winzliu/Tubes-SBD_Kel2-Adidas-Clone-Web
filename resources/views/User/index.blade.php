@@ -340,7 +340,7 @@
         <div class="d-flex gap-2 m-auto w-100">
           @foreach ($produks->slice(0,4) as $produk)
           <!-- Terbaik 1 carousel -->
-          <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+          <a href="/produk/{{ Str::slug($produk->nama) }}/{{ $produk->warna->warna }}"
             class="text-black nav-link hover-border">
             <div class="card border-0" style="width: 16rem;">
               @auth
@@ -404,11 +404,11 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->detailproduk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
-                      number_format($produk->detailproduk->harga
+                      number_format($produk->harga
                       , 0, ',', '.')}}</p>
                   </div>
             </div>
@@ -425,7 +425,7 @@
         <div class="d-flex gap-2 m-auto w-100">
           @foreach ($produks->slice(4,4) as $produk)
           <!-- Terbaik 1 carousel -->
-          <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+          <a href="/produk/{{ Str::slug($produk->nama) }}/{{ $produk->warna->warna }}"
             class="text-black nav-link hover-border">
             <div class="card border-0" style="width: 16rem;">
               @auth
@@ -489,11 +489,11 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->detailproduk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
-                      number_format($produk->detailproduk->harga
+                      number_format($produk->harga
                       , 0, ',', '.')}}</p>
                   </div>
             </div>
@@ -509,7 +509,7 @@
         <div class="d-flex gap-2 m-auto w-100">
           @foreach ($produks->slice(8,4) as $produk)
           <!-- Terbaik 1 carousel -->
-          <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+          <a href="/produk/{{ Str::slug($produk->nama) }}/{{ $produk->warna->warna }}"
             class="text-black nav-link hover-border">
             <div class="card border-0" style="width: 16rem;">
               @auth
@@ -573,11 +573,11 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->detailproduk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
-                      number_format($produk->detailproduk->harga
+                      number_format($produk->harga
                       , 0, ',', '.')}}</p>
                   </div>
             </div>
@@ -593,7 +593,7 @@
         <div class="d-flex gap-2 m-auto w-100">
           @foreach ($produks->slice(12,4) as $produk)
           <!-- Terbaik 1 carousel -->
-          <a href="/produk/{{ Str::slug($produk->detailproduk->nama) }}/{{ $produk->warna->warna }}"
+          <a href="/produk/{{ Str::slug($produk->nama) }}/{{ $produk->warna->warna }}"
             class="text-black nav-link hover-border">
             <div class="card border-0" style="width: 16rem;">
               @auth
@@ -657,11 +657,11 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->detailproduk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
-                      number_format($produk->detailproduk->harga
+                      number_format($produk->harga
                       , 0, ',', '.')}}</p>
                   </div>
             </div>
