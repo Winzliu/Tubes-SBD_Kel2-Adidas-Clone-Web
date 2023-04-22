@@ -13,7 +13,7 @@
   <div class="px-5 mx-4">
     <!-- head -->
     <div class="d-flex py-2">
-      <a href="#" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
+      <a href="/" class="nav-link hover-black text-decoration-underline fs-vs fw-bold"
         style="letter-spacing: 2px;">KEMBALI</a>
       <p class="fs-s ms-3 text-uppercase">{{ $title }}</p>
     </div>
@@ -25,6 +25,9 @@
       </p>
 
       <form action="{{ request()->url() }}" method="GET">
+        @if (request()->query('pencarian') != null)
+        <input type="hidden" name="pencarian" value="{{ request()->query('pencarian') }}">
+        @endif
         <div class="d-flex border border-1 border-dark justify-content-between" id="navbar-1" style="z-index: 999;">
           <div class="p-1 d-flex gap-2 w-100 justify-content-between">
             <div class="d-flex gap-2">
@@ -196,122 +199,6 @@
       </div>
       <!-- akhir produk 1.1 -->
       @endforeach
-      {{--
-      <!-- produk 2.1 -->
-      <div class="col">
-        <a href="#" class="text-black nav-link hover-produk" style="height: 450px;" id="produk">
-          <div class="card border-0">
-            <div class="">
-              <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
-            </div>
-            <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 1.300.000</p>
-              <p class="card-text fs-vs text-muted"></p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- akhir produk 2.1 -->
-      <!-- produk 2.1 -->
-      <div class="col">
-        <a href="#" class="text-black nav-link hover-border" style="height: 450px;">
-          <div class="card border-0">
-            <div class="">
-              <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
-            </div>
-            <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 1.300.000</p>
-              <p class="card-text fs-vs text-muted"></p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- akhir produk 2.1 -->
-      <!-- produk 2.1 -->
-      <div class="col">
-        <a href="#" class="text-black nav-link hover-border" style="height: 450px;">
-          <div class="card border-0">
-            <div class="">
-              <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
-            </div>
-            <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 1.300.000</p>
-              <p class="card-text fs-vs text-muted"></p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- akhir produk 2.1 -->
-      <!-- produk 2.1 -->
-      <div class="col">
-        <a href="#" class="text-black nav-link hover-border" style="height: 450px;">
-          <div class="card border-0">
-            <div class="">
-              <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
-            </div>
-            <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 1.300.000</p>
-              <p class="card-text fs-vs text-muted"></p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- akhir produk 2.1 -->
-      <!-- produk 2.1 -->
-      <div class="col">
-        <a href="#" class="text-black nav-link hover-border" style="height: 450px;">
-          <div class="card border-0">
-            <div class="">
-              <img src="img/Terbaik12.jpeg" class="card-img-top rounded-0" alt="...">
-              <button onclick="return false;" class="border-0 position-absolute start-100 wishlist"
-                style="margin-left: -45px; margin-top: 17px;">
-                <ion-icon style="font-size: 1.2rem;" name="heart-outline"></ion-icon>
-              </button>
-              <p class="fst-italic bg-white border-0 position-absolute start-0 top-0 fs-vs px-1 "
-                style="margin-left: -5px; margin-top: 25px; letter-spacing: 2px; transform: rotate(-90deg);">BARU</p>
-            </div>
-            <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
-              <p class="card-text mt-1 fs-vs text-muted">Wanita Lifestyle</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">SANDAL ASTIR ADIDAS</p>
-              <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. 1.300.000</p>
-              <p class="card-text fs-vs text-muted"></p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- akhir produk 2.1 --> --}}
     </div>
     <!-- akhir produk -->
   </div>

@@ -50,80 +50,58 @@
           </div>
           <!-- akhir sisi kiri -->
           <!-- sisi kanan -->
-          <div class="">
-            <!-- ukuran -->
-            <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
-            <div class="d-flex">
-              <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
-                aria-label="Default select example">
-                <option selected>UKURAN</option>
-                @foreach ($wishlist->produk->produk_ukuran as $ukurans)
-                <option value="{{ $ukurans->ukuran->ukuran }}">{{ $ukurans->ukuran->ukuran }}</option>
-                @endforeach
-              </select>
-            </div>
-            <p class="text-danger fw-bold fs-vs my-2">Low Stock</p>
-            <!-- akhir ukuran -->
+          <form action="/keranjang" method="POST">
+            <div class="">
+              @csrf
+              <!-- ukuran -->
+              <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
+              <div class="d-flex gap-3">
+                <select name="ukuran_id"
+                  class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+                  aria-label="Default select example">
+                  <option selected disabled>UKURAN</option>
+                  @foreach ($wishlist->produk->produk_ukuran as $ukurans)
+                  <option value="{{ $ukurans->ukuran->id }}">{{ $ukurans->ukuran->ukuran }}</option>
+                  @endforeach
+                </select>
+                <select name="jumlahItem"
+                  class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+                  aria-label="Default select example">
+                  <option selected disabled>JUMLAH</option>
+                  @for ($i = 1; $i <= $wishlist->produk->stock; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
+              </div>
+              <p class="text-danger fw-bold fs-vs my-2">{{ $wishlist->produk->stock }} Stock Tersisa</p>
+              <!-- akhir ukuran -->
+              @error('ukuran_id')
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Pilih Ukuran Yang Diinginkan</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @enderror
 
-            <!-- tambah keranjang -->
-            <button type="button" class="btn btn-dark rounded-0 w-100 fs-s fw-bold p-3">
-              TAMBAHKAN KE KERANJANG --->
-            </button>
-            <!-- akhir tambah keranjang -->
-          </div>
-          <!-- akhir sisi kanan -->
+              @error('jumlahItem')
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Pilih Jumlah Item Yang Diinginkan</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @enderror
+
+              <input type="hidden" name="produk_id" value="{{ $wishlist->produk->id }}">
+              <!-- tambah keranjang -->
+              <button type="submit" class="@auth @else disabled @endauth btn btn-dark rounded-0 w-100 fs-s fw-bold">
+                TAMBAHKAN KE KERANJANG --->
+              </button>
+              <!-- akhir tambah keranjang -->
+            </div>
+            <!-- akhir sisi kanan -->
         </div>
+        </form>
         <!-- akhir wishlist pertama -->
         @endif
         @endforeach
-
-        {{--
-        <!-- wishlist kedua -->
-        <div class="d-flex px-2 py-3 border-bottom border- 1 justify-content-between">
-          <!-- sisi kiri -->
-          <div class="d-flex gap-4">
-            <a href="#">
-              <img src="img/Produk1.2.jpeg" width="150px" height="150px" alt="">
-            </a>
-            <div class="">
-              <p class="fs-vs fw-bold mb-0">SEPATU SAMBA OG</p>
-              <p class="fs-vs mb-0">Color : Black/White/Beige</p>
-              <p class="fs-vs mb-0">Tersedia</p>
-              <a href="#" class="fs-vs mb-0 hover-black text-black">Remove</a>
-            </div>
-          </div>
-          <!-- akhir sisi kiri -->
-          <!-- sisi kanan -->
-          <div class="">
-            <!-- ukuran -->
-            <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
-            <div class="d-flex">
-              <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs me-2 py-2"
-                aria-label="Default select example">
-                <option value="UK" selected>UK</option>
-                <option value="2">EUROPE</option>
-                <option value="3">US</option>
-              </select>
-              <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
-                aria-label="Default select example">
-                <option selected>UKURAN</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <p class="text-danger fw-bold fs-vs my-2">Low Stock</p>
-            <!-- akhir ukuran -->
-
-            <!-- tambah keranjang -->
-            <button type="button" class="btn btn-dark rounded-0 w-100 fs-s fw-bold p-3">
-              TAMBAHKAN KE KERANJANG --->
-            </button>
-            <!-- akhir tambah keranjang -->
-          </div>
-          <!-- akhir sisi kanan -->
-        </div>
-        <!-- akhir wishlist kedua --> --}}
       </div>
     </div>
     <!-- akhir main wishlist -->

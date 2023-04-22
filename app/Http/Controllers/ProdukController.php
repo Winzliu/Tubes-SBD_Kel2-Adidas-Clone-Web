@@ -26,7 +26,7 @@ class ProdukController extends Controller
         }
 
         $ukurans = $produk->produk_ukuran->pluck('ukuran_id');
-        $ukurans = Ukuran::whereIn('id', $ukurans)->pluck('ukuran');
+        $ukurans = Ukuran::whereIn('id', $ukurans)->get();
 
         $produk_lainnya = $jumlah_produk->whereNotIn('id', $produk->id);
         $gambar_produk = Gambar::where('produk_id', $produk->id)->first()->gambar;

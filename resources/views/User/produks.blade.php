@@ -149,7 +149,7 @@
       <div class="my-5 mx-5 px-5">
         <p class="fs-3 fw-bold mb-2">SPESIFIKASI</p>
         <ul class="w-100">
-          {{$produk->detailproduk->spesifikasi}}
+          {!! $produk->detailproduk->spesifikasi !!}
         </ul>
       </div>
       <!-- akhir deskripsi -->
@@ -1203,68 +1203,158 @@
 
       <!-- ukuran -->
       <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
-      <div class="d-flex">
-        <select class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
-          aria-label="Default select example">
-          <option selected>UKURAN</option>
-          @foreach ($ukurans as $ukuran)
-          <option value="{{ $ukuran }}">{{ $ukuran }}</option>
-          @endforeach
-        </select>
-      </div>
-      <p class="text-danger fw-bold fs-vs my-2">{{ $produk->stock }} stok tersisa</p>
-      <div class="d-flex gap-4 my-3">
-        <a href="#" class="fs-vs fw-bold hover-black text-black">PANDUAN UKURAN</a>
-        <a href="#" class=" fs-vs text-black hover-black">Ukuran yang dipilih habis?</a>
-      </div>
-      <!-- akhir ukuran -->
-
-      <!-- tambah keranjang -->
-      <div class="d-flex gap-2">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-dark rounded-0 w-100 fs-s fw-bold">
-          TAMBAHKAN KE KERANJANG --->
-        </button>
-        <button class="bg-white py-1 px-2 wishlist">
-          <ion-icon class="fs-3" name="heart-outline"></ion-icon>
-        </button>
-      </div>
-      <!-- akhir tambah keranjang -->
-
-      <!-- learn more -->
-      <div class="d-flex my-3">
-        <p class="align-self-center me-2">
-          <ion-icon name="airplane-outline"></ion-icon>
-        </p>
-        <div class="">
-          <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
-          <p class="fs-vs">Free Delivery</p>
+      {{-- masukkan kedalam keranjang --}}
+      <form action="/keranjang" method="POST">
+        @csrf
+        <div class="d-flex gap-4">
+          <select name="ukuran_id" class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+            aria-label="Default select example">
+            <option selected disabled>UKURAN</option>
+            @foreach ($ukurans as $ukuran)
+            <option value="{{ $ukuran->id }}">{{ $ukuran->ukuran }}</option>
+            @endforeach
+          </select>
+          <select name="jumlahItem" class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+            aria-label="Default select example">
+            <option selected disabled>JUMLAH</option>
+            @for ($i = 1; $i<=$produk->stock;$i++)
+              <option value="{{ $i }}">{{ $i }}</option>
+              @endfor
+          </select>
         </div>
-      </div>
-      <div class="d-flex">
-        <p class="align-self-center me-2">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-        </p>
-        <div class="">
-          <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
-          <p class="fs-vs">Not the Right Size or colors</p>
+        <p class="text-danger fw-bold fs-vs my-2">{{ $produk->stock }} stok tersisa</p>
+        <div class="d-flex gap-4 my-3">
+          <a href="#" class="fs-vs fw-bold hover-black text-black">PANDUAN UKURAN</a>
+          <a href="#" class=" fs-vs text-black hover-black">Ukuran yang dipilih habis?</a>
         </div>
-      </div>
-      <div class="d-flex">
-        <p class="align-self-center me-2">
-          <ion-icon name="checkmark-outline"></ion-icon>
-        </p>
-        <div class="">
-          <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
-          <p class="fs-vs">Read our Terms and Conditions</p>
-        </div>
-      </div>
-      <!-- akhir learn more -->
+        <!-- akhir ukuran -->
 
+        @error('ukuran_id')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Pilih Ukuran Yang Diinginkan</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+
+        @error('jumlahItem')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Pilih Jumlah Item Yang Diinginkan</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+
+        @if (session()->has('success'))
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+          <strong>{{ session('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if (session()->has('errorKeranjang'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{ session('errorKeranjang') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        <!-- tambah keranjang -->
+        <div class="d-flex gap-2">
+          <!-- Button trigger modal -->
+          <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+          <button type="submit" class="@auth @else disabled @endauth btn btn-dark rounded-0 w-100 fs-s fw-bold">
+            TAMBAHKAN KE KERANJANG --->
+          </button>
+      </form>
+      {{-- akhir massukkan kedalam keranjang --}}
+      @auth
+      @if($produk->wishlist != NULL)
+      @foreach ($produk_wishlist as $wishlist)
+      @if(auth()->user()->id == $wishlist->user_id && $produk->id == $wishlist->produk_id)
+      @php
+      $hasil = 'delete';
+      $id = $wishlist->id
+      @endphp
+      @break;
+      @else
+      @php
+      $hasil = 'input'
+      @endphp
+      @endif
+      @endforeach
+      @if($hasil == 'delete')
+      <form action="/wishlist/{{ $id }}" method="POST">
+        @method('delete')
+        @csrf
+        @else
+        <form action="/wishlist" method="POST">
+          @csrf
+          <input type="hidden" name="produk_id" id="produk_id" value="{{ $produk->id }}">
+          @endif
+          @else
+          <form action="/wishlist" method="POST">
+            @csrf
+            <input type="hidden" name="produk_id" id="produk_id" value="{{ $produk->id }}">
+            @endif
+            @endauth
+            @auth
+            <button type="submit" class="bg-white py-1 px-2 wishlist">
+              @if ($produk->wishlist != NULL)
+              @foreach ($produk_wishlist as $wishlist)
+              @if(auth()->user()->id == $wishlist->user_id && $produk->id == $wishlist->produk_id)
+              @php
+              $hasil = 'heart';
+              @endphp
+              @break
+              @else
+              @php
+              $hasil = 'heart-outline';
+              @endphp
+              @endif
+              @endforeach
+              <ion-icon style="fs-3" name="{{ $hasil }}"></ion-icon>
+              @else
+              <ion-icon style="fs-3" name="heart-outline"></ion-icon>
+              @endif
+              @endauth
+            </button>
+          </form>
     </div>
-    <!-- akhir harga -->
+    <!-- akhir tambah keranjang -->
+
+    <!-- learn more -->
+    <div class="d-flex my-3">
+      <p class="align-self-center me-2">
+        <ion-icon name="airplane-outline"></ion-icon>
+      </p>
+      <div class="">
+        <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
+        <p class="fs-vs">Free Delivery</p>
+      </div>
+    </div>
+    <div class="d-flex">
+      <p class="align-self-center me-2">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+      </p>
+      <div class="">
+        <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
+        <p class="fs-vs">Not the Right Size or colors</p>
+      </div>
+    </div>
+    <div class="d-flex">
+      <p class="align-self-center me-2">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </p>
+      <div class="">
+        <p class="hover-black text-decoration-underline fs-vs my-0">Learn more</p>
+        <p class="fs-vs">Read our Terms and Conditions</p>
+      </div>
+    </div>
+    <!-- akhir learn more -->
+
   </div>
-  <!-- akhir pemaparan produk -->
+  <!-- akhir harga -->
+</div>
+<!-- akhir pemaparan produk -->
 </div>
 @endsection
 

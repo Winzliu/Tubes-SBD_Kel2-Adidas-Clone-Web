@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeranjangController;
 use App\Models\Gambar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -54,8 +55,12 @@ Route::resource('/login', LoginController::class)->except(['index']);
 Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // wishlist controller
-Route::delete('/wishlist/deleteall', [WishlistController::class, 'destroyAll']);
-Route::resource('/wishlist', WishlistController::class);
+Route::delete('/wishlist/deleteall', [WishlistController::class, 'destroyAll'])->middleware('auth');
+Route::resource('/wishlist', WishlistController::class)->middleware('auth');
+
+// keranjang controller
+Route::resource('/keranjang', KeranjangController::class)->middleware('auth');
 
 // kategori controller
+Route::get('/search', [KategoriController::class, 'pencarian']);
 Route::resource('/{pengguna?}/{jenis?}/{kategori?}', KategoriController::class);

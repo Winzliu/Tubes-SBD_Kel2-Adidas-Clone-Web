@@ -451,9 +451,10 @@
             </ul>
           </div>
           <!-- search -->
-          <form class="d-flex position-relative bg-grey mb-2 border-0" style="width: 26%" role="search">
-            <input class="border-0 bg-grey py-2 px-3 fs-vs" style="width: 90%" type="search" placeholder="Cari"
-              aria-label="Search" />
+          <form action="/search" method="GET" class="d-flex position-relative bg-grey mb-2 border-0" style="width: 26%">
+            @csrf
+            <input class="form-control rounded-0 border-0 bg-grey py-2 px-3 fs-vs " value="{{ request()->pencarian }}"
+              name="pencarian" style="width: 100%" type="text" placeholder="Cari.." aria-label="Search" />
             <button class="border-0 bg-grey position-absolute end-0 h-100 px-2" type="submit">
               <ion-icon name="search-outline"></ion-icon>
             </button>
@@ -462,10 +463,10 @@
           <a href="/wishlist" class="nav-link mx-2">
             <ion-icon class="fs-4" name="heart-outline"></ion-icon>
           </a>
-          @endauth
-          <a href="#" class="nav-link me-4 ms-2">
+          <a href="/keranjang" class="nav-link me-4 ms-2">
             <ion-icon class="fs-4" name="bag-handle-outline"></ion-icon>
           </a>
+          @endauth
         </div>
       </div>
     </div>
