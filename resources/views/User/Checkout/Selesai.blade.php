@@ -33,18 +33,18 @@
     <!-- sisi kanan -->
     <div class="bg-grey mt-4 mb-3 mx-5 p-2 w-100">
       <!-- Ringkasan Pesanan -->
-      <div class="d-flex justify-content-between">
-        <p class="fs-s fw-bold mb-0">RINGKASAN PESANAN:</p>
-        <a href="#" class="fs-vvs text-black align-self-center">Edit Bag</a>
+      <div class="d-flex justify-content-between w-100">
+        <p class="fs-3 fw-bold mb-0 text-center w-100">PEMBAYARAN BERHASIL!!</p>
       </div>
       <!-- akhir Ringkasan Pesanan -->
       <!-- harga pesanan -->
       <ul class="list-group bg-white rounded-0 mt-3">
-        <li class="list-group-item fs-vs p-2">2 Produk</li>
+        <li class="list-group-item fs-vs p-2">{{ $produks->count() }} Produk</li>
         <li class="list-group-item fs-vs p-2">
           <div class="d-flex justify-content-between">
             <p class="m-0">Total Produk</p>
-            <p class="m-0">Rp 4.100.000</p>
+            <p class="m-0">Rp {{ number_format($produks->first()->pesanan->totalHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
         <li class="list-group-item fs-vs p-2">
@@ -59,43 +59,50 @@
               Total <br />
               (Termasuk pajak)
             </p>
-            <p class="m-0">Rp 4.100.000</p>
+            <p class="m-0">Rp {{ number_format($produks->first()->pesanan->totalHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
+        @foreach ($produks as $produk)
         <li class="list-group-item fs-vs p-2">
           <div class="d-flex">
             <p class="m-0">
-              <img src="img/Produk1.1.jpeg" width="50px" height="50px" alt="" />
+              <img src={{ asset("img/". $produk->produk->gambar->first()->gambar) }} width="50px" height="50px" alt=""
+              />
             </p>
-            <div class="fs-vvs ms-2">
-              <a href="#" class="fw-bold text-black nav-link hover-line">TAS PINGGANG ADICOLOR CLASS</a>
-              <p class="mb-0">HK2627</p>
-              <p class="mb-0">Warna: Multicolor</p>
-              <p class="mb-0">Size: NSUK</p>
+            <div class="fs-vvs ms-2 w-25">
+              <a href="#" class="fw-bold text-black nav-link hover-line">{{ $produk->produk->nama }}</a>
+              <p class="mb-0">Warna: <span class="text-uppercase">{{ $produk->produk->deskripsiWarna }}</span></p>
+              <p class="mb-0">Size: {{ $produk->ukuran }}</p>
               <p class="mb-0 text-end">
-                1 <span class="mx-1">x</span>
-                <span class="fs-vs">Rp. 344.500</span>
+                {{ $produk->jumlahItem }} <span class="mx-1">x</span>
+                <span class="fs-vs">Rp. {{ number_format($produk->produk->harga, 0,
+                  ',', '.') }}</span>
               </p>
               <p class="mb-0 text-end">
-                Total <span class="fs-vs">Rp. 344.500</span>
+                Total <span class="fs-vs">Rp. {{ number_format($produk->produk->harga * $produk->jumlahItem, 0,
+                  ',', '.') }}</span>
               </p>
             </div>
           </div>
         </li>
+        @endforeach
       </ul>
       <!-- akhir harga pesanan -->
       <!-- metode pengiriman -->
       <ul class="list-group bg-white rounded-0 mt-3">
         <li class="list-group-item p-2">
           <p class="fs-vs fw-bold mb-0">DETAIL PENGIRIMAN</p>
-          <p class="fs-vs mb-0">nama depan nama belakang</p>
-          <p class="fs-vs mb-0">nama jalan</p>
-          <p class="fs-vs mb-0">provinsi</p>
-          <p class="fs-vs mb-0">kota, kecamatan</p>
-          <p class="fs-vs mb-0">kelurahan, kode pos</p>
-          <p class="fs-vs mb-0">Indonesia</p>
-          <p class="fs-vs mb-0">Telepon : 0812345678</p>
-          <a href="checkout1.html" class="text-dark fs-vs mb-0">Edit</a>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->namaDepan }} {{
+            $produks->first()->pesanan->alamat->namaBelakang }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->namaJalan }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->provinsi }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->kota }}, {{
+            $produks->first()->pesanan->alamat->kecamatan }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->kelurahan }}, {{
+            $produks->first()->pesanan->alamat->kodePos }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->negara }}</p>
+          <p class="fs-vs mb-0">Telepon : {{ $produks->first()->pesanan->alamat->nomorTelepon }}</p>
         </li>
       </ul>
       <!-- akhir metode pengiriman -->
@@ -110,7 +117,7 @@
       </ul>
       <!-- akhir metode pengiriman -->
       <!-- button kembali -->
-      <a href="index.html" class="bg-black fw-bold py-2 px-4 mt-3 d-block rounded-0 text-white">
+      <a href="/" class="bg-black fw-bold py-2 px-4 mt-3 d-block rounded-0 text-white">
         Kembali Belanja
       </a>
       <!-- akhir button kembali -->

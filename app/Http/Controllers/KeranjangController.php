@@ -14,7 +14,7 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $keranjangs = Keranjang::with('produk', 'ukuran')->get();
+        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth()->user()->id)->get();
 
         $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
 

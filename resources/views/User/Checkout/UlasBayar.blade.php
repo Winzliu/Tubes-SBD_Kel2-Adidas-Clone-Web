@@ -5,9 +5,9 @@
   <p class="mb-0 fw-bold fs-vs me-2 bg-black rounded-circle text-white text-center" style="width: 20px">
     1
   </p>
-  <p class="fw-bold mb-0 fs-vs" style="letter-spacing: 3px">
+  <a href="/checkout" class="fw-bold mb-0 fs-vs text-black nav-link" style="letter-spacing: 3px">
     DETAIL PESANAN
-  </p>
+  </a>
 </div>
 <div class="d-flex pb-3 border-bottom border-2 border-dark">
   <p class="mb-0 fw-bold fs-vs me-2 bg-black rounded-circle text-white text-center" style="width: 20px">
@@ -44,7 +44,8 @@
         pesanan dan mengosongkan keranjang belanja anda.
       </p>
       <!-- gambar payment -->
-      <button href="#" class="border-0 bg-white border-top border-bottom px-4 py-2 w-100 alamat text-black nav-link">
+      <button onclick="setValue('credit card / debit card online')"
+        class="border-0 bg-white border-top border-bottom px-4 py-2 w-100 alamat text-black nav-link">
         <p class="fw-bold fs-5">CREDIT CARD / DEBIT CARD ONLINE *</p>
         <div class="d-flex gap-4">
           <img src="img/pembayaran2.jpeg" width="200px" height="40px" class="d-block" alt="" />
@@ -56,22 +57,32 @@
       </button>
       <!-- akhir gambar payment -->
       <!-- gambar payment -->
-      <button href="#" class="border-0 bg-white border-top border-bottom px-4 py-2 w-100 alamat text-black nav-link">
+      <button onclick="setValue('online payment')"
+        class="border-0 bg-white border-top border-bottom px-4 py-2 w-100 alamat text-black nav-link">
         <p class="fw-bold fs-5">ONLINE PAYMENT</p>
         <img src="img/pembayaran1.jpeg" width="500px" class="d-block" alt="" />
         <p class="fs-vs">
           *Maksimal transaksi untuk QRIS adalah IDR 2.000.000,-
         </p>
       </button>
+      @error('pembayaran')
+      <div class="alert alert-danger fade show" role="alert">
+        <strong>Pilih Pembayaran Terlebih Dahulu!!</strong>
+      </div>
+      @enderror
       <!-- akhir gambar payment -->
-      <a href="checkout3.html" class="bg-black fw-bold py-2 px-4 mt-3 rounded-0 text-white">
-        PESAN SEKARANG ---->
-      </a>
-      <p class="fs-s mt-2 w-75 text-muted">
-        Dengan mengeklik Pesan Sekarang Anda menyetujui
-        <a href="#" class="text-muted">Syarat Pengiriman</a>. Semua
-        transaksi aman dan terjamin
-      </p>
+      <form action="/pembayaran" method="POST">
+        @csrf
+        <input type="hidden" name="pembayaran" id="selectedValue">
+        <input type="hidden" name="alamat_id" id="alamat_id" value="{{ $alamat_id }}">
+        <button type="submit" class="bg-black fw-bold py-2 px-4 mt-3 rounded-0 text-white d-block w-50 text-center">
+          PESAN SEKARANG ---->
+        </button>
+        <p class="fs-s mt-2 w-75 text-muted">
+          Dengan mengeklik Pesan Sekarang Anda menyetujui
+          <a href="#" class="text-muted">Syarat Pengiriman</a>. Semua
+          transaksi aman dan terjamin
+        </p>
     </div>
     <!-- akhir sisi kiri -->
 
@@ -85,11 +96,42 @@
       <!-- akhir Ringkasan Pesanan -->
       <!-- harga pesanan -->
       <ul class="list-group bg-white rounded-0 mt-3">
-        <li class="list-group-item fs-vs p-2">2 Produk</li>
+        <li class="list-group-item fs-vs p-2">{{ $keranjangs->count() }} Produk</li>
+        @php
+        $jumlahHarga = 0
+        @endphp
+        @foreach ($keranjangs as $keranjang)
+        <li class="list-group-item w-100 fs-vs p-2">
+          <div class="d-flex w-100">
+            <p class="m-0">
+              <img src={{ asset("img/". $keranjang->produk->gambar->first()->gambar) }} width="50px" height="50px"
+              alt="" />
+            </p>
+            <div class="fs-vvs ms-2 w-100">
+              <a href="#" class="fw-bold text-black nav-link hover-line">{{ $keranjang->produk->nama }}</a>
+              <p class="mb-0">Warna: <span class="text-uppercase">{{ $keranjang->produk->deskripsiWarna }}</span></p>
+              <p class="mb-0">Size: {{ $keranjang->ukuran->ukuran }}</p>
+              <p class="mb-0 text-end">
+                {{ $keranjang->jumlahItem }} <span class="mx-1">x</span>
+                <span class="fs-vs">Rp. {{ number_format($keranjang->produk->harga, 0,
+                  ',', '.') }}</span>
+              </p>
+              <p class="mb-0 text-end">
+                Total <span class="fs-vs">Rp. {{ number_format($keranjang->produk->harga * $keranjang->jumlahItem, 0,
+                  ',', '.') }}</span>
+              </p>
+            </div>
+          </div>
+          @php
+          $jumlahHarga += $keranjang->produk->harga * $keranjang->jumlahItem
+          @endphp
+        </li>
+        @endforeach
         <li class="list-group-item fs-vs p-2">
           <div class="d-flex justify-content-between">
             <p class="m-0">Total Produk</p>
-            <p class="m-0">Rp 4.100.000</p>
+            <p class="m-0">Rp {{ number_format($jumlahHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
         <li class="list-group-item fs-vs p-2">
@@ -104,30 +146,13 @@
               Total <br />
               (Termasuk pajak)
             </p>
-            <p class="m-0">Rp 4.100.000</p>
-          </div>
-        </li>
-        <li class="list-group-item fs-vs p-2">
-          <div class="d-flex">
-            <p class="m-0">
-              <img src="img/Produk1.1.jpeg" width="50px" height="50px" alt="" />
-            </p>
-            <div class="fs-vvs ms-2">
-              <a href="#" class="fw-bold text-black nav-link hover-line">TAS PINGGANG ADICOLOR CLASS</a>
-              <p class="mb-0">HK2627</p>
-              <p class="mb-0">Warna: Multicolor</p>
-              <p class="mb-0">Size: NSUK</p>
-              <p class="mb-0 text-end">
-                1 <span class="mx-1">x</span>
-                <span class="fs-vs">Rp. 344.500</span>
-              </p>
-              <p class="mb-0 text-end">
-                Total <span class="fs-vs">Rp. 344.500</span>
-              </p>
-            </div>
+            <p class="m-0">Rp {{ number_format($jumlahHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
       </ul>
+      <input type="hidden" name="totalHarga" id="totalHarga" value="{{ $jumlahHarga }}">
+      </form>
       <!-- akhir harga pesanan -->
       <!-- metode pengiriman -->
       <ul class="list-group bg-white rounded-0 mt-3">
@@ -172,4 +197,9 @@
 
 @section('script')
 <script src="js/checkout.js"></script>
+<script>
+  function setValue(value) {
+  document.getElementById("selectedValue").value = value;
+}
+</script>
 @endsection

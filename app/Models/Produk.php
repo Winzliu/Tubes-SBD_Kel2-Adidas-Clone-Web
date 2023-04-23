@@ -13,6 +13,10 @@ class Produk extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function gambar()
     {
         return $this->hasMany(Gambar::class);

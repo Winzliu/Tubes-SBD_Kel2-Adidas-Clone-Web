@@ -27,7 +27,7 @@
       <!-- main wishlist -->
       <div class="border-bottom border-top border-4 border-secondary mb-4">
         @foreach ($wishlists as $wishlist)
-        @if($wishlist->user_id == auth()->user()->id)
+        @if($wishlist->user_id == auth()->user()->id && $wishlist->produk->stock > 0)
         <!-- wishlist pertama -->
         <div class="d-flex px-2 py-3 border-bottom border- 1 justify-content-between">
           <!-- sisi kiri -->
@@ -91,7 +91,7 @@
 
               <input type="hidden" name="produk_id" value="{{ $wishlist->produk->id }}">
               <!-- tambah keranjang -->
-              <button type="submit" class="@auth @else disabled @endauth btn btn-dark rounded-0 w-100 fs-s fw-bold">
+              <button type="submit" class="btn btn-dark rounded-0 w-100 fs-s fw-bold">
                 TAMBAHKAN KE KERANJANG --->
               </button>
               <!-- akhir tambah keranjang -->

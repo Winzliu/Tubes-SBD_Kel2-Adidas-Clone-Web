@@ -7,7 +7,8 @@
     <div class="w-60">
       <!-- Header Keranjang -->
       <div class="d-flex px-5 pt-5 pb-3 justify-content-between">
-        <p><span class="fw-bold fs-4">BAG ANDA</span> {{ $keranjangs->count() }} ITEM</p>
+        <p><span class="fw-bold fs-4">BAG ANDA</span> {{ $keranjangs->count() }}
+          ITEM</p>
         <a href="/" class="text-black hover-black fs-vs align-self-center">Lanjutkan Belanja</a>
       </div>
       <!-- akhir header keranjang -->
@@ -17,7 +18,6 @@
       $jumlahHarga = 0;
       @endphp
       @foreach ($keranjangs as $keranjang)
-      @if($keranjang->user_id == auth()->user()->id)
       <!-- item pertama -->
       <div class="d-flex justify-content-between border-top border-2 mx-5 p-3">
         <!-- bagian kiri -->
@@ -61,11 +61,17 @@
         <!-- akhir bagian kanan -->
       </div>
       <!-- akhir item pertama -->
-      @endif
       @endforeach
       <!-- akhir item keranjang -->
+      @if($keranjangs->count() == 0)
+      <div class="alert alert-danger fade show" role="alert">
+        <strong>Harap Masukkan Item Kedalam Keranjang Terlebih Dahulu</strong>
+      </div>
+      @endif
       <!-- button beli -->
-      <button class="bg-dark text-white fs-vs fw-bold py-2 px-4 mx-6">CHECKOUT <span class="ms-5">---></span></button>
+      <a href="@if($keranjangs->count() == 0) # @else /checkout @endif"
+        class="bg-dark text-white fs-vs fw-bold py-2 px-4 mx-6 d-block w-25">CHECKOUT
+        <span class="ms-5">---></span></a>
       <!-- akhir button beli -->
 
       <!-- 3menu -->
@@ -91,13 +97,14 @@
       <!-- Ringkasan pesanan -->
       <div class="bg-grey mt-5 mb-3 mx-5 p-3">
         <!-- button checkout -->
-        <button class="bg-dark text-white fs-vs fw-bold py-3 w-100 px-5">CHECKOUT <span
-            class="ms-5">---></span></button>
+        <a href="@if($keranjangs->count() == 0) # @else /checkout @endif"
+          class="bg-dark text-white fs-vs fw-bold py-3 w-100 px-5 d-block">CHECKOUT <span class="ms-5">---></span></a>
         <!-- akhir button checkout -->
         <!-- harga pesanan -->
         <p class="fw-bold fs-5 my-2">RINGKASAN PESANAN:</p>
         <ul class="list-group bg-white rounded-0">
-          <li class="list-group-item fs-s">{{ $keranjangs->count() }} Produk</li>
+          <li class="list-group-item fs-s">{{ $keranjangs->where('user_id', auth()->user()->id)->count() }} Produk
+          </li>
           <li class="list-group-item fs-s">
             <div class="d-flex justify-content-between">
               <p class="m-0">Total Produk</p>
@@ -192,7 +199,7 @@
                       <div class="">
                         <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                           alt="...">
-                        <button type="submit" class="border-0 position-absolute start-100"
+                        <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                           style="margin-left: -45px; margin-top: 17px;">
                           @auth
                           @if ($produk->wishlist != NULL)
@@ -277,7 +284,7 @@
                       <div class="">
                         <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                           alt="...">
-                        <button type="submit" class="border-0 position-absolute start-100"
+                        <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                           style="margin-left: -45px; margin-top: 17px;">
                           @auth
                           @if ($produk->wishlist != NULL)

@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adidas Main Page</title>
+  <title>{{ $title }}</title>
   <!-- link  -->
-  <link rel="stylesheet" href="css/bootstrap.css" />
-  <link rel="stylesheet" href="css/bootstrap.css.map" />
-  <link rel="stylesheet" href="css/mystyle.css" />
+  <link rel="stylesheet" href={{ asset("css/bootstrap.css") }} />
+  <link rel="stylesheet" href={{ asset("css/bootstrap.css.map") }} />
+  <link rel="stylesheet" href={{ asset("css/mystyle.css") }} />
 </head>
 
 <body style="overflow-x: hidden">
@@ -17,7 +17,8 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom flex-column pb-0 fixed-top bg-white">
     <!-- bagian atas -->
     <div class="container">
-      <a class="navbar-brand" href="#">Logo Adidas</a>
+      <a class="navbar-brand w-16" href="/"><img src="{{ asset('img/logo.jpeg') }}" width="50px" class="ms-5"
+          alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,10 +65,10 @@
   <!-- akhir footer -->
 
   <!-- script -->
-  <script src="js/bootstrap.bundle.js"></script>
-  <script src="js/bootstrap.bundle.js.map"></script>
-  <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src={{ asset("js/bootstrap.bundle.js") }}></script>
+  <script src={{ asset("js/bootstrap.bundle.js.map") }}></script>
+  <script src={{ asset("js/jquery-3.6.0.min.js") }}></script>
+  <script src={{ asset("js/script.js") }}></script>
   @yield('script')
 
   <!-- ionicons -->

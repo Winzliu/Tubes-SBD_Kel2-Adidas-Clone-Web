@@ -34,36 +34,34 @@
     <div class="mt-5">
       <p class="fw-bold fs-4 mb-0">DETAIL PENGIRIMAN</p>
       <p>Silakan masukkan alamat pengiriman Anda</p>
+      {{-- tanda alamat berhasil di tambahkan --}}
+      @if (session()->has('success'))
+      <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
+      {{-- akhir tanda alamat berhasil di tambahkan --}}
+      @foreach ($alamats as $alamat)
       <!-- alamat -->
-      <a href="#" class="border-0 bg-white border-top border-bottom d-flex gap-4 px-4 py-2 alamat text-black nav-link">
-        <p class="fs-vs text-start">nama depan nama belakang</p>
+      <a href="/checkout/{{ $alamat->id }}"
+        class="border-0 @if($alamat->id == $alamatpilihan) bg-grey @else bg-white @endif border-top border-bottom d-flex gap-4 px-4 py-2 text-black nav-link">
+        <p class="fs-vs text-start">{{ $alamat->namaDepan }} {{ $alamat->namaBelakang }}</p>
         <div class="">
-          <p class="mb-0 fs-vs text-start">nama jalan</p>
+          <p class="mb-0 fs-vs text-start">{{ $alamat->namaJalan }}</p>
           <p class="mb-0 fs-vs text-start">
-            provinsi, kab/kota, kecamatan, kelurahan, kode pos
+            {{ $alamat->provinsi }}, {{ $alamat->kota }}, {{ $alamat->kecamatan }}, {{ $alamat->kelurahan }}, {{
+            $alamat->kodePos }}
           </p>
           <p class="mb-0 fs-vs text-start">
-            <span class="fw-bold">Telepon : </span>081362549559
+            <span class="fw-bold">Telepon : </span>{{ $alamat->nomorTelepon }}
           </p>
         </div>
       </a>
       <!-- akhir alamat -->
-      <!-- alamat -->
-      <a href="#" class="border-0 bg-white border-top border-bottom d-flex gap-4 px-4 py-2 alamat text-black nav-link">
-        <p class="fs-vs text-start">nama depan nama belakang</p>
-        <div class="">
-          <p class="mb-0 fs-vs text-start">nama jalan</p>
-          <p class="mb-0 fs-vs text-start">
-            provinsi, kab/kota, kecamatan, kelurahan, kode pos
-          </p>
-          <p class="mb-0 fs-vs text-start">
-            <span class="fw-bold">Telepon : </span>081362549559
-          </p>
-        </div>
-      </a>
-      <!-- akhir alamat -->
+      @endforeach
       <!-- tambah alamat -->
-      <a href="tambahAlamat.html" class="btn btn-dark rounded-0 py-2 px-4 my-3 fs-vs fw-bold">Tambah Alamat</a>
+      <a href="/tambahalamat" class="btn btn-dark rounded-0 py-2 px-4 my-3 fs-vs fw-bold">Tambah Alamat</a>
       <!-- akhir tambah alamat -->
       <!-- informasi lainnya -->
       <p class="fs-vs">
@@ -91,11 +89,23 @@
         </div>
       </div>
       <!-- akhir informasi lainnya -->
-      <!-- button ulas & bayar -->
-      <a href="checkout2.html" class="btn btn-dark rounded-0 py-3 px-5 my-3 fs-vs fw-bold">
-        ULAS & BAYAR --->
-      </a>
-      <!-- akhir button ulas & bayar -->
+      {{-- jika belum memilih alamat --}}
+      @if($alamatpilihan == null)
+      <div class="alert alert-danger fade show" role="alert">
+        <strong>Pilih/Buat Alamat Terlebih Dahulu!!</strong>
+      </div>
+      @endif
+      {{-- jika belum memilih alamat --}}
+      <form action="/pembayaran" method="GET">
+        @csrf
+        <input type="hidden" name="alamat_id" id="alamat_id" value="{{ $alamatpilihan }}">
+        <!-- button ulas & bayar -->
+        <button type="submit"
+          class="btn btn-dark @if($alamatpilihan == null) disabled @endif rounded-0 py-3 px-5 my-3 fs-vs fw-bold">
+          ULAS & BAYAR --->
+        </button>
+        <!-- akhir button ulas & bayar -->
+      </form>
     </div>
     <!-- akhir sisi kiri -->
 
@@ -104,16 +114,48 @@
       <!-- Ringkasan Pesanan -->
       <div class="d-flex justify-content-between">
         <p class="fs-s fw-bold mb-0">RINGKASAN PESANAN:</p>
-        <a href="#" class="fs-vvs text-black align-self-center">Edit Bag</a>
+        <a href="/keranjang" class="fs-vvs text-black align-self-center">Edit Bag</a>
       </div>
       <!-- akhir Ringkasan Pesanan -->
       <!-- harga pesanan -->
       <ul class="list-group bg-white rounded-0 mt-3">
-        <li class="list-group-item fs-vs p-2">2 Produk</li>
+        <li class="list-group-item fs-vs p-2">{{ $keranjangs->count() }} Produk
+        </li>
+        @php
+        $jumlahHarga = 0
+        @endphp
+        @foreach ($keranjangs as $keranjang)
+        <li class="list-group-item w-100 fs-vs p-2">
+          <div class="d-flex w-100">
+            <p class="m-0">
+              <img src={{ asset("img/". $keranjang->produk->gambar->first()->gambar) }} width="50px" height="50px"
+              alt="" />
+            </p>
+            <div class="fs-vvs ms-2 w-100">
+              <a href="#" class="fw-bold text-black nav-link hover-line">{{ $keranjang->produk->nama }}</a>
+              <p class="mb-0">Warna: <span class="text-uppercase">{{ $keranjang->produk->deskripsiWarna }}</span></p>
+              <p class="mb-0">Size: {{ $keranjang->ukuran->ukuran }}</p>
+              <p class="mb-0 text-end">
+                {{ $keranjang->jumlahItem }} <span class="mx-1">x</span>
+                <span class="fs-vs">Rp. {{ number_format($keranjang->produk->harga, 0,
+                  ',', '.') }}</span>
+              </p>
+              <p class="mb-0 text-end">
+                Total <span class="fs-vs">Rp. {{ number_format($keranjang->produk->harga * $keranjang->jumlahItem, 0,
+                  ',', '.') }}</span>
+              </p>
+            </div>
+          </div>
+          @php
+          $jumlahHarga += $keranjang->produk->harga * $keranjang->jumlahItem
+          @endphp
+        </li>
+        @endforeach
         <li class="list-group-item fs-vs p-2">
           <div class="d-flex justify-content-between">
             <p class="m-0">Total Produk</p>
-            <p class="m-0">Rp 4.100.000</p>
+            <p class="m-0">Rp {{ number_format($jumlahHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
         <li class="list-group-item fs-vs p-2">
@@ -128,27 +170,8 @@
               Total <br />
               (Termasuk pajak)
             </p>
-            <p class="m-0">Rp 4.100.000</p>
-          </div>
-        </li>
-        <li class="list-group-item fs-vs p-2">
-          <div class="d-flex">
-            <p class="m-0">
-              <img src="img/Produk1.1.jpeg" width="50px" height="50px" alt="" />
-            </p>
-            <div class="fs-vvs ms-2">
-              <a href="#" class="fw-bold text-black nav-link hover-line">TAS PINGGANG ADICOLOR CLASS</a>
-              <p class="mb-0">HK2627</p>
-              <p class="mb-0">Warna: Multicolor</p>
-              <p class="mb-0">Size: NSUK</p>
-              <p class="mb-0 text-end">
-                1 <span class="mx-1">x</span>
-                <span class="fs-vs">Rp. 344.500</span>
-              </p>
-              <p class="mb-0 text-end">
-                Total <span class="fs-vs">Rp. 344.500</span>
-              </p>
-            </div>
+            <p class="m-0">Rp {{ number_format($jumlahHarga, 0,
+              ',', '.') }}</p>
           </div>
         </li>
       </ul>

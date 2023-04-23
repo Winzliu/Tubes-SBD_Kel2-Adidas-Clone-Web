@@ -376,7 +376,7 @@
                     <div class="">
                       <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                         alt="...">
-                      <button type="submit" class="border-0 position-absolute start-100"
+                      <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                         style="margin-left: -45px; margin-top: 17px;">
                         @auth
                         @if ($produk->wishlist != NULL)
@@ -461,7 +461,7 @@
                     <div class="">
                       <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                         alt="...">
-                      <button type="submit" class="border-0 position-absolute start-100"
+                      <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                         style="margin-left: -45px; margin-top: 17px;">
                         @auth
                         @if ($produk->wishlist != NULL)
@@ -545,7 +545,7 @@
                     <div class="">
                       <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                         alt="...">
-                      <button type="submit" class="border-0 position-absolute start-100"
+                      <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                         style="margin-left: -45px; margin-top: 17px;">
                         @auth
                         @if ($produk->wishlist != NULL)
@@ -629,7 +629,7 @@
                     <div class="">
                       <img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" class="card-img-top rounded-0"
                         alt="...">
-                      <button type="submit" class="border-0 position-absolute start-100"
+                      <button type="submit" class="border-0 position-absolute start-100 bg-transparent"
                         style="margin-left: -45px; margin-top: 17px;">
                         @auth
                         @if ($produk->wishlist != NULL)

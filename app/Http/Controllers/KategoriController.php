@@ -31,7 +31,7 @@ class KategoriController extends Controller
 
             $id_semuaProduk = Detailproduk::with('produk')->where('pengguna', $pengguna)->pluck('id');
 
-            $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk);
+            $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('stock', '>', 0)->whereIn('detailproduk_id', $id_semuaProduk);
 
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
@@ -78,7 +78,7 @@ class KategoriController extends Controller
             $filter = $request->query('filter');
 
             $id_semuaProduk = Detailproduk::where('pengguna', $pengguna)->where('jenis', $jenis)->pluck('id');
-            $produks = Produk::whereIn('detailproduk_id', $id_semuaProduk);
+            $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('stock', '>', 0)->whereIn('detailproduk_id', $id_semuaProduk);
 
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
@@ -124,7 +124,7 @@ class KategoriController extends Controller
             $filter = $request->query('filter');
 
             $id_semuaProduk = Detailproduk::where('pengguna', $pengguna)->where('jenis', $jenis)->where('kategori', $kategori)->pluck('id');
-            $produks = Produk::whereIn('detailproduk_id', $id_semuaProduk);
+            $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('stock', '>', 0)->whereIn('detailproduk_id', $id_semuaProduk);
 
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
@@ -233,7 +233,7 @@ class KategoriController extends Controller
         $ukuran = $request->query('ukuran');
         $filter = $request->query('filter');
 
-        $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('nama', 'like', '%' . $request->query('pencarian') . '%');
+        $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('stock', '>', 0)->where('nama', 'like', '%' . $request->query('pencarian') . '%');
 
         if ($minimum != null && $maksimum != null) {
             $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
