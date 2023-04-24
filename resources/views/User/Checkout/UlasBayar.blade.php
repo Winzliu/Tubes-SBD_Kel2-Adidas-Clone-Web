@@ -74,7 +74,16 @@
       <form action="/pembayaran" method="POST">
         @csrf
         <input type="hidden" name="pembayaran" id="selectedValue">
-        <input type="hidden" name="alamat_id" id="alamat_id" value="{{ $alamat_id }}">
+        <input type="hidden" name="namaDepan" id="selectedValue" value="{{ $alamat->namaDepan }}">
+        <input type="hidden" name="namaBelakang" id="selectedValue" value="{{ $alamat->namaBelakang }}">
+        <input type="hidden" name="nomorTelepon" id="selectedValue" value="{{ $alamat->nomorTelepon }}">
+        <input type="hidden" name="namaJalan" id="selectedValue" value="{{ $alamat->namaJalan }}">
+        <input type="hidden" name="negara" id="selectedValue" value="{{ $alamat->negara }}">
+        <input type="hidden" name="provinsi" id="selectedValue" value="{{ $alamat->provinsi }}">
+        <input type="hidden" name="kota" id="selectedValue" value="{{ $alamat->kota }}">
+        <input type="hidden" name="kecamatan" id="selectedValue" value="{{ $alamat->kecamatan }}">
+        <input type="hidden" name="kelurahan" id="selectedValue" value="{{ $alamat->kelurahan }}">
+        <input type="hidden" name="kodePos" id="selectedValue" value="{{ $alamat->kodePos }}">
         <button type="submit" class="bg-black fw-bold py-2 px-4 mt-3 rounded-0 text-white d-block w-50 text-center">
           PESAN SEKARANG ---->
         </button>

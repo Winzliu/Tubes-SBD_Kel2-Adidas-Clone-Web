@@ -47,6 +47,9 @@ class AlamatController extends Controller
 
         Alamat::create($validated);
 
+        if ($request->urlSebelumnya == 'http://adidas.test/daftaralamat') {
+            return redirect('/daftaralamat')->with('success', 'Alamat Berhasil Ditambahkan!!');
+        }
         return redirect('/checkout')->with('success', 'Alamat Berhasil Ditambahkan!!');
     }
 
@@ -63,7 +66,10 @@ class AlamatController extends Controller
      */
     public function edit(Alamat $alamat)
     {
-        //
+        return view('User.Akun.EditAlamat', [
+            'title'  => 'Edit Alamat',
+            'alamat' => $alamat
+        ]);
     }
 
     /**
@@ -71,7 +77,42 @@ class AlamatController extends Controller
      */
     public function update(Request $request, Alamat $alamat)
     {
-        //
+        $validated = $request->validate([
+            'namaDepan'    => 'required|max:255',
+            'namaBelakang' => 'required|max:255',
+            'nomorTelepon' => 'required|min:10|numeric',
+            'namaJalan'    => 'required|max:255',
+            'negara'       => 'required',
+            'kodePos'      => 'required|numeric',
+        ]);
+
+        if ($request->provinsi == null) {
+            $validated['provinsi'] = $alamat->provinsi;
+        } else {
+            $validated['provinsi'] = $request->provinsi;
+        }
+
+        if ($request->kota == null) {
+            $validated['kota'] = $alamat->kota;
+        } else {
+            $validated['kota'] = $request->kota;
+        }
+
+        if ($request->kecamatan == null) {
+            $validated['kecamatan'] = $alamat->kecamatan;
+        } else {
+            $validated['kecamatan'] = $request->kecamatan;
+        }
+
+        if ($request->kelurahan == null) {
+            $validated['kelurahan'] = $alamat->kelurahan;
+        } else {
+            $validated['kelurahan'] = $request->kelurahan;
+        }
+
+        Alamat::where('id', $alamat->id)->update($validated);
+
+        return redirect('/daftaralamat')->with('success', 'Perubahan Berhasil Disimpan!!');
     }
 
     /**
@@ -79,6 +120,8 @@ class AlamatController extends Controller
      */
     public function destroy(Alamat $alamat)
     {
-        //
+        Alamat::destroy($alamat->id);
+
+        return redirect()->back();
     }
 }

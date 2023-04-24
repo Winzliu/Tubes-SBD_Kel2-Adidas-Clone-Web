@@ -14,62 +14,51 @@
     <div class="w-75 me-3">
       <div class="d-flex justify-content-between mb-2">
         <p class="fs-3 fw-bold">DAFTAR ALAMAT</p>
-        <a href="#" class="fw-bold fs-s text-black ps-1 hover-black align-self-center"
+        <a href="/alamat" class="fw-bold fs-s text-black ps-1 hover-black align-self-center"
           style="letter-spacing: 2px;">TAMBAH ALAMAT</a>
       </div>
+      @if (session()->has('success'))
+      <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
       <!-- list alamat -->
       <p class="fw-bold fs-5">ALAMAT</p>
       <div class="d-flex flex-wrap gap-3">
+        @foreach ($alamats as $alamat)
         <!-- alamat -->
         <div class="w-43 bg-grey p-4">
           <p class="fw-bold">ALAMAT PENGIRIMAN</p>
-          <p class="mb-0">nama depan nama belakang</p>
-          <p class="mb-0">jalan</p>
-          <p class="mb-0">Provinsi,kota,kecamatan,kabupaten,kode pos</p>
-          <p class="mb-0">Indonesia</p>
-          <p class="mb-2"><span class="fw-bold">Telepon: </span>081362549559</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">EDIT ALAMAT</a>
+          <p class="mb-0">{{ $alamat->namaDepan }} {{ $alamat->namaBelakang }}</p>
+          <p class="mb-0">{{ $alamat->namaJalan }}</p>
+          <p class="mb-0">{{ $alamat->provinsi }},{{ $alamat->kota }},{{ $alamat->kecamatan }},{{ $alamat->kabupaten
+            }}, {{ $alamat->kodePos }}</p>
+          <p class="mb-0">{{ $alamat->negara }}</p>
+          <p class="mb-2"><span class="fw-bold">Telepon: </span>{{ $alamat->nomorTelepon }}</p>
+          <a href="/alamat/{{ $alamat->id }}/edit" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">EDIT
+            ALAMAT</a>
           <p class="d-inline-block">|</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">HAPUS ALAMAT</a>
+          <form action="/alamat/{{ $alamat->id }}" method="POST" class="d-inline-block">
+            @csrf
+            @method('delete')
+            <button class=" text-black fs-s fw-bold border-0 bg-transparent text-decoration-underline"
+              style="letter-spacing: 2px;" type="submit">HAPUS ALAMAT</button>
+          </form>
         </div>
         <!-- akhir alamat -->
-        <!-- alamat -->
-        <div class="w-43 bg-grey p-4">
-          <p class="fw-bold">ALAMAT PENGIRIMAN</p>
-          <p class="mb-0">nama depan nama belakang</p>
-          <p class="mb-0">jalan</p>
-          <p class="mb-0">Provinsi,kota,kecamatan,kabupaten,kode pos</p>
-          <p class="mb-0">Indonesia</p>
-          <p class="mb-2"><span class="fw-bold">Telepon: </span>081362549559</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">EDIT ALAMAT</a>
-          <p class="d-inline-block">|</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">HAPUS ALAMAT</a>
-        </div>
-        <!-- akhir alamat -->
-        <!-- alamat -->
-        <div class="w-43 bg-grey p-4">
-          <p class="fw-bold">ALAMAT PENGIRIMAN</p>
-          <p class="mb-0">nama depan nama belakang</p>
-          <p class="mb-0">jalan</p>
-          <p class="mb-0">Provinsi,kota,kecamatan,kabupaten,kode pos</p>
-          <p class="mb-0">Indonesia</p>
-          <p class="mb-2"><span class="fw-bold">Telepon: </span>081362549559</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">EDIT ALAMAT</a>
-          <p class="d-inline-block">|</p>
-          <a href="#" class="text-black fs-s fw-bold" style="letter-spacing: 2px;">HAPUS ALAMAT</a>
-        </div>
-        <!-- akhir alamat -->
+        @endforeach
       </div>
       <!-- akhir list alamat -->
     </div>
     <!-- akhir bagian kiri -->
     <!-- bagian kanan -->
     <div class="w-25">
-      <a href="AkunSaya.html" class="text-black d-block mb-3 hover-black">Akun Saya</a>
-      <a href="InformasiPribadi.html" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="DataAlamat.html" class="fw-bold nav-link d-block mb-3">Data Alamat</a>
-      <a href="RiwayatPesanan.html" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
-      <a href="wishlist.html" class="text-black d-block mb-3 hover-black">Wish List</a>
+      <a href="/akunsaya" class="text-black d-block mb-3 hover-black">Akun Saya</a>
+      <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
+      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
+      <a href="/riwayatpesanan" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
+      <a href="/wishlist" class="text-black d-block mb-3 hover-black">Wish List</a>
       <hr>
       <!-- need help? -->
       <div class=" py-4 my-2">

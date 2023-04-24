@@ -26,30 +26,22 @@
           </tr>
         </thead>
         <tbody>
+          @php
+          $i = 1
+          @endphp
+          @foreach ($pesanans as $pesanan)
           <tr>
-            <th scope="row">1</th>
-            <td>13-04-2023</td>
-            <td>nama depan nama belakang</td>
-            <td>Rp. 460.000</td>
-            <td class="fst-italic">Success</td>
-            <td><a href="DetailPesanan.html" class="text-black">Lihat Pesanan</a></td>
+            <th scope="row">{{ $i }}</th>
+            <td>{{ $pesanan->created_at }}</td>
+            <td>{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</td>
+            <td>Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
+            <td class="fst-italic">{{ $pesanan->status }}</td>
+            <td><a href="/detailpesanan/{{ $pesanan->id }}" class="text-black">Lihat Pesanan</a></td>
           </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>13-04-2023</td>
-            <td>nama depan nama belakang</td>
-            <td>Rp. 460.000</td>
-            <td class="fst-italic">Success</td>
-            <td><a href="DetailPesanan.html" class="text-black">Lihat Pesanan</a></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>13-04-2023</td>
-            <td>nama depan nama belakang</td>
-            <td>Rp. 460.000</td>
-            <td class="fst-italic">Success</td>
-            <td><a href="DetailPesanan.html" class="text-black">Lihat Pesanan</a></td>
-          </tr>
+          @php
+          $i++
+          @endphp
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -57,11 +49,11 @@
     <!-- akhir bagian kiri -->
     <!-- bagian kanan -->
     <div class="w-25">
-      <a href="AkunSaya.html" class="text-black d-block mb-3 hover-black">Akun Saya</a>
-      <a href="InformasiPribadi.html" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="DataAlamat.html" class="text-black d-block mb-3 hover-black">Data Alamat</a>
-      <a href="RiwayatPesanan.html" class="fw-bold nav-link d-block mb-3">Riwayat Pesanan</a>
-      <a href="wishlist.html" class="text-black d-block mb-3 hover-black">Wish List</a>
+      <a href="/akunsaya" class="text-black d-block mb-3 hover-black">Akun Saya</a>
+      <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
+      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
+      <a href="/riwayatpesanan" class="fw-bold nav-link d-block mb-3">Riwayat Pesanan</a>
+      <a href="/wishlist" class="text-black d-block mb-3 hover-black">Wish List</a>
       <hr>
       <!-- need help? -->
       <div class=" py-4 my-2">

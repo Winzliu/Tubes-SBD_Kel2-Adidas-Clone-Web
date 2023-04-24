@@ -13,25 +13,32 @@
     <!-- bagian kiri -->
     <div class="w-75 me-3">
       <div class="d-flex justify-content-between mb-4">
-        <p class="fs-3 fw-bold">HALO ALWIN</p>
-        <p class="align-self-center">Bukan Alwin? <a href="#" class="fw-bold text-black ps-1 hover-black"
-            style="letter-spacing: 2px;">Keluar</a></p>
+        <p class="fs-3 fw-bold">HALO {{ Auth::user()->namaDepan }}</p>
+        <form action="/logout" method="POST">
+          @csrf
+          <p class="align-self-center">Bukan {{ Auth::user()->namaDepan }}? <button type="submit"
+              class="border-0 bg-transparent fw-bold text-black ps-1 hover-black"
+              style="letter-spacing: 2px;">Keluar</button></p>
+        </form>
       </div>
       <!-- Pesanan Baru Baru Ini -->
-      <p class="fw-bold fs-3 mb-1">OEDER #1 - STATUS</p>
+      <p class="fw-bold fs-3 mb-1">ORDER #{{ $pesanan->id }} - <span class="text-uppercase">{{
+          $pesanan->status
+          }}</span></p>
       <p class="mb-1">Tentang Pesanan Ini:</p>
       <p class="fw-bold mb-1">Informasi Pesanan</p>
       <hr>
-      <p>Tanggal Pesanan: 17 April 2023</p>
+      <p>Tanggal Pesanan: {{ $pesanan->created_at }}</p>
       <!-- alamat -->
       <div class="d-flex">
         <div class="bg-grey p-4">
           <p class="fw-bold">ALAMAT PENGIRIMAN</p>
-          <p class="mb-0">nama depan nama belakang</p>
-          <p class="mb-0">jalan</p>
-          <p class="mb-0">Provinsi,kota,kecamatan,kabupaten,kode pos</p>
+          <p class="mb-0">{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</p>
+          <p class="mb-0">{{ $pesanan->namaJalan }}</p>
+          <p class="mb-0">{{ $pesanan->provinsi }},{{ $pesanan->kota }},{{ $pesanan->kecamatan
+            }},{{ $pesanan->keluarahan }},{{ $pesanan->kodePos }}</p>
           <p class="mb-0">Indonesia</p>
-          <p class="mb-2"><span class="fw-bold">Telepon: </span>081362549559</p>
+          <p class="mb-2"><span class="fw-bold">Telepon: </span>{{ $pesanan->nomorTelepon }}</p>
         </div>
         <div class="bg-grey p-4">
           <p class="fw-bold">METODE PENGIRIMAN</p>
@@ -39,7 +46,7 @@
         </div>
         <div class="bg-grey p-4">
           <p class="fw-bold">METODE PEMBAYARAN</p>
-          <p class="mb-0">KREDIT CARD</p>
+          <p class="mb-0 text-uppercase">{{ $pesanan->pembayaran }}</p>
         </div>
       </div>
       <!-- akhir alamat -->
@@ -55,39 +62,31 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
+          @foreach ($produkPesanans as $produkPesanan)
           <tr>
-            <td scope="row">Tas Pinggang Adicolor Classic <br>Size: NSUK</td>
-            <td>Rp. 344.500</td>
-            <td class="text-center">1</td>
-            <td>Rp. 344.500</td>
+            <td scope="row">{{ $produkPesanan->produk->nama }} <br>Size: {{ $produkPesanan->ukuran }}
+            </td>
+            <td>Rp. {{ number_format($produkPesanan->produk->harga , 0, ',', '.') }}</td>
+            <td class="text-center">{{ $produkPesanan->jumlahItem }}</td>
+            <td>Rp. {{ number_format($produkPesanan->produk->harga * $produkPesanan->jumlahItem, 0, ',', '.') }}</td>
           </tr>
-          <tr>
-            <td scope="row">Tas Pinggang Adicolor Classic <br>Size: NSUK</td>
-            <td>Rp. 344.500</td>
-            <td class="text-center">1</td>
-            <td>Rp. 344.500</td>
-          </tr>
-          <tr>
-            <td scope="row">Tas Pinggang Adicolor Classic <br>Size: NSUK</td>
-            <td>Rp. 344.500</td>
-            <td class="text-center">1</td>
-            <td>Rp. 344.500</td>
-          </tr>
+          @endforeach
         </tbody>
         <tfoot class="table-group-divider bg-grey">
           <tr>
-            <td colspan="4" class="text-end">Subtotal : Rp.344.500</td>
+            <td colspan="4" class="text-end">Subtotal : {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
           </tr>
           <tr>
             <td colspan="4" class="text-end">Shipping & Handling: Rp. 0</td>
           </tr>
           <tr>
-            <td colspan="4" class="text-end">Grand Total: Rp. 344.500</td>
+            <td colspan="4" class="text-end">Grand Total: Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}
+            </td>
           </tr>
         </tfoot>
       </table>
       <!-- link kembali -->
-      <a href="RiwayatPesanan.html" class="text-black">
+      <a href="/riwayatpesanan" class="text-black">
         < Kembali Ke Pesanan Saya</a>
           <!-- akhir link kembali -->
           <!-- akhir item yang dipesan -->
@@ -95,11 +94,11 @@
     <!-- akhir bagian kiri -->
     <!-- bagian kanan -->
     <div class="w-25">
-      <a href="AkunSaya.html" class="fw-bold nav-link d-block mb-3">Akun Saya</a>
-      <a href="InformasiPribadi.html" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="DataAlamat.html" class="text-black d-block mb-3 hover-black">Data Alamat</a>
-      <a href="RiwayatPesanan.html" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
-      <a href="wishlist.html" class="text-black d-block mb-3 hover-black">Wish List</a>
+      <a href="/akunsaya" class="fw-bold nav-link d-block mb-3">Akun Saya</a>
+      <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
+      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
+      <a href="/riwayatpesanan" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
+      <a href="/wishlist" class="text-black d-block mb-3 hover-black">Wish List</a>
       <hr>
       <!-- need help? -->
       <div class=" py-4 my-2">

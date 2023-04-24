@@ -293,7 +293,7 @@
   <div class="position-relative w-100" style="z-index: 2; ">
     <img src="img/Pria.jpeg" class="img-fluid mb-2 w-100 h-100" style="object-fit: cover;" alt="...">
     <div class="position-absolute top-78 w-100 d-flex">
-      <a href="pria" class="button-54 mt-3 m-auto" role="button">Pri</a>
+      <a href="pria" class="button-54 mt-3 m-auto text-center" role="button">Pri</a>
     </div>
   </div>
   <!-- akhir Pria -->
@@ -301,7 +301,7 @@
   <div class="position-relative w-100" style="z-index: 2; ">
     <img src="img/Anak.jpeg" class="img-fluid mb-2 w-100 h-100" style="object-fit: cover;" alt="...">
     <div class="position-absolute top-78 w-100 d-flex">
-      <a href="anak" class="button-55 mt-3 m-auto" role="button">SH</a>
+      <a href="anak" class="button-55 mt-3 m-auto text-center" role="button">SH</a>
     </div>
   </div>
   <!-- Akhir Anak -->
@@ -309,7 +309,7 @@
   <div class="position-relative w-100" style="z-index: 2;">
     <img src="img/Wanita.jpeg" class="img-fluid mb-2 w-100 h-100" style="object-fit: cover;" alt="...">
     <div class="position-absolute top-78 w-100 d-flex">
-      <a href="wanita" class="button-56 mt-3 m-auto" role="button">Wani</a>
+      <a href="wanita" class="button-56 mt-3 m-auto text-center" role="button">Wani</a>
     </div>
   </div>
   <!-- Akhir Wanita -->

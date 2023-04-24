@@ -93,16 +93,16 @@
       <ul class="list-group bg-white rounded-0 mt-3">
         <li class="list-group-item p-2">
           <p class="fs-vs fw-bold mb-0">DETAIL PENGIRIMAN</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->namaDepan }} {{
-            $produks->first()->pesanan->alamat->namaBelakang }}</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->namaJalan }}</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->provinsi }}</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->kota }}, {{
-            $produks->first()->pesanan->alamat->kecamatan }}</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->kelurahan }}, {{
-            $produks->first()->pesanan->alamat->kodePos }}</p>
-          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->alamat->negara }}</p>
-          <p class="fs-vs mb-0">Telepon : {{ $produks->first()->pesanan->alamat->nomorTelepon }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->namaDepan }} {{
+            $produks->first()->pesanan->namaBelakang }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->namaJalan }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->provinsi }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->kota }}, {{
+            $produks->first()->pesanan->kecamatan }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->kelurahan }}, {{
+            $produks->first()->pesanan->kodePos }}</p>
+          <p class="fs-vs mb-0">{{ $produks->first()->pesanan->negara }}</p>
+          <p class="fs-vs mb-0">Telepon : {{ $produks->first()->pesanan->nomorTelepon }}</p>
         </li>
       </ul>
       <!-- akhir metode pengiriman -->

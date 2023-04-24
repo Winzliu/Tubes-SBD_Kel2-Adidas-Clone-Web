@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alamat;
 use App\Models\Pesanan;
 use App\Models\Keranjang;
 use App\Models\Produk_Pesanan;
@@ -17,11 +18,13 @@ class PembayaranController extends Controller
     {
         $alamat_id = $request->alamat_id;
 
+        $alamat = Alamat::where('id', $alamat_id)->first();
+
         $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth()->user()->id)->get();
 
         return view('User.Checkout.UlasBayar', [
             'title'      => 'Ulas & Bayar',
-            'alamat_id'  => $alamat_id,
+            'alamat'     => $alamat,
             'keranjangs' => $keranjangs,
         ]);
     }
@@ -40,9 +43,18 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'pembayaran' => 'required',
-            'alamat_id'  => 'required',
-            'totalHarga' => 'required'
+            'pembayaran'   => 'required',
+            'totalHarga'   => 'required',
+            'namaDepan'    => 'required|max:255',
+            'namaBelakang' => 'required|max:255',
+            'nomorTelepon' => 'required|min:10|numeric',
+            'namaJalan'    => 'required|max:255',
+            'negara'       => 'required',
+            'provinsi'     => 'required',
+            'kota'         => 'required',
+            'kecamatan'    => 'required',
+            'kelurahan'    => 'required',
+            'kodePos'      => 'required|numeric',
         ]);
 
         $validated['user_id'] = auth()->user()->id;

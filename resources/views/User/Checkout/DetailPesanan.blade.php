@@ -61,7 +61,7 @@
       <!-- akhir alamat -->
       @endforeach
       <!-- tambah alamat -->
-      <a href="/tambahalamat" class="btn btn-dark rounded-0 py-2 px-4 my-3 fs-vs fw-bold">Tambah Alamat</a>
+      <a href="/alamat" class="btn btn-dark rounded-0 py-2 px-4 my-3 fs-vs fw-bold">Tambah Alamat</a>
       <!-- akhir tambah alamat -->
       <!-- informasi lainnya -->
       <p class="fs-vs">

@@ -48,7 +48,7 @@
             </li>
             <li class="nav-item me-3">
               @auth
-              <p class="fs-vs mb-0">Selamat Datang Kembali <a href="/AkunSaya"
+              <p class="fs-vs mb-0">Selamat Datang Kembali <a href="/akunsaya"
                   class="px-0 fs-vs nav-link text-black d-inline">{{
                   Auth::user()->namaDepan
                   }}</a></p>

@@ -5,15 +5,16 @@
   <div class="d-flex justify-content-center">
     <!-- sisi kiri -->
     <div class="my-5">
-      <p class="fw-bold fs-3">Tambah Alamat Baru</p>
+      <p class="fw-bold fs-3">Edit Alamat</p>
       <p class="fw-bold fs-5 mb-0">Informasi Kontak</p>
-      <form action="/alamat" method="POST">
+      <form action="/alamat/{{ $alamat->id }}" method="POST">
         @csrf
+        @method('put')
         <!-- Informasi Kontak -->
         <div class="d-flex gap-3">
           <!-- nama depan -->
           <div class="form-floating mb-3">
-            <input type="text" name="namaDepan" value="{{ @old('namaDepan') }}" class=" form-control rounded-0 p-2
+            <input type="text" name="namaDepan" value="{{ $alamat->namaDepan }}" class=" form-control rounded-0 p-2
               border-dark @error('namaDepan') is-invalid @enderror" style="height: 50px; width: 250px" id="namaDepan"
               placeholder="name@example.com" />
             <label for="namaDepan" class="p-2 fs-s">Nama Depan <span class="text-danger">*</span></label>
@@ -26,7 +27,7 @@
           <!-- akhir nama depan -->
           <!-- nama belakang -->
           <div class="form-floating mb-3">
-            <input type="text" value="{{ @old('namaBelakang') }}" name="namaBelakang"
+            <input type="text" value="{{ $alamat->namaBelakang }}" name="namaBelakang"
               class="form-control rounded-0 p-2 border-dark @error('namaBelakang') is-invalid @enderror"
               style="height: 50px; width: 250px" id="namaBelakang" placeholder="name@example.com" />
             <label for="namaBelakang" class="p-2 fs-s">Nama Belakang <span class="text-danger">*</span></label>
@@ -40,7 +41,7 @@
         </div>
         <!-- nomor telepon -->
         <div class="form-floating mb-3">
-          <input type="text" value="{{ @old('nomorTelepon') }}" name="nomorTelepon"
+          <input type="text" value="{{ $alamat->nomorTelepon }}" name="nomorTelepon"
             class="form-control rounded-0 p-2 border-dark @error('nomorTelepon') is-invalid @enderror"
             style="height: 50px; width: 250px" id="nomorTelepon" placeholder="name@example.com" />
           <label for="nomorTelepon" class="p-2 fs-s">Nomor Telepon <span class="text-danger">*</span></label>
@@ -56,7 +57,7 @@
         <p class="fw-bold fs-5 mb-0">Alamat</p>
         <!-- nama jalan -->
         <div class="form-floating mb-3">
-          <input type="text" value="{{ @old('namaJalan') }}" name="namaJalan"
+          <input type="text" value="{{ $alamat->namaJalan }}" name="namaJalan"
             class="form-control rounded-0 p-2 border-dark w-100 @error('namaJalan') is-invalid @enderror"
             style="height: 50px" id="namaJalan" placeholder="name@example.com" />
           <label for="namaJalan" class="p-2 fs-s">Nama jalan <span class="text-danger">*</span></label>
@@ -81,6 +82,7 @@
               aria-label="Default select example" name="provinsi" id="provinsi">
               <option selected disabled>Provinsi</option>
             </select>
+            <p class="fw-bold fs-vs text-danger mb-0">Data Sebelumnya : {{ $alamat->provinsi }}</p>
             @error('provinsi')
             <div class="invalid-feedback">
               {{ $message }}
@@ -96,6 +98,7 @@
               aria-label="Default select example" name="kota" id="kota">
               <option selected disabled>Kota</option>
             </select>
+            <p class="fw-bold fs-vs text-danger mb-0">Data Sebelumnya : {{ $alamat->kota }}</p>
             @error('kota')
             <div class="invalid-feedback">
               {{ $message }}
@@ -109,6 +112,7 @@
               aria-label="Default select example" name="kecamatan" id="kecamatan">
               <option selected>Kecamatan</option>
             </select>
+            <p class="fw-bold fs-vs text-danger mb-0">Data Sebelumnya : {{ $alamat->kecamatan }}</p>
             @error('kecamatan')
             <div class="invalid-feedback">
               {{ $message }}
@@ -124,6 +128,7 @@
               style="height: 40px" aria-label="Default select example" name="kelurahan" id="kelurahan">
               <option selected disabled>Kelurahan</option>
             </select>
+            <p class="fw-bold fs-vs text-danger mb-0">Data Sebelumnya : {{ $alamat->kelurahan }}</p>
             @error('kelurahan')
             <div class="invalid-feedback">
               {{ $message }}
@@ -133,7 +138,7 @@
           <!-- akhir kelurahan -->
           <!-- kode pos -->
           <div class="form-floating mb-3 w-50">
-            <input type="text" value="{{ @old('kodePos') }}" name="kodePos"
+            <input type="text" value="{{ $alamat->kodePos }}" name="kodePos"
               class="form-control rounded-0 p-2 border-dark w-100 @error('kodePos') is-invalid @enderror"
               style="height: 50px" id="kodePos" placeholder="name@example.com" />
             <label for="kodePos" class="p-2 fs-s">Kode Pos <span class="text-danger">*</span></label>
@@ -146,10 +151,9 @@
           <!-- akhir kode pos -->
         </div>
         <!-- akhir alamat -->
-        <input type="hidden" name="urlSebelumnya" value="{{ url()->previous() }}">
         <!-- button -->
         <button type="submit" class="bg-black rounded-0 fw-bold text-white py-3 px-5">
-          Simpan Alamat
+          Ubah Alamat
         </button>
         <!-- akhir button -->
       </form>
@@ -177,7 +181,7 @@
         document.getElementById("kelurahan").innerHTML =
           "<option selected disabled>Kelurahan</option>";
         data.forEach((el) => {
-          tampung += `<option data-reg="${el.id}" value="${el.name}">${el.name}</option>`;
+            tampung += `<option data-reg="${el.id}" value="${el.name}">${el.name}</option>`;
         });
         document.getElementById("provinsi").innerHTML = tampung;
       });

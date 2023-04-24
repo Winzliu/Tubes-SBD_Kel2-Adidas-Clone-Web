@@ -9,12 +9,17 @@ use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\SelesaiController;
+use App\Http\Controllers\AkunsayaController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RegistrasiController;
+use App\Http\Controllers\DaftaralamatController;
+use App\Http\Controllers\DetailpesananController;
+use App\Http\Controllers\RiwayatpesananController;
+use App\Http\Controllers\InformasipribadiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +32,6 @@ use App\Http\Controllers\RegistrasiController;
 |
 */
 
-Route::get('/AkunSaya', function () {
-    return view('User.Akun.AkunSaya', [
-        'title' => 'Akun Saya'
-    ]);
-});
 
 // home controller
 Route::get('/', [HomeController::class, 'index']);
@@ -58,7 +58,7 @@ Route::resource('/wishlist', WishlistController::class)->middleware('auth');
 Route::resource('/keranjang', KeranjangController::class)->middleware('auth');
 
 //alamat controller
-Route::resource('/tambahalamat', AlamatController::class)->middleware('auth');
+Route::resource('/alamat', AlamatController::class)->middleware('auth');
 
 //checkout controller
 Route::get('/checkout/{id?}', [CheckoutController::class, 'index'])->middleware('auth');
@@ -69,6 +69,21 @@ Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');
 
 //checkout controller
 Route::resource('/pembayaran-selesai', SelesaiController::class)->middleware('auth');
+
+// akunsaya controller
+Route::resource('/akunsaya', AkunsayaController::class)->middleware('auth');
+
+// riwayatpesanan controller
+Route::resource('/riwayatpesanan', RiwayatpesananController::class)->middleware('auth');
+
+// detailpesanan controller
+Route::get('/detailpesanan/{id}', [DetailpesananController::class, 'index'])->middleware('auth');
+
+// informasipribadi controller
+Route::resource('/informasipribadi', InformasipribadiController::class)->middleware('auth');
+
+// daftaralamat controller
+Route::get('/daftaralamat', [DaftaralamatController::class, 'index'])->middleware('auth');
 
 // kategori controller
 Route::get('/search', [KategoriController::class, 'pencarian']);

@@ -108,11 +108,11 @@
 
     <!-- bagian kanan -->
     <div class="w-25 mt-4">
-      <a href="AkunSaya.html" class="text-black d-block mb-3 hover-black">Akun Saya</a>
-      <a href="InformasiPribadi.html" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="DataAlamat.html" class="text-black d-block mb-3 hover-black">Data Alamat</a>
-      <a href="RiwayatPesanan.html" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
-      <a href="wishlist.html" class="fw-bold nav-link d-block">Wish List</a>
+      <a href="/akunsaya" class="text-black d-block mb-3 hover-black">Akun Saya</a>
+      <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
+      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
+      <a href="/riwayatpesanan" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
+      <a href="/wishlist" class="fw-bold nav-link d-block">Wish List</a>
       <hr>
       <!-- need help? -->
       <div class=" py-4 my-2">
