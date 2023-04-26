@@ -66,21 +66,17 @@
         @foreach ($produks as $produk)
         <li class="list-group-item fs-vs p-2">
           <div class="d-flex">
-            <p class="m-0">
-              <img src={{ asset("img/". $produk->produk->gambar->first()->gambar) }} width="50px" height="50px" alt=""
-              />
-            </p>
             <div class="fs-vvs ms-2 w-25">
-              <a href="#" class="fw-bold text-black nav-link hover-line">{{ $produk->produk->nama }}</a>
-              <p class="mb-0">Warna: <span class="text-uppercase">{{ $produk->produk->deskripsiWarna }}</span></p>
+              <a href="#" class="fw-bold text-black nav-link hover-line">{{ $produk->nama }}</a>
+              <p class="mb-0">Warna: <span class="text-uppercase">{{ $produk->warna }}</span></p>
               <p class="mb-0">Size: {{ $produk->ukuran }}</p>
               <p class="mb-0 text-end">
                 {{ $produk->jumlahItem }} <span class="mx-1">x</span>
-                <span class="fs-vs">Rp. {{ number_format($produk->produk->harga, 0,
+                <span class="fs-vs">Rp. {{ number_format($produk->harga, 0,
                   ',', '.') }}</span>
               </p>
               <p class="mb-0 text-end">
-                Total <span class="fs-vs">Rp. {{ number_format($produk->produk->harga * $produk->jumlahItem, 0,
+                Total <span class="fs-vs">Rp. {{ number_format($produk->harga * $produk->jumlahItem, 0,
                   ',', '.') }}</span>
               </p>
             </div>

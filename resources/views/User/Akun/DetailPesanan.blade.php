@@ -56,6 +56,7 @@
         <thead>
           <tr>
             <th scope="col">Nama Produk</th>
+            <th scope="col">Warna</th>
             <th scope="col">Harga</th>
             <th scope="col">Kuantitas</th>
             <th scope="col">Subtotal</th>
@@ -64,23 +65,24 @@
         <tbody class="table-group-divider">
           @foreach ($produkPesanans as $produkPesanan)
           <tr>
-            <td scope="row">{{ $produkPesanan->produk->nama }} <br>Size: {{ $produkPesanan->ukuran }}
+            <td scope="row">{{ $produkPesanan->nama }} <br>Size: {{ $produkPesanan->ukuran }}
             </td>
-            <td>Rp. {{ number_format($produkPesanan->produk->harga , 0, ',', '.') }}</td>
+            <td scope="row" class="text-uppercase">{{ $produkPesanan->warna }}</td>
+            <td>Rp. {{ number_format($produkPesanan->harga , 0, ',', '.') }}</td>
             <td class="text-center">{{ $produkPesanan->jumlahItem }}</td>
-            <td>Rp. {{ number_format($produkPesanan->produk->harga * $produkPesanan->jumlahItem, 0, ',', '.') }}</td>
+            <td>Rp. {{ number_format($produkPesanan->harga * $produkPesanan->jumlahItem, 0, ',', '.') }}</td>
           </tr>
           @endforeach
         </tbody>
         <tfoot class="table-group-divider bg-grey">
           <tr>
-            <td colspan="4" class="text-end">Subtotal : {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
+            <td colspan="5" class="text-end">Subtotal : {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
           </tr>
           <tr>
-            <td colspan="4" class="text-end">Shipping & Handling: Rp. 0</td>
+            <td colspan="5" class="text-end">Shipping & Handling: Rp. 0</td>
           </tr>
           <tr>
-            <td colspan="4" class="text-end">Grand Total: Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}
+            <td colspan="5" class="text-end">Grand Total: Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}
             </td>
           </tr>
         </tfoot>

@@ -67,8 +67,10 @@ class PembayaranController extends Controller
         foreach ($keranjangs as $keranjang) {
             $produk_id = $keranjang->produk_id;
             Produk_Pesanan::create([
-                'produk_id'  => $produk_id,
                 'pesanan_id' => Pesanan::latest()->value('id'),
+                'nama'       => Produk::where('id', $produk_id)->value('nama'),
+                'harga'      => Produk::where('id', $produk_id)->value('harga'),
+                'warna'      => Produk::where('id', $produk_id)->value('deskripsiWarna'),
                 'jumlahItem' => $keranjang->where('produk_id', $produk_id)->value('jumlahItem'),
                 'ukuran'     => $keranjang->ukuran->ukuran
             ]);

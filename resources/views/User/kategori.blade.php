@@ -101,6 +101,25 @@
           </div>
         </div>
       </form>
+      @if(request()->query('minimum') != null && request()->query('maksimum') != null)
+      <span class="badge text-bg-secondary mt-2">Harga : {{ number_format(request()->query('minimum'), 0, ',', '.') }} -
+        {{
+        number_format(request()->query('maksimum'), 0, ',', '.')}}</span>
+      @endif
+      @if(request()->query('ukuran') != null)
+      <span class="badge text-bg-secondary mt-2">Ukuran : {{ $ukurans->where('id',
+        request()->query('ukuran'))->first()->ukuran }}</span>
+      @endif
+      @if(request()->query('warna') != null)
+      <span class="badge text-bg-secondary mt-2">Warna : {{ $warnas->where('id',
+        request()->query('warna'))->first()->warna}}</span>
+      @endif
+      @if(request()->query('filter') != null)
+      <span class="badge text-bg-secondary mt-2">Filter : @if(request()->query('filter') == 'namaUp') Nama A hingga Z
+        @elseif(request()->query('filter') == 'namaDown') Nama Z hingga A @elseif(request()->query('filter') ==
+        'hargaUp') Harga Rendah ke Tinggi @elseif(request()->query('filter') == 'hargaDown') Harga Tinggi ke Rendah
+        @endif</span>
+      @endif
     </div>
     <!-- akhir kategori/Filter -->
     <!-- produk -->
@@ -188,7 +207,7 @@
               <p class="card-text fs-vs" style="margin-top: -7px;">{{ $produk->nama }}</p>
               <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. {{
                 number_format($produk->harga
-                , 0, ',', '.')}}</p>
+                , 0, ',', '.') }}</p>
               @if($produk->where('detailproduk_id',$produk->detailproduk_id)->count() > 1)
               <p class="card-text fs-vs text-muted mb-2">{{ $produks->where('detailproduk_id',
                 $produk->detailproduk_id)->count() }} warna</p>
