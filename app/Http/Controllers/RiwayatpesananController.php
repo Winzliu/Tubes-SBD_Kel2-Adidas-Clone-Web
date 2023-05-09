@@ -12,7 +12,7 @@ class RiwayatpesananController extends Controller
      */
     public function index()
     {
-        $pesanans = Pesanan::with('alamat')->where('user_id', auth()->user()->id)->latest()->get();
+        $pesanans = Pesanan::with('alamat')->where('user_id', auth('web')->user()->id)->latest()->get();
 
         return view('User.Akun.RiwayatPesanan', [
             'title'    => 'Riwayat Pesanan',

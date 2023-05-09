@@ -13,7 +13,7 @@ class SelesaiController extends Controller
      */
     public function index()
     {
-        $produks = Produk_Pesanan::with('produk', 'pesanan')->where('pesanan_id', Pesanan::latest()->value('id'))->get();
+        $produks = Produk_Pesanan::with('pesanan')->where('pesanan_id', Pesanan::latest()->value('id'))->get();
 
         return view('User.Checkout.Selesai', [
             'title'   => 'Produk_Pesanan Selesai',

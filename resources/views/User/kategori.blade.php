@@ -61,6 +61,7 @@
               <select name="ukuran" class="form-select border-dark rounded-0 h-100 w-auto"
                 aria-label="Default select example">
                 <option disabled {{ request()->query('ukuran') ?: 'selected' }}>Ukuran</option>
+                <option value="">Hapus Ukuran</option>
                 @foreach ($ukurans as $ukuran)
                 <option value="{{ $ukuran->id }}" {{ request()->query('ukuran') == $ukuran->id ? 'selected' : '' }}>{{
                   $ukuran->ukuran }}</option>
@@ -71,6 +72,7 @@
               <select name="warna" class="form-select border-dark rounded-0 h-100 w-auto"
                 aria-label="Default select example">
                 <option disabled {{ request()->query('warna') ?: 'selected' }}>Warna</option>
+                <option value="">Hapus Warna</option>
                 @foreach ($warnas as $warna)
                 <option value="{{ $warna->id }}" {{ request()->query('warna') == $warna->id ? 'selected' : '' }}>{{
                   $warna->warna }}</option>
@@ -81,6 +83,7 @@
               <select name="filter" class="form-select border-dark rounded-0 h-100 w-auto"
                 aria-label="Default select example">
                 <option disabled {{ request()->query('filter') ?: 'selected' }}>Filter</option>
+                <option value="">Hapus Filter</option>
                 <option value="namaUp" {{ request()->query('filter') == 'namaUp' ? 'selected' : '' }}>Nama : A hingga Z
                 </option>
                 <option value="namaDown" {{ request()->query('filter') == 'namaDown' ? 'selected' : '' }}>Nama : Z

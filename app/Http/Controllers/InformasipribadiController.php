@@ -62,7 +62,7 @@ class InformasipribadiController extends Controller
                 'nomorTelepon' => 'required|min:10|numeric',
             ]);
 
-            auth()->user()->update($validated);
+            auth('web')->user()->update($validated);
 
             return redirect()->back()->with('success', 'Perubahan Berhasil Disimpan!!');
         } else if ($request->updatePassword) {
@@ -70,8 +70,8 @@ class InformasipribadiController extends Controller
                 'password' => 'required|min:5|max:255'
             ]);
 
-            if (Hash::check($request->passwordLama, auth()->user()->password)) {
-                auth()->user()->update([
+            if (Hash::check($request->passwordLama, auth('web')->user()->password)) {
+                auth('web')->user()->update([
                     'password' => bcrypt($request->password)
                 ]);
                 return redirect()->back()->with('success', 'Password Berhasil Diubah!!');

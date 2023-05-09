@@ -12,7 +12,7 @@ class AkunsayaController extends Controller
      */
     public function index()
     {
-        $pesanans = Pesanan::with('alamat')->where('user_id', auth()->user()->id)->latest()->take(5)->get();
+        $pesanans = Pesanan::with('alamat')->where('user_id', auth('web')->user()->id)->latest()->take(5)->get();
 
         return view('User.Akun.AkunSaya', [
             'title'    => 'Akun Saya',

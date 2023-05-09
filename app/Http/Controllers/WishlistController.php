@@ -44,7 +44,7 @@ class WishlistController extends Controller
         ]);
         // untuk menjadikan inputan produk_id menjadi integer
         $validated['produk_id'] = intval($validated['produk_id']);
-        $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth('web')->user()->id;
 
         Wishlist::create($validated);
 
@@ -87,7 +87,7 @@ class WishlistController extends Controller
 
     public function destroyAll()
     {
-        Wishlist::where('user_id', auth()->user()->id)->delete();
+        Wishlist::where('user_id', auth('web')->user()->id)->delete();
 
         return redirect()->back();
     }

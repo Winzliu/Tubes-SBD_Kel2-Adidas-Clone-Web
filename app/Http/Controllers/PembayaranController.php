@@ -20,7 +20,7 @@ class PembayaranController extends Controller
 
         $alamat = Alamat::where('id', $alamat_id)->first();
 
-        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth()->user()->id)->get();
+        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth('web')->user()->id)->get();
 
         return view('User.Checkout.UlasBayar', [
             'title'      => 'Ulas & Bayar',
@@ -57,12 +57,12 @@ class PembayaranController extends Controller
             'kodePos'      => 'required|numeric',
         ]);
 
-        $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth('web')->user()->id;
         $validated['status'] = 'Berhasil';
 
         Pesanan::create($validated);
 
-        $keranjangs = Keranjang::where('user_id', auth()->user()->id)->get();
+        $keranjangs = Keranjang::where('user_id', auth('web')->user()->id)->get();
 
         foreach ($keranjangs as $keranjang) {
             $produk_id = $keranjang->produk_id;

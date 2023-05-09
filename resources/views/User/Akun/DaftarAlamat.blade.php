@@ -56,7 +56,7 @@
     <div class="w-25">
       <a href="/akunsaya" class="text-black d-block mb-3 hover-black">Akun Saya</a>
       <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
+      <a href="/daftaralamat" class="fw-bold nav-link d-block mb-3">Daftar Alamat</a>
       <a href="/riwayatpesanan" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
       <a href="/wishlist" class="text-black d-block mb-3 hover-black">Wish List</a>
       <hr>

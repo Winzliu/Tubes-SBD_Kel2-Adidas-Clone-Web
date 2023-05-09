@@ -142,7 +142,7 @@
       <div class="my-5 mx-5 px-5">
         <p class="fs-3 fw-bold mb-2">{{ $produk->nama }}</p>
         <p class="fst-italic fw-bolder mb-2">{{ $produk->detailproduk->deskripsi }}</p>
-        <p class="fs-s">{{ $produk->detailproduk->subDeskripsi }}</p>
+        <p class="fs-s">{!! $produk->detailproduk->subDeskripsi !!}</p>
       </div>
       <!-- akhir deskripsi -->
       <!-- Deskripsi -->

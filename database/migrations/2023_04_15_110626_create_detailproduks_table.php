@@ -12,14 +12,12 @@ return new class extends Migration {
     {
         Schema::create('detailproduks', function (Blueprint $table) {
             $table->id();
-            $table->string("nama");
             $table->longText("deskripsi");
             $table->longText("subDeskripsi");
             $table->longText("spesifikasi");
             $table->string("pengguna");
             $table->string("jenis");
             $table->string("kategori");
-            $table->integer("harga");
             $table->timestamps();
         });
     }

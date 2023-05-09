@@ -15,11 +15,6 @@ class Produk_Pesanan extends Model
         'id'
     ];
 
-    public function produk()
-    {
-        return $this->belongsTo(Produk::class);
-    }
-
     public function pesanan()
     {
         return $this->belongsTo(Pesanan::class);

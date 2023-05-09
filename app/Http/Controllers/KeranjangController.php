@@ -14,7 +14,7 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth()->user()->id)->get();
+        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth('web')->user()->id)->get();
 
         $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
 
@@ -48,7 +48,7 @@ class KeranjangController extends Controller
             'jumlahItem' => 'required',
         ]);
 
-        $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth('web')->user()->id;
 
         $produk_keranjang = Keranjang::where('user_id', $validated['user_id'])->where('produk_id', $validated['produk_id'])->get();
 

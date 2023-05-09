@@ -38,7 +38,7 @@ class UlasanController extends Controller
             'ulasan'      => 'required'
         ]);
 
-        $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth('web')->user()->id;
         $validated['is_verif'] = 0;
 
         $ulasan = Ulasan::create($validated);

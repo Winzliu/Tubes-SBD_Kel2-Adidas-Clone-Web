@@ -12,11 +12,20 @@ return new class extends Migration {
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("alamat_id")->constrained("alamats");
             $table->foreignId("user_id")->constrained("users");
             $table->integer("totalHarga");
             $table->string("pembayaran");
             $table->string("status");
+            $table->string("namaDepan");
+            $table->string("namaBelakang");
+            $table->string("nomorTelepon");
+            $table->string("namaJalan");
+            $table->string("negara");
+            $table->string("provinsi");
+            $table->string("kota");
+            $table->string("kecamatan");
+            $table->string("kelurahan");
+            $table->integer("kodePos");
             $table->timestamps();
         });
     }

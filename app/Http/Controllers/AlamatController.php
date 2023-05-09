@@ -43,7 +43,7 @@ class AlamatController extends Controller
             'kodePos'      => 'required|numeric',
         ]);
 
-        $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth('web')->user()->id;
 
         Alamat::create($validated);
 

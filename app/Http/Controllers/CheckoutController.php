@@ -14,11 +14,11 @@ class CheckoutController extends Controller
      */
     public function index($id = null)
     {
-        $alamats = Alamat::where('user_id', auth()->user()->id)->get();
+        $alamats = Alamat::where('user_id', auth('web')->user()->id)->get();
 
         $alamatpilihan = $id;
 
-        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth()->user()->id)->get();
+        $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth('web')->user()->id)->get();
 
         return view('User.Checkout.DetailPesanan', [
             'title'         => 'Checkout',

@@ -50,7 +50,7 @@
               @auth
               <p class="fs-vs mb-0">Selamat Datang Kembali <a href="/akunsaya"
                   class="px-0 fs-vs nav-link text-black d-inline">{{
-                  Auth::user()->namaDepan
+                  auth()->user()->namaDepan
                   }}</a></p>
               @else
               <a class="nav-link active p-0" aria-current="page" href="/login"><span class="fs-vs">masuk</span></a>
@@ -123,7 +123,7 @@
                               Panjang & Celana
                               Ketat</a>
                             <a class="nav-link text-black d-block py-0 hover-line" href="/pria/pakaian/jaket">Jaket &
-                              Track Top/</a>
+                              Track Top</a>
                             <a class="nav-link text-black d-block py-0 hover-line"
                               href="/pria/pakaian/hoodies">Hoodies/Sweatshirts</a>
                           </li>

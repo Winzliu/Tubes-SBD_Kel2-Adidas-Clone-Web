@@ -9,6 +9,10 @@ class Gambar extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function produk()
     {
         return $this->belongsTo(Produk::class);

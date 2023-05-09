@@ -13,4 +13,8 @@ class Detailproduk extends Model
     {
         return $this->hasMany(Produk::class);
     }
+
+    protected $guarded = [
+        'id'
+    ];
 }

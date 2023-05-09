@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer("quality");
             $table->integer("value");
             $table->integer("price");
+            $table->integer("is_verif");
             $table->timestamps();
         });
     }

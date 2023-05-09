@@ -167,13 +167,13 @@
       <ul class="list-group bg-white rounded-0 mt-3">
         <li class="list-group-item p-2">
           <p class="fs-vs fw-bold mb-0">DETAIL PENGIRIMAN</p>
-          <p class="fs-vs mb-0">nama depan nama belakang</p>
-          <p class="fs-vs mb-0">nama jalan</p>
-          <p class="fs-vs mb-0">provinsi</p>
-          <p class="fs-vs mb-0">kota, kecamatan</p>
-          <p class="fs-vs mb-0">kelurahan, kode pos</p>
-          <p class="fs-vs mb-0">Indonesia</p>
-          <p class="fs-vs mb-0">Telepon : 0812345678</p>
+          <p class="fs-vs mb-0">{{ $alamat->namaDepan }} {{ $alamat->namaBelakang }}</p>
+          <p class="fs-vs mb-0">{{ $alamat->namaJalan }}</p>
+          <p class="fs-vs mb-0">{{ $alamat->provinsi }}</p>
+          <p class="fs-vs mb-0">{{ $alamat->kota }}, {{ $alamat->kecamatan }}</p>
+          <p class="fs-vs mb-0">{{ $alamat->kelurahan }}, {{ $alamat->kodePos }}</p>
+          <p class="fs-vs mb-0">{{ $alamat->negara }}</p>
+          <p class="fs-vs mb-0">Telepon : {{ $alamat->nomorTelepon }}</p>
           <a href="checkout1.html" class="text-dark fs-vs mb-0">Edit</a>
         </li>
       </ul>
