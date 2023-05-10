@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\AdminProdukController;
+use App\Http\Controllers\AdminVariasiController;
 use App\Http\Controllers\DaftaralamatController;
 use App\Http\Controllers\DetailpesananController;
 use App\Http\Controllers\RiwayatpesananController;
@@ -46,6 +47,10 @@ Route::get('/admin', function () {
 
 // produk admin controller
 Route::resource('/admin/produks', AdminProdukController::class)->middleware('admin');
+
+// variasi produk admin controller
+Route::get('/admin/variasi/{id}', [AdminVariasiController::class, 'index'])->middleware('admin');
+Route::post('/admin/variasi', [AdminVariasiController::class, 'store'])->middleware('admin');
 
 
 // User

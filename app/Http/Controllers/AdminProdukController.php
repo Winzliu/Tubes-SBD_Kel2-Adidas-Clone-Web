@@ -60,14 +60,14 @@ class AdminProdukController extends Controller
         Detailproduk::create($detailProduk);
 
         // produk
+        $request->validate([
+            'warna' => 'required',
+        ]);
         $produk = $request->validate([
             'nama'           => 'required|max:255',
             'deskripsiWarna' => 'required|max:255',
             'stock'          => 'required|numeric',
             'harga'          => 'required|numeric',
-        ]);
-        $request->validate([
-            'warna' => 'required',
         ]);
         $produk['detailproduk_id'] = Detailproduk::latest('id')->value('id');
         $produk['warna_id'] = $request['warna'];
@@ -106,7 +106,7 @@ class AdminProdukController extends Controller
             }
         }
 
-        return redirect('/admin/produks')->with('success', 'Produk Berhasil Dibuat!!');
+        return redirect('/admin/produks')->with('success', 'Produk Berhasil Ditambahkan!!');
     }
 
     /**
@@ -183,8 +183,8 @@ class AdminProdukController extends Controller
         // masukkan nilai dalam table gambar
         for ($i = 0; $i < $produk->gambar->count(); $i++) {
             if ($request->file('gambar' . $i)) {
-                if ($request->file('gambarLama' . $i)) {
-                    Storage::delete($request->file('gambarLama' . $i));
+                if ($request->input('gambarLama' . $i)) {
+                    Storage::delete('img/' . $request->input('gambarLama' . $i));
                 }
                 $gambar['gambar' . $i] = $request->file('gambar' . $i);
                 $namaGambar = $produk->id . '.' . ($i + 1) . '.' . $gambar['gambar' . $i]->getClientOriginalExtension();

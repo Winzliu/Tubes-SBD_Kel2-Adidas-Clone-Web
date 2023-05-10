@@ -88,7 +88,7 @@
             </a>
           </td>
           <td>
-            <a href="">
+            <a href="/admin/variasi/{{ $produk->id }}">
               <ion-icon class="btn btn-success me-3 fs-5" style="height: 25px" name="add-circle-outline"></ion-icon>
             </a>
           </td>
