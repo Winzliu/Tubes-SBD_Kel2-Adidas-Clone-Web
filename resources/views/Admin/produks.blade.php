@@ -98,10 +98,14 @@
             </a>
           </td>
           <td>
-            <a href="">
-              <ion-icon class="btn btn-danger me-3 fs-5" style="height: 25px" name="trash-outline">
-              </ion-icon>
-            </a>
+            <form action="/admin/produks/{{ $produk->id }}" method="POST" class="d-inline-block">
+              @csrf
+              @method('delete')
+              <button type="submit" class="bg-transparent border-0">
+                <ion-icon class="btn btn-danger me-3 fs-5" style="height: 25px" name="trash-outline">
+                </ion-icon>
+              </button>
+            </form>
           </td>
         </tr>
         @php

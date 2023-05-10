@@ -222,6 +222,16 @@ class AdminProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        for ($i = 0; $i < $produk->gambar->count(); $i++) {
+            Storage::delete('img/' . $produk->gambar[$i]->gambar);
+            Gambar::destroy($produk->gambar[$i]->id);
+        }
+        for ($i = 0; $i < $produk->produk_ukuran->count(); $i++) {
+            Produk_Ukuran::destroy($produk->produk_ukuran[$i]->id);
+        }
+        Produk::destroy($produk->id);
+        Detailproduk::destroy($produk->detailproduk->id);
+
+        return redirect()->back()->with('success', 'Produk Berhasil Dihapus!!');
     }
 }
