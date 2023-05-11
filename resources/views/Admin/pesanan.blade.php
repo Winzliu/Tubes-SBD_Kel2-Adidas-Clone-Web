@@ -1,28 +1,18 @@
-@extends('layouts.layoutIndex')
+@extends('admin.layout.layoutAdmin')
 
 @section('main')
-<div class="mt-7">
-  <!-- 3 navbar -->
-  <div class="d-flex justify-content-center border-bottom gap-5" id="1">
-    <a class="nav-link hover-line fs-s py-2">GRATIS ONGKIR UNTUK PESANAN MIN. 900RB</a>
-    <a class="nav-link hover-line fs-s py-2">CHAT DENGAN KAMI</a>
-    <a class="nav-link hover-line fs-s py-2">CICILAN AKULAKU TERSEDIA SEKARANG!</a>
-  </div>
-  <!-- akhir 3 navbar -->
-  <div class="container py-4 px-5 d-flex gap-2">
+<div class="mt-4">
+  <div class="container px-5 d-flex gap-2">
     <!-- bagian kiri -->
-    <div class="w-75 me-3">
-      @if(Auth::user())
-      <div class="d-flex justify-content-between mb-4">
-        <p class="fs-3 fw-bold">HALO {{ Auth::user()->namaDepan }}</p>
-        <form action="/logout" method="POST">
-          @csrf
-          <p class="align-self-center">Bukan {{ Auth::user()->namaDepan }}? <button type="submit"
-              class="border-0 bg-transparent fw-bold text-black ps-1 hover-black"
-              style="letter-spacing: 2px;">Keluar</button></p>
-        </form>
-      </div>
-      @endif
+    <div class="w-100 me-3">
+      {{-- path --}}
+      <p>
+        /
+        <a href="/admin" class="text-dark fw-bold fs-6">Admin</a>
+        /
+        <a class="text-dark fw-bold fs-6">Pesanan</a>
+      </p>
+      {{-- akhir path --}}
       <!-- Pesanan Baru Baru Ini -->
       <p class="fw-bold fs-3 mb-1">ORDER #{{ $pesanan->id }} - <span class="text-uppercase">{{
           $pesanan->status
@@ -89,33 +79,9 @@
           </tr>
         </tfoot>
       </table>
-      <!-- link kembali -->
-      <a href="/riwayatpesanan" class="text-black">
-        < Kembali Ke Pesanan Saya</a>
-          <!-- akhir link kembali -->
-          <!-- akhir item yang dipesan -->
+      <!-- akhir item yang dipesan -->
     </div>
     <!-- akhir bagian kiri -->
-    <!-- bagian kanan -->
-    <div class="w-25">
-      <a href="/akunsaya" class="fw-bold nav-link d-block mb-3">Akun Saya</a>
-      <a href="/informasipribadi" class="text-black d-block mb-3 hover-black">Informasi Pribadi</a>
-      <a href="/daftaralamat" class="text-black d-block mb-3 hover-black">Daftar Alamat</a>
-      <a href="/riwayatpesanan" class="text-black d-block mb-3 hover-black">Riwayat Pesanan</a>
-      <a href="/wishlist" class="text-black d-block mb-3 hover-black">Wish List</a>
-      <hr>
-      <!-- need help? -->
-      <div class=" py-4 my-2">
-        <p class="fw-bold fs-5">NEED HELP?</p>
-        <a href="#" class="hover-black text-black d-block fs-s mb-2">Ordering</a>
-        <a href="#" class="hover-black text-black d-block fs-s mb-2">Promotions & Vouchers</a>
-        <a href="#" class="hover-black text-black d-block fs-s mb-2">Payment</a>
-        <a href="#" class="hover-black text-black d-block fs-s mb-2">Delivery</a>
-        <a href="#" class="hover-black text-black d-block fs-s mb-2">Returns and Refunds</a>
-      </div>
-      <!-- akhir need help? -->
-    </div>
-    <!-- akhir bagian kanan -->
   </div>
 </div>
 @endsection

@@ -13,6 +13,7 @@ use App\Http\Controllers\AkunsayaController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminHomeController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\PembayaranController;
@@ -41,9 +42,8 @@ use App\Http\Controllers\InformasipribadiController;
 Route::resource('/admin/login', AdminLoginController::class)->middleware('bukanAdmin');
 
 // home admin controller
-Route::get('/admin', function () {
-  return "Ini Halaman Admin";
-})->middleware('admin');
+Route::get('/admin', [AdminHomeController::class, 'index'])->middleware('admin');
+Route::get('/admin/pesanan/{id}', [AdminHomeController::class, 'pesanan'])->middleware('admin');
 
 // produk admin controller
 Route::resource('/admin/produks', AdminProdukController::class)->middleware('admin');

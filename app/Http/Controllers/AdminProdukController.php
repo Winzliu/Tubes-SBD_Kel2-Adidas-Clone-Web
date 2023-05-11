@@ -18,9 +18,10 @@ class AdminProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('nama', 'like', '%' . $request->query('pencarian') . '%')->paginate(10)->withQueryString();
+        $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('nama', 'like', '%' . $request->query('pencarian') . '%')->latest()->paginate(5)->withQueryString();
 
         return view('Admin.produks', [
+            'title'   => 'Daftar Produk',
             'produks' => $produks,
         ]);
     }
@@ -35,6 +36,7 @@ class AdminProdukController extends Controller
         $jenisUkurans = Ukuran::select('jenis')->distinct()->get();
 
         return view('Admin.tambahProduk', [
+            'title'        => 'Tambah Produk',
             'warnas'       => $warnas,
             'ukurans'      => $ukurans,
             'jenisUkurans' => $jenisUkurans
@@ -46,6 +48,14 @@ class AdminProdukController extends Controller
      */
     public function store(Request $request)
     {
+        // ukuran
+        for ($i = 0; $i < Ukuran::count(); $i++) {
+            if ($request->input('ukuran' . $i) != null) {
+                $request->validate([
+                    'stock' . $i => 'required|numeric',
+                ]);
+            }
+        }
         // detailproduk
         $detailProduk = $request->validate([
             'deskripsi'    => 'required|max:255',
@@ -66,7 +76,6 @@ class AdminProdukController extends Controller
         $produk = $request->validate([
             'nama'           => 'required|max:255',
             'deskripsiWarna' => 'required|max:255',
-            'stock'          => 'required|numeric',
             'harga'          => 'required|numeric',
         ]);
         $produk['detailproduk_id'] = Detailproduk::latest('id')->value('id');
@@ -96,12 +105,12 @@ class AdminProdukController extends Controller
             ]);
         }
 
-        // ukuran
         for ($i = 0; $i < Ukuran::count(); $i++) {
             if ($request->input('ukuran' . $i) != null) {
                 Produk_Ukuran::create([
                     'produk_id' => $produk_id,
                     'ukuran_id' => $request->input('ukuran' . $i),
+                    'stock'     => $request->input('stock' . $i)
                 ]);
             }
         }
@@ -125,18 +134,15 @@ class AdminProdukController extends Controller
         $warnas = Warna::get();
         $ukurans = Ukuran::get();
         $jenisUkurans = Ukuran::select('jenis')->distinct()->get();
-        $produk_ukuran[] = 0;
-        foreach ($produk->produk_ukuran as $p) {
-            $produk_ukuran[] = $p->ukuran_id;
-        }
-        ;
+        $produk_ukuran = $produk->produk_ukuran;
 
         return view('Admin.editProduk', [
+            'title'         => 'Edit Produk',
             'produk'        => $produk,
             'warnas'        => $warnas,
             'ukurans'       => $ukurans,
             'jenisUkurans'  => $jenisUkurans,
-            'produk_ukuran' => collect($produk_ukuran)
+            'produk_ukuran' => $produk_ukuran
         ]);
     }
 
@@ -145,6 +151,13 @@ class AdminProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
+        for ($i = 0; $i < Ukuran::count(); $i++) {
+            if ($request->input('ukuran' . $i) != null) {
+                $request->validate([
+                    'stock' . $i => 'required|numeric',
+                ]);
+            }
+        }
         // detailproduk
         $detailProduk = $request->validate([
             'deskripsi'    => 'required|max:255',
@@ -161,7 +174,6 @@ class AdminProdukController extends Controller
         $produkBaru = $request->validate([
             'nama'           => 'required|max:255',
             'deskripsiWarna' => 'required|max:255',
-            'stock'          => 'required|numeric',
             'harga'          => 'required|numeric',
         ]);
         $request->validate([
@@ -210,6 +222,7 @@ class AdminProdukController extends Controller
                 Produk_Ukuran::create([
                     'produk_id' => $produk->id,
                     'ukuran_id' => $request->input('ukuran' . $i),
+                    'stock'     => $request->input('stock' . $i)
                 ]);
             }
         }

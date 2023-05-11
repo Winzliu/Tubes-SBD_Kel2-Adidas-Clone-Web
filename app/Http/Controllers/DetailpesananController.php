@@ -13,7 +13,7 @@ class DetailpesananController extends Controller
      */
     public function index(Request $request)
     {
-        $pesanan = Pesanan::with('alamat')->where('user_id', auth('web')->user()->id)->where('id', $request->id)->first();
+        $pesanan = Pesanan::with('alamat')->where('id', $request->id)->first();
 
         $produkPesanans = Produk_Pesanan::where('pesanan_id', $pesanan->id)->get();
 

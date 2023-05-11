@@ -25,14 +25,16 @@ class ProdukController extends Controller
             }
         }
 
-        $ukurans = $produk->produk_ukuran->pluck('ukuran_id');
-        $ukurans = Ukuran::whereIn('id', $ukurans)->get();
+        // dd($produk->produk_ukuran);
+
+        $ukurans = $produk->produk_ukuran;
+        // $ukurans = Ukuran::whereIn('id', $ukurans)->get();
 
         $produk_lainnya = $jumlah_produk->whereNotIn('id', $produk->id);
         $gambar_produk = Gambar::where('produk_id', $produk->id)->first()->gambar;
 
-        $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->where('stock', '>', 0)->inRandomOrder()->take(16)->get();
-        $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->where('stock', '>', 0)->inRandomOrder()->take(16)->get();
+        $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
+        $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
 
         $ulasans = $produk->ulasan;
 

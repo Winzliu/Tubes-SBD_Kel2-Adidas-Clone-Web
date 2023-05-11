@@ -23,6 +23,7 @@ class AdminVariasiController extends Controller
         $produkSerupa = Produk::with(['detailproduk', 'gambar', 'warna'])->where('id', $request->id)->first();
 
         return view('Admin.tambahVariasi', [
+            'title'        => 'Tambah Variasi Produk',
             'warnas'       => $warnas,
             'ukurans'      => $ukurans,
             'jenisUkurans' => $jenisUkurans,
@@ -43,6 +44,14 @@ class AdminVariasiController extends Controller
      */
     public function store(Request $request)
     {
+        // ukuran
+        for ($i = 0; $i < Ukuran::count(); $i++) {
+            if ($request->input('ukuran' . $i) != null) {
+                $request->validate([
+                    'stock' . $i => 'required|numeric',
+                ]);
+            }
+        }
         $request->validate([
             'warna' => 'required',
         ]);
@@ -50,7 +59,6 @@ class AdminVariasiController extends Controller
         $produk = $request->validate([
             'nama'           => 'required|max:255',
             'deskripsiWarna' => 'required|max:255',
-            'stock'          => 'required|numeric',
             'harga'          => 'required|numeric',
         ]);
         $produk['detailproduk_id'] = $request->detailproduk_id;
@@ -86,6 +94,7 @@ class AdminVariasiController extends Controller
                 Produk_Ukuran::create([
                     'produk_id' => $produk_id,
                     'ukuran_id' => $request->input('ukuran' . $i),
+                    'stock'     => $request->input('stock' . $i)
                 ]);
             }
         }

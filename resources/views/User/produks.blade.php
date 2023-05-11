@@ -181,7 +181,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($produk_sukai->nama) }}/{{ $produk_sukai->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($produk_sukai->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -243,7 +243,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
                             $produk_sukai->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $produk_sukai->nama
                             }}
                           </p>
@@ -266,7 +267,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($produk_sukai->nama) }}/{{ $produk_sukai->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($produk_sukai->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -328,7 +329,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
                             $produk_sukai->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $produk_sukai->nama
                             }}
                           </p>
@@ -351,7 +353,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($produk_sukai->nama) }}/{{ $produk_sukai->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($produk_sukai->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -413,7 +415,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
                             $produk_sukai->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $produk_sukai->nama
                             }}
                           </p>
@@ -436,7 +439,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($produk_sukai->nama) }}/{{ $produk_sukai->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($produk_sukai->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -498,7 +501,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $produk_sukai->detailproduk->pengguna }} {{
                             $produk_sukai->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $produk_sukai->nama
                             }}
                           </p>
@@ -569,7 +573,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($pelanggan_lain->nama) }}/{{ $pelanggan_lain->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($pelanggan_lain->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -632,7 +636,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
                             $pelanggan_lain->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $pelanggan_lain->nama
                             }}
                           </p>
@@ -655,7 +660,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($pelanggan_lain->nama) }}/{{ $pelanggan_lain->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($pelanggan_lain->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -718,7 +723,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
                             $pelanggan_lain->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $pelanggan_lain->nama
                             }}
                           </p>
@@ -741,7 +747,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($pelanggan_lain->nama) }}/{{ $pelanggan_lain->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($pelanggan_lain->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -804,7 +810,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
                             $pelanggan_lain->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $pelanggan_lain->nama
                             }}
                           </p>
@@ -827,7 +834,7 @@
                 <!-- Terbaik 1 carousel -->
                 <a href="/produk/{{ Str::slug($pelanggan_lain->nama) }}/{{ $pelanggan_lain->warna->warna }}"
                   class="text-black nav-link hover-border">
-                  <div class="card border-0" style="width: 13rem;">
+                  <div class="card border-0" style="width: 12.5rem;">
                     @auth
                     @if($pelanggan_lain->wishlist != NULL)
                     @foreach ($produk_wishlist as $wishlist)
@@ -890,7 +897,8 @@
                           style="height: auto;">
                           <p class="card-text mt-1 fs-vs text-muted">{{ $pelanggan_lain->detailproduk->pengguna }} {{
                             $pelanggan_lain->detailproduk->kategori }}</p>
-                          <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                          <p class="card-text fs-vs text-uppercase"
+                            style="margin-top: -7px;height: 26px;overflow: hidden;">{{
                             $pelanggan_lain->nama
                             }}
                           </p>
@@ -1182,7 +1190,7 @@
     <!-- akhir gambar, deskripsi,dll -->
 
     <!-- harga -->
-    <div class="w-100 px-5 py-4 vh-100" id="tampilanKanan">
+    <div class="px-5 py-4 vh-100" style="width: 470px" id="tampilanKanan">
       <!-- kategori dan beri ulasan -->
       <div class="d-flex justify-content-between">
         <div class="d-flex">
@@ -1207,22 +1215,25 @@
       <form action="/keranjang" method="POST">
         @csrf
         <div class="d-flex gap-4">
-          <select name="ukuran_id" class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+          <select name="ukuran_id" id="ukuran"
+            class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
             aria-label="Default select example">
             <option selected disabled>UKURAN</option>
             @foreach ($ukurans as $ukuran)
-            <option value="{{ $ukuran->id }}">{{ $ukuran->ukuran }}</option>
+            @if($ukuran->stock > 0)
+            <option value="{{ $ukuran->ukuran_id }}" data-stock="{{ $ukuran->stock }}">{{ $ukuran->ukuran->ukuran }}
+            </option>
+            @endif
             @endforeach
           </select>
-          <select name="jumlahItem" class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
+          <select name="jumlahItem" id="jumlahItem"
+            class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
             aria-label="Default select example">
             <option selected disabled>JUMLAH</option>
-            @for ($i = 1; $i<=$produk->stock;$i++)
-              <option value="{{ $i }}">{{ $i }}</option>
-              @endfor
           </select>
         </div>
-        <p class="text-danger fw-bold fs-vs my-2">{{ $produk->stock }} stok tersisa</p>
+        <p class="text-danger fw-bold fs-vs my-2" id="produkTersedia">NB: Jika Ukuran Tidak Tersedia Maka Stock Sedang
+          Kosong</p>
         <div class="d-flex gap-4 my-3">
           <a href="#" class="fs-vs fw-bold hover-black text-black">PANDUAN UKURAN</a>
           <a href="#" class=" fs-vs text-black hover-black">Ukuran yang dipilih habis?</a>
@@ -1360,4 +1371,22 @@
 
 @section('script')
 <script src="{{ asset('js/produks.js') }}"></script>
+
+<script>
+  const ukuran = document.getElementById('ukuran');
+  const jumlahItem = document.getElementById('jumlahItem')
+
+  ukuran.addEventListener('change', function (e) {
+    const jumlahUkuranPilihan = e.target.options[e.target.selectedIndex].dataset.stock;
+    let tampung = "<option selected disabled>JUMLAH</option>";
+
+    for (let index = 1; index <= jumlahUkuranPilihan; index++) {
+      tampung += `<option value="${index}">${index}</option>`;
+    }
+
+    jumlahItem.innerHTML = tampung;
+
+    document.getElementById('produkTersedia').innerHTML = `${jumlahUkuranPilihan} Produk Tersisa`
+  })
+</script>
 @endsection

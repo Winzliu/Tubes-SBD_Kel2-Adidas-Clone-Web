@@ -8,7 +8,7 @@
     <img src="img/Hero1.jpeg" class="img-fluid mb-2" width="100%" height="100%" alt="...">
     <div class="position-absolute top-50 start-10">
       <h1 class="text-white">HOME OF CLASSICS</h1>
-      <h6 class="text-white">Three classics, timeless for a reason</h6>
+      <h6 class="text-white">Celebrate timeless classics with Blackpink</h6>
       <button class="button-52 mt-3" role="button">SHOP NP</button>
     </div>
   </div>
@@ -404,7 +404,9 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">
+                      {{
+                      $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
@@ -489,7 +491,8 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">{{
+                      $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
@@ -573,7 +576,8 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">{{
+                      $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{
@@ -657,7 +661,8 @@
                   <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                     <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                       $produk->detailproduk->kategori }}</p>
-                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{ $produk->nama
+                    <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">{{
+                      $produk->nama
                       }}
                     </p>
                     <p class="card-text fs-vs" style="margin-top: -10px;">Rp. {{

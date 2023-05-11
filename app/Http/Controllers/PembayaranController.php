@@ -77,8 +77,8 @@ class PembayaranController extends Controller
 
             $produk = Produk::where('id', $produk_id);
 
-            $produk->update([
-                'stock' => $produk->value('stock') - $keranjang->where('produk_id', $produk_id)->value('jumlahItem')
+            $produk->first()->produk_ukuran->where('ukuran_id', $keranjang->ukuran->id)->first()->update([
+                'stock' => $produk->first()->produk_ukuran->where('ukuran_id', $keranjang->ukuran->id)->value('stock') - $keranjang->where('produk_id', $produk_id)->value('jumlahItem')
             ]);
 
             Keranjang::destroy($keranjang->id);

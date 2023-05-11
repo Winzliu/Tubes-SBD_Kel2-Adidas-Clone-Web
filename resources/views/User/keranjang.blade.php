@@ -34,7 +34,7 @@
               <p class="fs-vs m-0 ">Size : {{ $keranjang->ukuran->ukuran }}</p>
               <p class="fs-vs m-0 ">Color : <span class="text-uppercase">{{ $keranjang->produk->deskripsiWarna }}</span>
               </p>
-              <p class="fs-vs m-0 ">@if($keranjang->produk->stock > 0) Tersedia @else <span
+              <p class="fs-vs m-0 ">@if($keranjang->produk->produk_ukuran->first()->stock > 0) Tersedia @else <span
                   class="text-danger">Habis</span>@endif</p>
             </div>
             <form action="/keranjang/{{ $keranjang->id }}" method="POST">
@@ -227,7 +227,8 @@
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                       <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                         $produk->detailproduk->kategori }}</p>
-                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">
+                        {{
                         $produk->nama
                         }}
                       </p>
@@ -312,7 +313,8 @@
                     <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
                       <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                         $produk->detailproduk->kategori }}</p>
-                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;">{{
+                      <p class="card-text fs-vs text-uppercase" style="margin-top: -7px;height: 26px;overflow: hidden;">
+                        {{
                         $produk->nama
                         }}
                       </p>

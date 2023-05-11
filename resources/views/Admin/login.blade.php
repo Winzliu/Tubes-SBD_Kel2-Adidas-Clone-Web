@@ -54,7 +54,7 @@
       </div>
 
       <div class="text-center mt-5">
-        <button type="submit" class="btn btn-light border-1 border border-dark px-3 fs-6">Submit</button>
+        <button type="submit" class="btn btn-light border-1 border border-dark px-3 fs-6">Login</button>
       </div>
       </form>
     </div>

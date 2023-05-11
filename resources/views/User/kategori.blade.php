@@ -207,7 +207,7 @@
             <div class="card-body px-2 py-0 d-flex flex-column justify-content-between" style="height: auto;">
               <p class="card-text mt-1 fs-vs text-muted">{{ $produk->detailproduk->pengguna }} {{
                 $produk->detailproduk->kategori }}</p>
-              <p class="card-text fs-vs" style="margin-top: -7px;">{{ $produk->nama }}</p>
+              <p class="card-text fs-vs" style="margin-top: -7px;height: 26px;overflow: hidden;">{{ $produk->nama }}</p>
               <p class="card-text fs-vs mb-3" style="margin-top: -10px;">Rp. {{
                 number_format($produk->harga
                 , 0, ',', '.') }}</p>
