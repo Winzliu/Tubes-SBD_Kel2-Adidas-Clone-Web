@@ -6,6 +6,7 @@ use App\Models\Detailproduk;
 use App\Models\Produk;
 use App\Models\Gambar;
 use App\Models\Produk_Ukuran;
+use App\Models\Ulasan;
 use App\Models\Warna;
 use App\Models\Ukuran;
 use Illuminate\Http\Request;
@@ -56,6 +57,14 @@ class AdminProdukController extends Controller
                 ]);
             }
         }
+        $request->validate([
+            'warna' => 'required',
+        ]);
+        $produk = $request->validate([
+            'nama'           => 'required|max:255',
+            'deskripsiWarna' => 'required|max:255',
+            'harga'          => 'required|numeric',
+        ]);
         // detailproduk
         $detailProduk = $request->validate([
             'deskripsi'    => 'required|max:255',
@@ -65,19 +74,17 @@ class AdminProdukController extends Controller
             'jenis'        => 'required',
             'kategori'     => 'required',
         ]);
+        // gambar
+        for ($i = 0; $i < $request->jumlahGambar; $i++) {
+            $gambar = $request->validate([
+                'gambar' . $i => 'required|image|file|max:3072'
+            ]);
+        }
 
         // memasukkan nilai dalam table detail produk
         Detailproduk::create($detailProduk);
 
         // produk
-        $request->validate([
-            'warna' => 'required',
-        ]);
-        $produk = $request->validate([
-            'nama'           => 'required|max:255',
-            'deskripsiWarna' => 'required|max:255',
-            'harga'          => 'required|numeric',
-        ]);
         $produk['detailproduk_id'] = Detailproduk::latest('id')->value('id');
         $produk['warna_id'] = $request['warna'];
 
@@ -87,12 +94,6 @@ class AdminProdukController extends Controller
         // ambil produk_id terbaru
         $produk_id = Produk::latest('id')->value('id');
 
-        // gambar
-        for ($i = 0; $i < $request->jumlahGambar; $i++) {
-            $gambar = $request->validate([
-                'gambar' . $i => 'required|image|file|max:3072'
-            ]);
-        }
 
         // masukkan nilai dalam table gambar
         for ($i = 0; $i < $request->jumlahGambar; $i++) {
@@ -158,6 +159,7 @@ class AdminProdukController extends Controller
                 ]);
             }
         }
+
         // detailproduk
         $detailProduk = $request->validate([
             'deskripsi'    => 'required|max:255',
@@ -167,8 +169,6 @@ class AdminProdukController extends Controller
             'jenis'        => 'required',
             'kategori'     => 'required',
         ]);
-        // memasukkan nilai dalam table detail produk
-        Detailproduk::where('id', $produk->detailproduk->id)->update($detailProduk);
 
         // produk
         $produkBaru = $request->validate([
@@ -179,11 +179,6 @@ class AdminProdukController extends Controller
         $request->validate([
             'warna' => 'required',
         ]);
-        $produkBaru['detailproduk_id'] = $produk->detailproduk->id;
-        $produkBaru['warna_id'] = $request['warna'];
-
-        // memasukkan nilai dalam table produk
-        $produk->update($produkBaru);
 
         // gambar
         for ($i = 0; $i < $request->jumlahGambar; $i++) {
@@ -191,6 +186,16 @@ class AdminProdukController extends Controller
                 'gambar' . $i => 'required|image|file|max:3072'
             ]);
         }
+
+        // memasukkan nilai dalam table detail produk
+        Detailproduk::where('id', $produk->detailproduk->id)->update($detailProduk);
+
+        $produkBaru['detailproduk_id'] = $produk->detailproduk->id;
+        $produkBaru['warna_id'] = $request['warna'];
+
+        // memasukkan nilai dalam table produk
+        $produk->update($produkBaru);
+
 
         // masukkan nilai dalam table gambar
         for ($i = 0; $i < $produk->gambar->count(); $i++) {
@@ -235,6 +240,9 @@ class AdminProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
+        foreach ($produk->ulasan as $ulasan) {
+            Ulasan::destroy($ulasan->id);
+        }
         for ($i = 0; $i < $produk->gambar->count(); $i++) {
             Storage::delete('img/' . $produk->gambar[$i]->gambar);
             Gambar::destroy($produk->gambar[$i]->id);

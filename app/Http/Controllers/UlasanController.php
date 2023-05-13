@@ -12,7 +12,12 @@ class UlasanController extends Controller
      */
     public function index()
     {
-        //
+        $ulasans = Ulasan::with(['user', 'produk'])->latest()->paginate(5);
+
+        return view('Admin.verifikasi', [
+            'title'   => 'Verifikasi Ulasan',
+            'ulasans' => $ulasans
+        ]);
     }
 
     /**
@@ -71,7 +76,15 @@ class UlasanController extends Controller
      */
     public function update(Request $request, Ulasan $ulasan)
     {
-        //
+        Ulasan::where('id', $ulasan->id)->update([
+            'is_verif' => ($ulasan->is_verif == 1) ? 0 : 1
+        ]);
+
+        if ($ulasan->is_verif == 1) {
+            return redirect()->back()->with('error', 'Verfikasi Ulasan Telah Dihapus!!');
+        } else {
+            return redirect()->back()->with('success', 'Ulasan Telah Diverifikasi!!');
+        }
     }
 
     /**
@@ -79,6 +92,8 @@ class UlasanController extends Controller
      */
     public function destroy(Ulasan $ulasan)
     {
-        //
+        Ulasan::destroy($ulasan->id);
+
+        return redirect()->back()->with('success', 'Ulasan Telah Dihapus!!');
     }
 }

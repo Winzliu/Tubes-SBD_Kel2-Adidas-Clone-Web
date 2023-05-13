@@ -33,6 +33,8 @@ class KategoriController extends Controller
 
             $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk);
 
+            $produkserupas = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk)->get();
+
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
             }
@@ -80,6 +82,8 @@ class KategoriController extends Controller
             $id_semuaProduk = Detailproduk::where('pengguna', $pengguna)->where('jenis', $jenis)->pluck('id');
             $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk);
 
+            $produkserupas = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk)->get();
+
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
             }
@@ -126,6 +130,8 @@ class KategoriController extends Controller
             $id_semuaProduk = Detailproduk::where('pengguna', $pengguna)->where('jenis', $jenis)->where('kategori', $kategori)->pluck('id');
             $produks = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk);
 
+            $produkserupas = Produk::with('warna', 'detailproduk', 'gambar')->whereIn('detailproduk_id', $id_semuaProduk)->get();
+
             if ($minimum != null && $maksimum != null) {
                 $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
             }
@@ -167,7 +173,8 @@ class KategoriController extends Controller
             'produks'         => $produks,
             'produk_wishlist' => $produk_wishlist,
             'ukurans'         => $ukurans,
-            'warnas'          => $warnas
+            'warnas'          => $warnas,
+            'produkserupas'   => $produkserupas
         ]);
     }
 
@@ -235,6 +242,8 @@ class KategoriController extends Controller
 
         $produks = Produk::with('warna', 'detailproduk', 'gambar')->where('nama', 'like', '%' . $request->query('pencarian') . '%');
 
+        $produkserupas = Produk::with('warna', 'detailproduk', 'gambar')->get();
+
         if ($minimum != null && $maksimum != null) {
             $produks = $produks->where('harga', '>', $minimum)->where('harga', '<', $maksimum);
         }
@@ -275,7 +284,8 @@ class KategoriController extends Controller
             'produks'         => $produks,
             'produk_wishlist' => $produk_wishlist,
             'ukurans'         => $ukurans,
-            'warnas'          => $warnas
+            'warnas'          => $warnas,
+            'produkserupas'   => $produkserupas
         ]);
     }
 }

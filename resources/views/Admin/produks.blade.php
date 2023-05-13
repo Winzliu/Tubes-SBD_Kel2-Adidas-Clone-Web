@@ -13,7 +13,7 @@
   <p class="fw-bold fs-2 text-center">Daftar Produk</p>
 
   @if (session()->has('success'))
-  <div class="alert alert-success alert-dismissible fade show w-25 m-auto text-center" role="alert">
+  <div class="alert alert-success alert-dismissible fade show w-50 m-auto text-center" role="alert">
     <strong>{{ session('success') }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -65,7 +65,7 @@
         <th scope="col" colspan="2" class="w-25">Nama Produk</th>
         <th scope="col">Warna</th>
         <th scope="col">Stock</th>
-        <th scope="col" colspan="4" class="w-25">Actions</th>
+        <th scope="col" colspan="4" class="w-25">Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -74,7 +74,7 @@
       @endphp
       @foreach ($produks as $produk)
       <tr class="fw-bold">
-        <th scope="row">{{ $i + (($produks->currentPage()-1) * 10) }}</th>
+        <th scope="row">{{ $i + (($produks->currentPage()-1) * 5) }}</th>
         <td><img src="{{ asset('img/'. $produk->gambar->first()->gambar) }}" style="width: 50px" alt="">
         </td>
         <td>{{ $produk->nama }}</td>
@@ -104,35 +104,11 @@
           </a>
         </td>
         <td>
-          <button type="button" class="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="border-0 bg-transparent" data-bs-toggle="modal"
+            data-bs-target="#exampleModal{{ $produk->id }}">
             <ion-icon class="btn btn-danger me-3 fs-5" style="height: 25px" name="trash-outline">
             </ion-icon>
           </button>
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Produk</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <span class="fw-normal">Yakin Ingin Menghapus</span> "{{ $produk->nama }}""
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <form action="/admin/produks/{{ $produk->id }}" method="POST" class="d-inline-block">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">
-                      Hapus
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
         </td>
       </tr>
       @php
@@ -147,4 +123,33 @@
     {{ $produks->links() }}
   </div>
 </div>
+
+@foreach ($produks as $produk)
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ $produk->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Produk</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fw-bold">
+        <span class="fw-normal">Yakin Ingin Menghapus</span> "{{ $produk->nama }} (<span class="text-uppercase">{{
+          $produk->warna->warna }}</span>)"
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form action="/admin/produks/{{ $produk->id }}" method="POST" class="d-inline-block">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-danger">
+            Hapus
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 @endsection

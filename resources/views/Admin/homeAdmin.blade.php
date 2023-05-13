@@ -27,7 +27,7 @@
       @endphp
       @foreach ($pesanans as $pesanan)
       <tr>
-        <th scope="row">{{ $i }}</th>
+        <th scope="row">{{ $i + (($pesanans->currentPage()-1) * 5) }}</th>
         <td>{{ $pesanan->created_at }}</td>
         <td>{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</td>
         <td>{{ number_format($pesanan->totalHarga, 0, ',', '.') }}</td>
@@ -44,6 +44,5 @@
 
     </tbody>
   </table>
-</div>
 </div>
 @endsection

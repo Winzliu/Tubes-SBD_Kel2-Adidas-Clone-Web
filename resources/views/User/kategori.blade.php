@@ -48,7 +48,7 @@
                   </li>
                   <li>
                     <div class="form-floating mb-3">
-                      <input type="text" value="{{ request()->query('maksimum') ?: 8499000 }}" name="maksimum"
+                      <input type="text" value="{{ request()->query('maksimum') }}" name="maksimum"
                         class="form-control rounded-0 border-dark" style="height: 40px" id="floatingInput"
                         placeholder="name@example.com">
                       <label class="p-2" for="floatingInput">Maksimum</label>
@@ -198,7 +198,8 @@
               <button onclick="return false;" class="border-0"><img src={{ asset("img/".
                   $produk->gambar->first()->gambar)}}
                 class="border-bottom border-dark border-2 hover-border-bottom" width="50px" alt=""></button>
-              @foreach ($produks->where('detailproduk_id',$produk->detailproduk_id)->whereNotIn('id',$produk->id) as $p)
+              @foreach ($produkserupas->where('detailproduk_id',$produk->detailproduk_id)->whereNotIn('id',$produk->id)
+              as $p)
               <button onclick="return false;" class="border-0"><img src={{ asset("img/". $p->gambar->first()->gambar)}}
                 class="hover-border-bottom" width="50px" alt=""></button>
               @endforeach
@@ -212,7 +213,7 @@
                 number_format($produk->harga
                 , 0, ',', '.') }}</p>
               @if($produk->where('detailproduk_id',$produk->detailproduk_id)->count() > 1)
-              <p class="card-text fs-vs text-muted mb-2">{{ $produks->where('detailproduk_id',
+              <p class="card-text fs-vs text-muted mb-2">{{ $produkserupas->where('detailproduk_id',
                 $produk->detailproduk_id)->count() }} warna</p>
               @endif
             </div>

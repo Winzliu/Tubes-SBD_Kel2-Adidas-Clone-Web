@@ -10,6 +10,10 @@ class Ukuran extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function produk_ukuran()
     {
         return $this->hasMany(Produk_Ukuran::class);

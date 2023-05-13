@@ -12,8 +12,8 @@ body {
 
 .login-form {
     width: 380px;
-    height: 480px;
     padding: 20px;
+    padding-bottom: 30px;
     border-radius: 10px !important;
 }
 

@@ -20,11 +20,14 @@
       <ul class="mt-3 list-unstyled text-center">
         <li><a href="/admin">Home</a></li>
         <li><a href="/admin/produks">Daftar Produk</a></li>
-        <li><a href="verifikasi.html">Verifikasi Ulasan</a></li>
-        <li><a href="halaman6.html">Daftar Ukuran Produk</a></li>
-        <li><a href="halaman7.html">Daftar Warna Produk</a></li>
+        <li><a href="/admin/verifikasi">Verifikasi Ulasan</a></li>
+        <li><a href="/admin/ukuran">Daftar Ukuran Produk</a></li>
+        <li><a href="/admin/warna">Daftar Warna Produk</a></li>
       </ul>
-      <button class="btn btn-danger w-50 w-100">Logout</button>
+      <form action="/admin/logout" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger w-50 w-100">Logout</button>
+      </form>
     </div>
 
     <!-- main section -->

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminUkuranController;
+use App\Http\Controllers\AdminWarnaController;
 use App\Models\Gambar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -40,6 +42,7 @@ use App\Http\Controllers\InformasipribadiController;
 // Admin
 // login admin controller
 Route::resource('/admin/login', AdminLoginController::class)->middleware('bukanAdmin');
+Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->middleware('admin');
 
 // home admin controller
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware('admin');
@@ -51,6 +54,17 @@ Route::resource('/admin/produks', AdminProdukController::class)->middleware('adm
 // variasi produk admin controller
 Route::get('/admin/variasi/{id}', [AdminVariasiController::class, 'index'])->middleware('admin');
 Route::post('/admin/variasi', [AdminVariasiController::class, 'store'])->middleware('admin');
+
+// produk admin controller
+Route::get('/admin/verifikasi', [UlasanController::class, 'index'])->middleware('admin');
+Route::put('/admin/verifikasi/{ulasan}', [UlasanController::class, 'update'])->middleware('admin');
+Route::delete('/admin/verifikasi/{ulasan}', [UlasanController::class, 'destroy'])->middleware('admin');
+
+// ukuran admin controller
+Route::resource('/admin/ukuran', AdminUkuranController::class)->middleware('admin');
+
+// warna admin controller
+Route::resource('/admin/warna', AdminWarnaController::class)->middleware('admin');
 
 
 // User
