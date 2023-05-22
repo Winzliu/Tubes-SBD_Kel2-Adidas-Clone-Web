@@ -24,11 +24,11 @@
       <!-- Pesanan Baru Baru Ini -->
       <div class="d-flex justify-content-between">
         <p class="fw-bold fs-5">RECENT ORDERS</p>
-        <a href="RiwayatPesanan.html" class="text-black align-self-center">View All</a>
+        <a href="/riwayatpesanan" class="text-black align-self-center">View All</a>
       </div>
       <table class="table table-striped">
         <thead>
-          <tr class="table-dark">
+          <tr class="table-dark text-center">
             <th scope="col">Pesanan#</th>
             <th scope="col">Tanggal</th>
             <th scope="col">Kirim Ke</th>
@@ -42,9 +42,9 @@
           $i=1;
           @endphp
           @foreach ($pesanans as $pesanan)
-          <tr>
+          <tr class="text-center">
             <th scope="row">{{ $i }}</th>
-            <td>{{ $pesanan->created_at }}</td>
+            <td>{{ date('d-M-Y,',strtotime($pesanan->created_at)) }}</td>
             <td>{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</td>
             <td>Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
             <td class="fst-italic">{{ $pesanan->status }}</td>

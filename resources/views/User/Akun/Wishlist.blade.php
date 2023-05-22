@@ -26,6 +26,9 @@
       <!-- akhir header wishlist -->
       <!-- main wishlist -->
       <div class="border-bottom border-top border-4 border-secondary mb-4">
+        @php
+        $i=1
+        @endphp
         @foreach ($wishlists as $wishlist)
         @if($wishlist->user_id == auth()->user()->id)
         <!-- wishlist pertama -->
@@ -46,7 +49,8 @@
                 @csrf
                 <button type="submit" class="fs-vs mb-0 hover-black text-black border-0 bg-transparent">Remove</button>
               </form>
-              <p class="text-danger fw-bold fs-vs my-2" id="produkTersedia">NB: Jika Ukuran Tidak Tersedia Maka Stock
+              <p class="text-danger fw-bold fs-vs my-2" id="produkTersedia{{ $i }}">NB: Jika Ukuran Tidak Tersedia Maka
+                Stock
                 Sedang
                 Kosong</p>
             </div>
@@ -59,7 +63,7 @@
               <!-- ukuran -->
               <p class="fs-vvs fw-bold" style="letter-spacing: 3px;">PILIH SIZE</p>
               <div class="d-flex gap-3 mb-5">
-                <select name="ukuran_id" id="ukuran"
+                <select name="ukuran_id" id="ukuran{{ $i }}"
                   class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
                   aria-label="Default select example">
                   <option selected disabled>UKURAN</option>
@@ -70,7 +74,7 @@
                   @endif
                   @endforeach
                 </select>
-                <select name="jumlahItem" id="jumlahItem"
+                <select name="jumlahItem" id="jumlahItem{{ $i }}"
                   class="form-select bg-white border-1 border-dark rounded-0 w-auto fw-bold fs-vs"
                   aria-label="Default select example">
                   <option selected disabled>JUMLAH</option>
@@ -102,6 +106,9 @@
         </div>
         </form>
         <!-- akhir wishlist pertama -->
+        @php
+        $i++
+        @endphp
         @endif
         @endforeach
       </div>
@@ -136,21 +143,21 @@
 @section('script')
 <script src="js/AkunSaya.js"></script>
 
+
 <script>
-  const ukuran = document.getElementById('ukuran');
-  const jumlahItem = document.getElementById('jumlahItem')
-
-  ukuran.addEventListener('change', function (e) {
-    const jumlahUkuranPilihan = e.target.options[e.target.selectedIndex].dataset.stock;
-    let tampung = "<option selected disabled>JUMLAH</option>";
-
-    for (let index = 1; index <= jumlahUkuranPilihan; index++) {
-      tampung += `<option value="${index}">${index}</option>`;
-    }
-
-    jumlahItem.innerHTML = tampung;
-
-    document.getElementById('produkTersedia').innerHTML = `${jumlahUkuranPilihan} Produk Tersisa`
-  })
+  for (let i = 1; i <= {{ $i }}; i++) {
+    document.getElementById(`ukuran${i}`).addEventListener('change', function (e) {
+      const jumlahUkuranPilihan = e.target.options[e.target.selectedIndex].dataset.stock;
+      let tampung = "<option selected disabled>JUMLAH</option>";
+  
+      for (let index = 1; index <= jumlahUkuranPilihan; index++) {
+        tampung += `<option value="${index}">${index}</option>`;
+      }
+  
+      document.getElementById(`jumlahItem${i}`).innerHTML = tampung;
+  
+      document.getElementById(`produkTersedia${i}`).innerHTML = `${jumlahUkuranPilihan} Produk Tersisa`
+    })
+  }
 </script>
 @endsection

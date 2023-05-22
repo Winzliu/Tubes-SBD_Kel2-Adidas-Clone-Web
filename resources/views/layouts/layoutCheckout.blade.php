@@ -10,6 +10,8 @@
   <link rel="stylesheet" href={{ asset("css/bootstrap.css") }} />
   <link rel="stylesheet" href={{ asset("css/bootstrap.css.map") }} />
   <link rel="stylesheet" href={{ asset("css/mystyle.css") }} />
+  <link rel="icon" href="{{ asset('img/logo.png')  }}">
+
 </head>
 
 <body style="overflow-x: hidden">

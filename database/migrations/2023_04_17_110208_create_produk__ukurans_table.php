@@ -11,8 +11,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('produk__ukurans', function (Blueprint $table) {
+            $table->id();
             $table->foreignId("produk_id")->constrained("produks");
             $table->foreignId("ukuran_id")->constrained("ukurans");
+            $table->integer("stock");
             $table->timestamps();
         });
     }

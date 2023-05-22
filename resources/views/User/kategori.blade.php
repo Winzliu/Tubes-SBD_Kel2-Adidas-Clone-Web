@@ -226,6 +226,9 @@
     <!-- akhir produk -->
   </div>
   <!-- Akhir Produk -->
+  <div class="d-flex justify-content-center ">
+    {{ $produks->links() }}
+  </div>
   <!-- tentang adidas -->
   <div class="bg-grey">
     <div class="container d-flex gap-5 py-4">

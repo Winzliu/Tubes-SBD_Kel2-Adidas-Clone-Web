@@ -33,7 +33,7 @@ class RegistrasiController extends Controller
         $validated = $request->validate([
             'namaDepan'          => 'required|max:255',
             'namaBelakang'       => 'required|max:255',
-            'nomorTelepon'       => 'required|min:10|numeric',
+            'nomorTelepon'       => 'required|digits_between:10,14|numeric',
             'tanggalLahir'       => 'required',
             'gender'             => 'required',
             'email'              => 'required|email:dns|unique:users',

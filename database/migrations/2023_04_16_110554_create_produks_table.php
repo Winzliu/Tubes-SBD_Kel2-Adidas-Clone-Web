@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string("nama");
             $table->foreignId("detailproduk_id")->constrained("detailproduks");
             $table->foreignId("warna_id")->constrained("warnas");
-            $table->integer("stock");
             $table->string("deskripsiWarna");
             $table->string("harga");
             $table->timestamps();

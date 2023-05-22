@@ -36,10 +36,10 @@ class AdminLoginController extends Controller
 
         if (Auth::guard('admin')->attempt($validated)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin');
+            return redirect('/admin');
         }
 
-        return back()->with('loginError', 'Email/Password Salah!!');
+        return back()->with('loginError', 'Username/Password Salah!!');
     }
 
     /**

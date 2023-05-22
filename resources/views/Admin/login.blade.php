@@ -9,6 +9,8 @@
   <link rel="stylesheet" href={{ asset("css/bootstrap.css") }}>
   <!--custom css-->
   <link rel="stylesheet" href={{ asset("css/loginAdmin.css") }}>
+  <link rel="icon" href="{{ asset('img/logo.png')  }}">
+
 </head>
 
 <body class="bg-dark">
@@ -40,8 +42,7 @@
           {{-- password --}}
           <label for="password" class="form-label fw-bold">Password</label>
           <div class="d-flex position-relative">
-            <input type="password" name="password"
-              class=" form-control bg-light @error('password') is-invalid @enderror" id="password">
+            <input type="password" name="password" class=" form-control bg-light" id="password">
             <button id="showpassword" onclick="return false"
               class="border-0 position-absolute bg-transparent end-0 pt-2 pe-3">
               <ion-icon id="icon" class="text-black fs-4 fw-bold mb-0" name="eye-outline">
@@ -49,7 +50,7 @@
             </button>
           </div>
           @error('password')
-          <div class="invalid-feedback">{{ $message }}</div>
+          <div class="text-danger">{{ $message }}</div>
           @enderror
       </div>
 

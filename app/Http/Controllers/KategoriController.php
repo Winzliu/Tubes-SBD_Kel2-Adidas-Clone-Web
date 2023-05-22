@@ -65,7 +65,7 @@ class KategoriController extends Controller
                 $produks = $produks->orderBy('harga', 'desc');
             }
 
-            $produks = $produks->latest()->get();
+            $produks = $produks->latest()->paginate(16)->withQueryString();
 
             $produk_wishlist = Wishlist::with('produk')->get();
 
@@ -114,7 +114,7 @@ class KategoriController extends Controller
                 $produks = $produks->orderBy('harga', 'desc');
             }
 
-            $produks = $produks->latest()->get();
+            $produks = $produks->latest()->paginate(16)->withQueryString();
 
             $produk_wishlist = Wishlist::with('produk')->get();
         } else {
@@ -162,7 +162,7 @@ class KategoriController extends Controller
                 $produks = $produks->orderBy('harga', 'desc');
             }
 
-            $produks = $produks->latest()->get();
+            $produks = $produks->latest()->paginate(16)->withQueryString();
 
             $produk_wishlist = Wishlist::with('produk')->get();
         }
@@ -274,7 +274,7 @@ class KategoriController extends Controller
             $produks = $produks->orderBy('harga', 'desc');
         }
 
-        $produks = $produks->latest()->get();
+        $produks = $produks->latest()->paginate(16)->withQueryString();
 
         $produk_wishlist = Wishlist::with('produk')->get();
 

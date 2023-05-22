@@ -59,7 +59,7 @@ class InformasipribadiController extends Controller
             $validated = $request->validate([
                 'namaDepan'    => 'required|max:255',
                 'namaBelakang' => 'required|max:255',
-                'nomorTelepon' => 'required|min:10|numeric',
+                'nomorTelepon' => 'required|digits_between:10,14|numeric',
             ]);
 
             auth('web')->user()->update($validated);

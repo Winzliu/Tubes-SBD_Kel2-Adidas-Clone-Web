@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
-use App\Models\Ukuran;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
@@ -21,7 +20,7 @@ class WishlistController extends Controller
 
 
         return view('User.Akun.Wishlist', [
-            'title'     => 'WIshlist',
+            'title'     => 'Wishlist',
             'wishlists' => $wishlists
         ]);
     }

@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('css/mainpageAdmin.css') }}">
+  <link rel="icon" href="{{ asset('img/logo.png')  }}">
   @yield('css')
 
 </head>
@@ -23,6 +24,7 @@
         <li><a href="/admin/verifikasi">Verifikasi Ulasan</a></li>
         <li><a href="/admin/ukuran">Daftar Ukuran Produk</a></li>
         <li><a href="/admin/warna">Daftar Warna Produk</a></li>
+        <li><a href="/admin/user">Daftar User</a></li>
       </ul>
       <form action="/admin/logout" method="POST">
         @csrf

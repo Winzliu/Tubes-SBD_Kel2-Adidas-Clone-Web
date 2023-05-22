@@ -31,8 +31,8 @@
           @endphp
           @foreach ($pesanans as $pesanan)
           <tr>
-            <th scope="row">{{ $i }}</th>
-            <td>{{ $pesanan->created_at }}</td>
+            <th scope="row">{{ $i + (($pesanans->currentPage()-1) * 5) }}</th>
+            <td>{{ date('d-M-Y',strtotime($pesanan->created_at)) }}</td>
             <td>{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</td>
             <td>Rp. {{ number_format($pesanan->totalHarga , 0, ',', '.') }}</td>
             <td class="fst-italic">{{ $pesanan->status }}</td>
@@ -44,6 +44,9 @@
           @endforeach
         </tbody>
       </table>
+      <div class="d-flex justify-content-center ">
+        {{ $pesanans->links() }}
+      </div>
     </div>
     <!-- akhir pesanan baru baru ini -->
     <!-- akhir bagian kiri -->

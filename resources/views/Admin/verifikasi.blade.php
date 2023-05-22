@@ -42,7 +42,7 @@
       @foreach ($ulasans as $ulasan)
       <tr>
         <th scope="row">{{ $z + (($ulasans->currentPage()-1) * 5) }}</th>
-        <td>{{ $ulasan->created_at }}</td>
+        <td>{{ date('d-M-Y',strtotime($ulasan->created_at)) }}</td>
         <td>{{ $ulasan->namaDepan }} / </br>{{ $ulasan->produk->nama }}</td>
         <td>
           @for ($i = 0; $i < $ulasan->quality; $i++)

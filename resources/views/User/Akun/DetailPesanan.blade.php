@@ -30,7 +30,7 @@
       <p class="mb-1">Tentang Pesanan Ini:</p>
       <p class="fw-bold mb-1">Informasi Pesanan</p>
       <hr>
-      <p>Tanggal Pesanan: {{ $pesanan->created_at }}</p>
+      <p>Tanggal Pesanan: {{ date('d-M-Y',strtotime($pesanan->created_at)) }}</p>
       <!-- alamat -->
       <div class="d-flex">
         <div class="bg-grey p-4">

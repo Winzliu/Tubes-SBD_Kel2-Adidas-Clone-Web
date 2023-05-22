@@ -17,7 +17,7 @@ class bukanAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('admin')->check()) {
-            return redirect('admin');
+            return redirect('/admin');
         }
         return $next($request);
     }

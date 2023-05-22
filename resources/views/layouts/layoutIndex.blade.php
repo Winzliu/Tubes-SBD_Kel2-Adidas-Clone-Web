@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/bootstrap.css.map') }}" />
   <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
+  <link rel="icon" href="{{ asset('img/logo.png')  }}">
 </head>
 
 <body style="overflow-x: hidden;">
@@ -19,8 +20,7 @@
     style="z-index: 99999999999999; transition: 0.3s;">
     <div class="container-fluid">
       <!-- brand -->
-      <a class="navbar-brand w-16" href="/"><img src="{{ asset('img/logo.jpeg') }}" width="50px" class="ms-5"
-          alt=""></a>
+      <a class="navbar-brand w-16" href="/"><img src="{{ asset('img/logo.png') }}" width="50px" class="ms-5" alt=""></a>
       <!-- hamburger menu -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">

@@ -1175,7 +1175,7 @@
             <div class="w-72">
               <div class="d-flex justify-content-between w-100">
                 <p class="fw-bold fs-4 text-uppercase">{{ $ulasan->judulUlasan }}</p>
-                <p class=" align-self-center">{{ $ulasan->created_at }}</p>
+                <p class=" align-self-center">{{ date('d-M-Y H:i:s,',strtotime($ulasan->created_at)) }}</p>
               </div>
               <p>{{ $ulasan->ulasan }}</p>
               <p class="fw-bold fs-vs">-{{ $ulasan->namaDepan }}</p>

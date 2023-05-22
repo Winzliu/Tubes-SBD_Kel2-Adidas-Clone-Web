@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AdminUkuranController;
-use App\Http\Controllers\AdminWarnaController;
 use App\Models\Gambar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -16,11 +14,14 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminHomeController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminWarnaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\AdminProdukController;
+use App\Http\Controllers\AdminUkuranController;
 use App\Http\Controllers\AdminVariasiController;
 use App\Http\Controllers\DaftaralamatController;
 use App\Http\Controllers\DetailpesananController;
@@ -66,6 +67,11 @@ Route::resource('/admin/ukuran', AdminUkuranController::class)->middleware('admi
 // warna admin controller
 Route::resource('/admin/warna', AdminWarnaController::class)->middleware('admin');
 
+// user admin controller
+Route::get('/admin/user', [AdminUserController::class, 'index'])->middleware('admin');
+Route::get('/admin/user/{user}', [AdminUserController::class, 'user'])->middleware('admin');
+Route::delete('/admin/user/{user}', [AdminUserController::class, 'destroy'])->middleware('admin');
+
 
 // User
 // home controller
@@ -97,7 +103,7 @@ Route::resource('/alamat', AlamatController::class)->middleware('auth');
 
 //checkout controller
 Route::get('/checkout/{id?}', [CheckoutController::class, 'index'])->middleware('auth');
-Route::resource('/checkout', CheckoutController::class)->except(['index'])->middleware('auth');
+// Route::resource('/checkout', CheckoutController::class)->except(['index'])->middleware('auth');
 
 //checkout controller
 Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');

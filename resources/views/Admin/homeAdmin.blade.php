@@ -28,7 +28,7 @@
       @foreach ($pesanans as $pesanan)
       <tr>
         <th scope="row">{{ $i + (($pesanans->currentPage()-1) * 5) }}</th>
-        <td>{{ $pesanan->created_at }}</td>
+        <td>{{ date('d-M-Y,',strtotime($pesanan->created_at)) }}</td>
         <td>{{ $pesanan->namaDepan }} {{ $pesanan->namaBelakang }}</td>
         <td>{{ number_format($pesanan->totalHarga, 0, ',', '.') }}</td>
         <td class="fst-italic">{{ $pesanan->status }}</td>

@@ -51,7 +51,7 @@ class UlasanController extends Controller
         if ($ulasan->wasRecentlyCreated) {
             return redirect()->back()->with('success', 'Ulasan Telah Dikirim, Menunggu Verifikasi Admin');
         } else {
-            return redirect()->back()->with('errorUlasan', 'Error!!, Pastikan Mengisi Seluruh Form!');
+            return redirect()->back()->with('success', 'Error!!, Pastikan Mengisi Seluruh Form!');
         }
     }
 
