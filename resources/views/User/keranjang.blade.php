@@ -34,8 +34,7 @@
               <p class="fs-vs m-0 ">Size : {{ $keranjang->ukuran->ukuran }}</p>
               <p class="fs-vs m-0 ">Color : <span class="text-uppercase">{{ $keranjang->produk->deskripsiWarna }}</span>
               </p>
-              <p class="fs-vs m-0 ">@if($keranjang->produk->produk_ukuran->first()->stock > 0) Tersedia @else <span
-                  class="text-danger">Habis</span>@endif</p>
+              <p class="fs-vs m-0 ">Tersedia</p>
             </div>
             <form action="/keranjang/{{ $keranjang->id }}" method="POST">
               @method('delete')
@@ -103,7 +102,7 @@
         <!-- harga pesanan -->
         <p class="fw-bold fs-5 my-2">RINGKASAN PESANAN:</p>
         <ul class="list-group bg-white rounded-0">
-          <li class="list-group-item fs-s">{{ $keranjangs->where('user_id', auth()->user()->id)->count() }} Produk
+          <li class="list-group-item fs-s">{{ $keranjangs->where('user_id', auth('web')->user()->id)->count() }} Produk
           </li>
           <li class="list-group-item fs-s">
             <div class="d-flex justify-content-between">

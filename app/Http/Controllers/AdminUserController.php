@@ -11,8 +11,23 @@ class AdminUserController extends Controller
     {
         if ($request->pencarian) {
             $users = User::where('namaDepan', 'like', '%' . $request->query('pencarian') . '%')->orWhere('namaBelakang', 'like', '%' . $request->query('pencarian') . '%')->paginate(5)->withQueryString();
+
+            /* 
+            SELECT *
+            FROM users
+            WHERE namaDepan LIKE '%$request->query('pencarian')%' OR namaBelakang LIKE '%$request->query('pencarian')%'
+            LIMIT 5;
+            */
+
         } else {
             $users = User::paginate(5);
+
+            /* 
+            SELECT *
+            FROM users
+            LIMIT 5;
+            */
+
         }
 
         return view('Admin.user', [
@@ -32,6 +47,8 @@ class AdminUserController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
+
+        // DELETE FROM users WHERE id = '$user->id';
 
         return redirect()->back()->with('success', 'User Berhasil Dihapus!!');
     }

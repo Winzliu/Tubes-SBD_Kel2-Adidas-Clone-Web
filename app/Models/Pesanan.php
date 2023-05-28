@@ -14,8 +14,8 @@ class Pesanan extends Model
         'id'
     ];
 
-    public function alamat()
+    public function produk_pesanan()
     {
-        return $this->belongsTo(Alamat::class);
+        return $this->hasMany(Produk_Pesanan::class);
     }
 }

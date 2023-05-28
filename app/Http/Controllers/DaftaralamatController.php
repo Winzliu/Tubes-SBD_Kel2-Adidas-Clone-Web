@@ -11,6 +11,12 @@ class DaftaralamatController extends Controller
     {
         $alamats = Alamat::where('user_id', auth('web')->user()->id)->get();
 
+        /* 
+        SELECT *
+        FROM alamats
+        WHERE user_id = $_SESSION('web')->id;
+        */
+
         return view('User.Akun.DaftarAlamat', [
             'title'   => 'Daftar Alamat',
             'alamats' => $alamats

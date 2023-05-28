@@ -18,6 +18,17 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE gambars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    produk_id INT,
+    gambar VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (produk_id) REFERENCES produks(id)
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

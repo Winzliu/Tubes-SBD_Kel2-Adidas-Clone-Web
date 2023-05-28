@@ -14,11 +14,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $id_produk = Produk::inRandomOrder()->take(4)->pluck('id');
-        // $gambars = Gambar::whereIn('id_produk', $id_produk)->pluck('gambar');
-
         $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
+
+        /* 
+        SELECT *
+        FROM produks
+        INNER JOIN detailproduks ON produks.detailproduk_id = detailproduks.id
+        INNER JOIN gambars ON produks.id = gambars.produk_id
+        INNER JOIN warnas ON produks.warna_id = warnas.id
+        INNER JOIN wishlists ON produks.id = wishlists.produk_id
+        ORDER BY RAND()
+        LIMIT 16;
+        */
+
         $produk_wishlist = Wishlist::with('produk')->get();
+
+        /* 
+        SELECT *
+        FROM wishlists
+        INNER JOIN produks ON wishlists.produk_id = produks.id;
+        */
 
         return view('User.index', [
             'title'           => 'Adidas',

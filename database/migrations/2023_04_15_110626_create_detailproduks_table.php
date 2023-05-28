@@ -22,6 +22,20 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE detailproduks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    deskripsi LONGTEXT NOT NULL,
+    subDeskripsi LONGTEXT NOT NULL,
+    spesifikasi LONGTEXT NOT NULL,
+    pengguna VARCHAR(255) NOT NULL,
+    jenis VARCHAR(255) NOT NULL,
+    kategori VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

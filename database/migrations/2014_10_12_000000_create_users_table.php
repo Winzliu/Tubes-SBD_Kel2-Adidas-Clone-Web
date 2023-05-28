@@ -25,6 +25,23 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    namaDepan VARCHAR(255) NOT NULL,
+    namaBelakang VARCHAR(255) NOT NULL,
+    nomorTelepon VARCHAR(255) NOT NULL,
+    tanggalLahir DATE NOT NULL,
+    gender VARCHAR(255) NOT NULL,
+    email_verified_at TIMESTAMP NULL,
+    remember_token VARCHAR(100) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

@@ -15,6 +15,12 @@ class SelesaiController extends Controller
     {
         $produks = Produk_Pesanan::with('pesanan')->where('pesanan_id', Pesanan::latest()->value('id'))->get();
 
+        /* 
+        SELECT * FROM produk__pesanans
+        JOIN pesanan ON produk_pesanan.pesanan_id = pesanand.id
+        WHERE pesanan_id = (SELECT id FROM pesanans ORDER BY created_at DESC LIMIT 1)
+        */
+
         return view('User.Checkout.Selesai', [
             'title'   => 'Produk_Pesanan Selesai',
             'produks' => $produks

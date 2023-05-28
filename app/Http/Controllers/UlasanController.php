@@ -14,6 +14,14 @@ class UlasanController extends Controller
     {
         $ulasans = Ulasan::with(['user', 'produk'])->latest()->paginate(5);
 
+        /* 
+        SELECT * FROM ulasans
+        JOIN users ON ulasans.user_id = users.id
+        JOIN produks ON ulasans.produk_id = produks.id
+        ORDER BY ulasans.created_at DESC
+        LIMIT 5
+        */
+
         return view('Admin.verifikasi', [
             'title'   => 'Verifikasi Ulasan',
             'ulasans' => $ulasans
@@ -48,6 +56,11 @@ class UlasanController extends Controller
 
         $ulasan = Ulasan::create($validated);
 
+        /* 
+        INSERT INTO ulasans (produk_id, quality, value, price, namaDepan, judulUlasan, ulasan, user_id, is_verif, created_at, updated_at)
+        VALUES ($validated['produk_id'], $validated['quality'], $validated['value'], $validated['price'], $validated['namaDepan'], $validated['judulUlasan'], $validated['ulasan'], $_SESSION('web')->id, 0, NOW(), NOW())
+        */
+
         if ($ulasan->wasRecentlyCreated) {
             return redirect()->back()->with('success', 'Ulasan Telah Dikirim, Menunggu Verifikasi Admin');
         } else {
@@ -80,6 +93,8 @@ class UlasanController extends Controller
             'is_verif' => ($ulasan->is_verif == 1) ? 0 : 1
         ]);
 
+        // UPDATE ulasans SET is_verif = CASE WHEN is_verif = 1 THEN 0 ELSE 1 END WHERE id =$ulasan->id
+
         if ($ulasan->is_verif == 1) {
             return redirect()->back()->with('error', 'Verfikasi Ulasan Telah Dihapus!!');
         } else {
@@ -93,6 +108,8 @@ class UlasanController extends Controller
     public function destroy(Ulasan $ulasan)
     {
         Ulasan::destroy($ulasan->id);
+
+        // DELETE FROM ulasan WHERE id = $ulasan->id
 
         return redirect()->back()->with('success', 'Ulasan Telah Dihapus!!');
     }

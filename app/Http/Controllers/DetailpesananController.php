@@ -13,9 +13,18 @@ class DetailpesananController extends Controller
      */
     public function index(Request $request)
     {
-        $pesanan = Pesanan::with('alamat')->where('id', $request->id)->first();
+        $pesanan = Pesanan::where('id', $request->id)->first();
+
+        /* 
+        SELECT *
+        FROM pesanans
+        WHERE id = $request->id
+        LIMIT 1;
+        */
 
         $produkPesanans = Produk_Pesanan::where('pesanan_id', $pesanan->id)->get();
+
+        // SELECT * FROM produk_pesanan WHERE pesanan_id = $pesanan->id;
 
         return view('User.Akun.DetailPesanan', [
             'title'          => 'Detail Pesanan',

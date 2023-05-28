@@ -12,6 +12,12 @@
   <!--  wishlist -->
   <div class="d-flex container">
     <div class="w-72 ps-5 mx-4">
+      @if(session()->has('errorKeranjang'))
+      <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <strong>{{ session('errorKeranjang') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
       <!-- header wishlist -->
       <div class="d-flex justify-content-between mt-4">
         <p class="fs-4 fw-bold align-self-center">WISHLIST SAYA</p>

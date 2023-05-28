@@ -2,13 +2,6 @@
 
 @section('css')
 <style>
-  form {
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-
   label {
     display: block;
     margin-bottom: 10px;
@@ -44,7 +37,7 @@
   {{-- akhir path --}}
   <p class="text-center fs-2 fw-bold mb-5">EDIT UKURAN</p>
   <div class="w-25 mb-5 m-auto">
-    <form action="/admin/ukuran/{{ $ukuran->id }}" method="POST">
+    <form class="rounded-3 p-3 bg-light shadow-lg" action="/admin/ukuran/{{ $ukuran->id }}" method="POST">
       @csrf
       @method('put')
       <label>Ukuran</label>

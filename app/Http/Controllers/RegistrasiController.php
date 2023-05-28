@@ -46,7 +46,10 @@ class RegistrasiController extends Controller
 
         User::create($validated);
 
-        // $request->session()->flash('success', 'Registrasi Berhasil, Silahkan Login!!');
+        /* 
+        INSERT INTO users (namaDepan, namaBelakang, nomorTelepon, tanggalLahir, gender, email, password, created_at, updated_at)
+        VALUES ($validated['namaDepan'],$validated['namaBelakang'],$validated['nomorTelepon'],$validated['tanggalLahir'],$validated['gender'],$validated['email'],$validated['password'], NOW(), NOW())
+        */
 
         return redirect('/login')->with('success', 'Registrasi Berhasil, Silahkan Login!!');
     }

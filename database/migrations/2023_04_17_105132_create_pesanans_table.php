@@ -30,6 +30,29 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE pesanans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    totalHarga INT NOT NULL,
+    pembayaran VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    namaDepan VARCHAR(255) NOT NULL,
+    namaBelakang VARCHAR(255) NOT NULL,
+    nomorTelepon VARCHAR(255) NOT NULL,
+    namaJalan VARCHAR(255) NOT NULL,
+    negara VARCHAR(255) NOT NULL,
+    provinsi VARCHAR(255) NOT NULL,
+    kota VARCHAR(255) NOT NULL,
+    kecamatan VARCHAR(255) NOT NULL,
+    kelurahan VARCHAR(255) NOT NULL,
+    kodePos INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

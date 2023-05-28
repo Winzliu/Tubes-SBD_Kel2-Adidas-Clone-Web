@@ -11,6 +11,9 @@ class AdminHomeController extends Controller
     public function index()
     {
         $pesanans = Pesanan::latest()->paginate(5);
+
+        // SELECT * FROM pesanans ORDER BY created_at DESC LIMIT 5;
+
         return view('Admin.homeAdmin', [
             'title'    => 'Dashboard',
             'pesanans' => $pesanans
@@ -19,14 +22,18 @@ class AdminHomeController extends Controller
 
     public function pesanan(Request $request)
     {
-        $pesanan = Pesanan::with('alamat')->where('id', $request->id)->first();
+        $pesanan = Pesanan::with(['produk_pesanan'])->where('id', $request->id)->first();
 
-        $produkPesanans = Produk_Pesanan::where('pesanan_id', $pesanan->id)->get();
+        /* 
+        SELECT pesanans.*, produk__pesanans.*
+        FROM pesanans
+        INNER JOIN produk__pesanans ON pesanans.id = produk__pesanans.pesanan_id
+        WHERE pesanans.id = $request->id
+        */
 
         return view('admin.pesanan', [
-            'title'          => 'Detail Pesanan',
-            'pesanan'        => $pesanan,
-            'produkPesanans' => $produkPesanans
+            'title'   => 'Detail Pesanan',
+            'pesanan' => $pesanan,
         ]);
     }
 }

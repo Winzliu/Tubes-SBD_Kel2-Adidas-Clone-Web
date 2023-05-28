@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          @foreach ($produkPesanans as $produkPesanan)
+          @foreach ($pesanan->produk_pesanan->all() as $produkPesanan)
           <tr>
             <td scope="row">{{ $produkPesanan->nama }} <br>Size: {{ $produkPesanan->ukuran }}
             </td>

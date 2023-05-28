@@ -19,6 +19,19 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE produk_ukurans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    produk_id INT,
+    ukuran_id INT,
+    stock INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (produk_id) REFERENCES produks(id),
+    FOREIGN KEY (ukuran_id) REFERENCES ukurans(id)
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

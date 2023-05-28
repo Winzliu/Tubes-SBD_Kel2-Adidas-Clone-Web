@@ -36,6 +36,12 @@
         <!-- navbar atas -->
         <div class="collapse navbar navbar-collapse py-0">
           <ul class="navbar-nav ms-auto mb-lg-0">
+            @auth
+            <li class="nav-item me-3">
+              <a class="nav-link active p-0" aria-current="page" href="/wishlist"><span
+                  class="fs-vs">wishlist</span></a>
+            </li>
+            @endauth
             <li class="nav-item me-3">
               <a class="nav-link active p-0" aria-current="page" href="#"><span class="fs-vs">status pesanan</span></a>
             </li>

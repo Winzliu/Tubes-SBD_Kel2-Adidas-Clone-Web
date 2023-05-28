@@ -18,27 +18,58 @@ class ProdukController extends Controller
     {
         $produks = Produk::with(['detailproduk', 'gambar', 'warna', 'ulasan'])->get();
 
+        /* 
+        SELECT *
+        FROM produks
+        INNER JOIN detailproduks ON produks.detailproduk_id = detailproduks.id
+        INNER JOIN gambars ON produks.id = gambars.produk_id
+        INNER JOIN warnas ON produks.id = warnas.produk_id
+        INNER JOIN ulasans ON produks.id = ulasans.produk_id
+        */
+
         foreach ($produks as $p) {
             if (Str::slug($p->nama) == $slug && $p->warna->warna == $warna) {
                 $produk = $p;
                 $jumlah_produk = $produks->where('detailproduk_id', $p->detailproduk_id);
+
+                // SELECT * FROM produks WHERE detailproduk_id = $p->detailproduk_id
+
             }
         }
 
-        // dd($produk->produk_ukuran);
-
         $ukurans = $produk->produk_ukuran;
-        // $ukurans = Ukuran::whereIn('id', $ukurans)->get();
+
+        // SELECT * FROM produk_ukurans WHERE produk_id = $produk_id;
 
         $produk_lainnya = $jumlah_produk->whereNotIn('id', $produk->id);
+
+        // SELECT * FROM produk WHERE detailproduk_id = $p->detailproduk_id AND id NOT IN $produk->id
+
         $gambar_produk = Gambar::where('produk_id', $produk->id)->first()->gambar;
+
+        // SELECT gambar FROM gambars WHERE produk_id = $produk->id LIMIT 1
 
         $produk_tawaran = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
         $pelanggan_lain_membeli = Produk::with(['detailproduk', 'gambar', 'warna', 'wishlist'])->inRandomOrder()->take(16)->get();
 
+        /* 
+        SELECT * FROM produks
+        JOIN detailproduks ON produks.detailproduk_id = detailproduks.id
+        JOIN gambars ON produsk.id = gambars.produk_id
+        JOIN warnas ON produks.warna_id = warnas.id
+        JOIN wishlists ON produks.id = wishlists.produk_id
+        ORDER BY RAND()
+        LIMIT 16
+        */
+
         $ulasans = $produk->ulasan;
 
         $produk_wishlist = Wishlist::with('produk')->get();
+
+        /* 
+        SELECT * FROM wishlists
+        JOIN produks ON wishlist.produk_id = produk.id
+        */
 
         return view('User.produks', [
             'title'                  => $produk->nama,

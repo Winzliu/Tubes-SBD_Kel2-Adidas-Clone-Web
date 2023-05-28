@@ -18,9 +18,27 @@ class AdminVariasiController extends Controller
     public function index(Request $request)
     {
         $warnas = Warna::get();
+
+        // SELECT * FROM warnas;
+
         $ukurans = Ukuran::get();
+
+        // SELECT * FROM ukurans;
+
         $jenisUkurans = Ukuran::select('jenis')->distinct()->get();
+
+        // SELECT DISTINCT jenis FROM ukurans;
+
         $produkSerupa = Produk::with(['detailproduk', 'gambar', 'warna'])->where('id', $request->id)->first();
+
+        /* 
+        SELECT *
+        FROM produks p
+        INNER JOIN detailproduks dp ON p.detailproduk_id = dp.id
+        INNER JOIN gambars g ON p.id = g.produk_id
+        INNER JOIN warnas w ON p.warna_id = w.id
+        WHERE p.id = '$request->id';
+        */
 
         return view('Admin.tambahVariasi', [
             'title'        => 'Tambah Variasi Produk',
@@ -61,14 +79,6 @@ class AdminVariasiController extends Controller
             'deskripsiWarna' => 'required|max:255',
             'harga'          => 'required|numeric',
         ]);
-        $produk['detailproduk_id'] = $request->detailproduk_id;
-        $produk['warna_id'] = $request['warna'];
-
-        // memasukkan nilai dalam table produk
-        Produk::create($produk);
-
-        // ambil produk_id terbaru
-        $produk_id = Produk::latest('id')->value('id');
 
         // gambar
         for ($i = 0; $i < $request->jumlahGambar; $i++) {
@@ -76,6 +86,22 @@ class AdminVariasiController extends Controller
                 'gambar' . $i => 'required|image|file|max:3072'
             ]);
         }
+
+        $produk['detailproduk_id'] = $request->detailproduk_id;
+        $produk['warna_id'] = $request['warna'];
+
+        // memasukkan nilai dalam table produk
+        Produk::create($produk);
+
+        /* 
+        INSERT INTO produks (nama, deskirpsiWarna, harga, detailproduk_id, warna_id)
+        VALUES ('$produk->nama', '$produk->deskripsiWarna', '$produk->harga', '$produk->detailproduk_id', '$produk->warna_id');
+        */
+
+        // ambil produk_id terbaru
+        $produk_id = Produk::latest('id')->value('id');
+
+        // SELECT id FROM produks ORDER BY id DESC LIMIT 1;
 
         // masukkan nilai dalam table gambar
         for ($i = 0; $i < $request->jumlahGambar; $i++) {
@@ -88,6 +114,8 @@ class AdminVariasiController extends Controller
             ]);
         }
 
+        // INSERT INTO gambars (produk_id, gambar) VALUES ('$produk_id', '$namaGambar');
+
         // ukuran
         for ($i = 0; $i < Ukuran::count(); $i++) {
             if ($request->input('ukuran' . $i) != null) {
@@ -98,6 +126,8 @@ class AdminVariasiController extends Controller
                 ]);
             }
         }
+
+        // INSERT INTO produk__ukurans (produk_id, ukuran_id, stock) VALUES ('$produk_id', '$request->input('ukuran' . $i)', '$request->input('stock' . $i )');
 
         return redirect('/admin/produks')->with('success', 'Produk Berhasil Ditambahkan!!');
     }

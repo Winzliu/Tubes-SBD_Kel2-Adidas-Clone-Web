@@ -15,6 +15,8 @@ class AdminWarnaController extends Controller
     {
         $warnas = Warna::paginate(10);
 
+        // SELECT * FROM warnas LIMIT 10;
+
         return view('admin.warna', [
             'title'  => 'Daftar Warna',
             'warnas' => $warnas
@@ -35,12 +37,21 @@ class AdminWarnaController extends Controller
     public function store(Request $request)
     {
         if (Warna::where('warna', Str::lower($request->warna))->exists()) {
+            /* 
+            SELECT EXISTS (
+            SELECT 1
+            FROM warnas
+            WHERE LOWER(warna) = LOWER($request->warna)
+            );
+            */
             return redirect()->back()->with('error', 'Warna Yang Ditambahkan Sudah Tersedia!!');
         } else {
             $validated = $request->validate([
                 'warna' => 'required',
             ]);
             Warna::create($validated);
+
+            // INSERT INTO warnas ('warna') VALUES ($validated->warna)
 
             return redirect()->back()->with('success', 'Berhasil Menambahkan Warna');
         }
@@ -76,6 +87,7 @@ class AdminWarnaController extends Controller
     public function destroy(Warna $warna)
     {
         Warna::destroy($warna->id);
+        // DELETE FROM warnas WHERE id = $warna->id;
 
         return redirect()->back()->with('success', 'Warna Berhasil Dihapus!!');
     }

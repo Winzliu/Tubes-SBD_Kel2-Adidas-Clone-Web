@@ -18,6 +18,16 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE ukurans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ukuran VARCHAR(255) NOT NULL,
+    jenis VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

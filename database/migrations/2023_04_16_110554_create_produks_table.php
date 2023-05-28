@@ -21,6 +21,21 @@ return new class extends Migration {
         });
     }
 
+    /* 
+    CREATE TABLE produks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    detailproduk_id INT,
+    warna_id INT,
+    deskripsiWarna VARCHAR(255) NOT NULL,
+    harga VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (detailproduk_id) REFERENCES detailproduks(id),
+    FOREIGN KEY (warna_id) REFERENCES warnas(id)
+    );
+    */
+
     /**
      * Reverse the migrations.
      */

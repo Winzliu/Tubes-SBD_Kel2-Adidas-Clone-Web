@@ -47,6 +47,11 @@ class AlamatController extends Controller
 
         Alamat::create($validated);
 
+        /* 
+        INSERT INTO alamats (user_id, namaDepan, namaBelakang, nomorTelepon, namaJalan, negara, provinsi, kota, kecamatan, kelurahan, kodePos, created_at, updated_at)
+        VALUES ('$validated['user_id']', '$validated['namaDepan']', '$validated['namaBelakang']', '$validated['nomorTelepon']', '$validated['namaJalan']', '$validated['negara']', '$validated['provinsi']', '$validated['kota']', '$validated['kecamatan']', '$validated['kelurahan']', '$validated['kodePos']', current_timestamp, current_timestamp);
+        */
+
         if ($request->urlSebelumnya == 'http://adidas.test/daftaralamat') {
             return redirect('/daftaralamat')->with('success', 'Alamat Berhasil Ditambahkan!!');
         }
@@ -112,6 +117,12 @@ class AlamatController extends Controller
 
         Alamat::where('id', $alamat->id)->update($validated);
 
+        /* 
+        UPDATE alamats
+        SET namaDepan = '$validated['namaDepan']', namaBelakang = '$validated['namaBelakang']', nomorTelepon = '$validated['nomorTelepon']', namaJalan = '$validated['namaJalan']', negara = '$validated['negara']', provinsi = '$validated['provinsi']', kota = '$validated['kota']', kecamatan = '$validated['kecamatan']', kelurahan = '$validated['kelurahan']', kodePos = '$validated['kodePos']', updated_at = current_timestamp
+        WHERE id = 'alamat_id';
+        */
+
         return redirect('/daftaralamat')->with('success', 'Perubahan Berhasil Disimpan!!');
     }
 
@@ -121,6 +132,7 @@ class AlamatController extends Controller
     public function destroy(Alamat $alamat)
     {
         Alamat::destroy($alamat->id);
+        // DELETE FROM alamats WHERE id = '$alamat->id';
 
         return redirect()->back();
     }

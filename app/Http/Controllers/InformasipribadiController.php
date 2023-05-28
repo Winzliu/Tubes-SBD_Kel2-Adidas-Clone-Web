@@ -64,6 +64,12 @@ class InformasipribadiController extends Controller
 
             auth('web')->user()->update($validated);
 
+            /* 
+            UPDATE users
+            SET namaDepan = '$validated['namaDepan']', namaBelakang = '$validated['namaBelakang']', nomorTelepon = '$validated['nomorTelepon']'
+            WHERE id = $_SESSION('web')->id;
+            */
+
             return redirect()->back()->with('success', 'Perubahan Berhasil Disimpan!!');
         } else if ($request->updatePassword) {
             $validated = $request->validate([
@@ -74,6 +80,13 @@ class InformasipribadiController extends Controller
                 auth('web')->user()->update([
                     'password' => bcrypt($request->password)
                 ]);
+
+                /* 
+                UPDATE users
+                SET password = '$validated['password']'
+                WHERE id = $_SESSION('web')->id;
+                */
+
                 return redirect()->back()->with('success', 'Password Berhasil Diubah!!');
             }
 

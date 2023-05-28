@@ -16,9 +16,23 @@ class CheckoutController extends Controller
     {
         $alamats = Alamat::where('user_id', auth('web')->user()->id)->get();
 
+        /* 
+        SELECT *
+        FROM alamats
+        WHERE user_id = session('web')->id;
+        */
+
         $alamatpilihan = $id;
 
         $keranjangs = Keranjang::with('produk', 'ukuran')->where('user_id', auth('web')->user()->id)->get();
+
+        /* 
+        SELECT *
+        FROM keranjangs
+        INNER JOIN produks ON keranjangs.produk_id = produks.id
+        INNER JOIN ukurans ON keranjangs.ukuran_id = ukurans.id
+        WHERE keranjangs.user_id = $_SESSION('web')->id;
+        */
 
         return view('User.Checkout.DetailPesanan', [
             'title'         => 'Checkout',

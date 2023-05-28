@@ -14,10 +14,10 @@ class WishlistController extends Controller
     {
         $wishlists = Wishlist::with('produk')->get();
 
-        // $ukurans = Ukuran::where('produk_id', $wishlists->produk->produk_ukuran->produk_id);
-
-        // @dd($ukurans);
-
+        /* 
+        SELECT * FROM wishlists
+        JOIN produks ON wishlists.produk_id = produks.id
+        */
 
         return view('User.Akun.Wishlist', [
             'title'     => 'Wishlist',
@@ -41,11 +41,17 @@ class WishlistController extends Controller
         $validated = $request->validate([
             'produk_id' => 'required'
         ]);
+
         // untuk menjadikan inputan produk_id menjadi integer
         $validated['produk_id'] = intval($validated['produk_id']);
         $validated['user_id'] = auth('web')->user()->id;
 
         Wishlist::create($validated);
+
+        /* 
+        INSERT INTO wishlists (produk_id, user_id, created_at, updated_at)
+        VALUES ($validated['produk_id'], $_SESSION('web')->id, NOW(), NOW())
+        */
 
         return redirect()->back();
     }
@@ -81,12 +87,16 @@ class WishlistController extends Controller
     {
         Wishlist::destroy($wishlist->id);
 
+        // DELETE FROM wishlists WHERE id = $wishlist->id
+
         return redirect()->back();
     }
 
     public function destroyAll()
     {
         Wishlist::where('user_id', auth('web')->user()->id)->delete();
+
+        // DELETE FROM wishlists WHERE user_id = $_SESSION('web')->id
 
         return redirect()->back();
     }
