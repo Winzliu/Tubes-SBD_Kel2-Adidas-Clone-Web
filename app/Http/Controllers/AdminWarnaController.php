@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Warna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -86,9 +87,14 @@ class AdminWarnaController extends Controller
      */
     public function destroy(Warna $warna)
     {
-        Warna::destroy($warna->id);
-        // DELETE FROM warnas WHERE id = $warna->id;
+        if (Produk::where('warna_id', $warna->id)->first() != NULL) {
+            return redirect()->back()->with('error', 'Hapus produk dengan warna serupa terlebih dahulu!!');
+        } else {
+            Warna::destroy($warna->id);
+            // DELETE FROM warnas WHERE id = $warna->id;
 
-        return redirect()->back()->with('success', 'Warna Berhasil Dihapus!!');
+            return redirect()->back()->with('success', 'Warna Berhasil Dihapus!!');
+        }
+
     }
 }

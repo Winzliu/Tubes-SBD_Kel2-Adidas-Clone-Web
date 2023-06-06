@@ -345,8 +345,8 @@ selectedJenis.addEventListener("change", (e) => {
         tampung += "<option value='sepatu-perempuan'>Sepatu Perempuan</option>"
       } else if(pengguna == 'anak' && jenis == 'balita-1-4'){
         tampung += "<option value='new-arrivals'>New Arrivals</option>"
-        tampung += "<option value='pakaian-laki-laki'>Pakaian</option>"
-        tampung += "<option value='sepatu-laki-laki'>Sepatu</option>"
+        tampung += "<option value='pakaian'>Pakaian</option>"
+        tampung += "<option value='sepatu'>Sepatu</option>"
       } else if(pengguna == 'anak' && jenis == 'sports'){
         tampung += "<option value='training'>Training</option>"
         tampung += "<option value='sepak-bola'>Sepak Bola</option>"

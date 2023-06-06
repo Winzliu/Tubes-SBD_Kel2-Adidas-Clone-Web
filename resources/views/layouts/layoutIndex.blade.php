@@ -407,19 +407,21 @@
                         <div class="">
                           <li class="list-group-item border-0 py-0">
                             <a class="nav-link fw-bold text-black hover-line" style="letter-spacing: 2px"
-                              href="/anak/balita">BALITA
+                              href="/anak/balita-1-4">BALITA
                               (1-4)</a>
                           </li>
                           <li class="list-group-item border-0 py-0">
-                            <a class="nav-link text-black d-block py-0 hover-line" href="/anak/balita/new-arrivals">New
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="/anak/balita-1-4/new-arrivals">New
                               Arrivals</a>
                             <a class="nav-link text-black d-block py-0 hover-line"
-                              href="/anak/balita/pakaian">Pakaian</a>
-                            <a class="nav-link text-black d-block py-0 hover-line" href="/anak/balita/sepatu">Sepatu</a>
+                              href="/anak/balita-1-4/pakaian">Pakaian</a>
+                            <a class="nav-link text-black d-block py-0 hover-line"
+                              href="/anak/balita-1-4/sepatu">Sepatu</a>
                           </li>
                         </div>
                         <li class="list-group-item border-0">
-                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="/anak/balita">Lihat Semua
+                          <a class="nav-link text-black fw-bold d-block mt-7 py-0" href="/anak/balita-1-4">Lihat Semua
                             Balita
                             (1-4)</a>
                         </li>

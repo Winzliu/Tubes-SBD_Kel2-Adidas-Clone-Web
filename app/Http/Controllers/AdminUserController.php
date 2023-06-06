@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alamat;
+use App\Models\Keranjang;
+use App\Models\Pesanan;
+use App\Models\Produk_Pesanan;
+use App\Models\Ulasan;
 use App\Models\User;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
@@ -46,6 +52,22 @@ class AdminUserController extends Controller
 
     public function destroy(User $user)
     {
+        $pesanan = Pesanan::where('user_id', $user->id);
+
+        foreach ($pesanan->get() as $p) {
+            Produk_Pesanan::where('pesanan_id', $p->id)->delete();
+        }
+
+        $pesanan->delete();
+
+        Ulasan::where('user_id', $user->id)->delete();
+
+        Wishlist::where('user_id', $user->id)->delete();
+
+        Keranjang::where('user_id', $user->id)->delete();
+
+        Alamat::where('user_id', $user->id)->delete();
+
         User::destroy($user->id);
 
         // DELETE FROM users WHERE id = '$user->id';

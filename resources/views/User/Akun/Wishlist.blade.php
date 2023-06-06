@@ -18,6 +18,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       @endif
+      @error('ukuran_id')
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Pilih Ukuran Yang Diinginkan</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @enderror
+
+      @error('jumlahItem')
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Pilih Jumlah Item Yang Diinginkan</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @enderror
       <!-- header wishlist -->
       <div class="d-flex justify-content-between mt-4">
         <p class="fs-4 fw-bold align-self-center">WISHLIST SAYA</p>
@@ -87,19 +100,6 @@
                 </select>
               </div>
               <!-- akhir ukuran -->
-              @error('ukuran_id')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Pilih Ukuran Yang Diinginkan</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              @enderror
-
-              @error('jumlahItem')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Pilih Jumlah Item Yang Diinginkan</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              @enderror
 
               <input type="hidden" name="produk_id" value="{{ $wishlist->produk->id }}">
               <!-- tambah keranjang -->

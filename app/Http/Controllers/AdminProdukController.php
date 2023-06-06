@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detailproduk;
+use App\Models\Keranjang;
 use App\Models\Produk;
 use App\Models\Gambar;
 use App\Models\Produk_Ukuran;
 use App\Models\Ulasan;
 use App\Models\Warna;
 use App\Models\Ukuran;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -333,6 +335,11 @@ class AdminProdukController extends Controller
             WHERE produk_id = $produk->id;
             */
         }
+
+        Wishlist::where('produk_id', $produk->id)->delete();
+
+        Keranjang::where('produk_id', $produk->id)->delete();
+
         Produk::destroy($produk->id);
 
         /* 
